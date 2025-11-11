@@ -80,7 +80,7 @@ export function ContactUsPage() {
 
         {/* Form Description */}
         <div className="mb-6">
-          <p className="text-[#020a1c] text-[15px] leading-[22px] font-['Satoshi:Regular',_sans-serif]">
+          <p className="text-[#020a1c] text-[15px] leading-[20.8px] font-normal">
             Whether you need more information, have specific queries or are looking for further assistance, our team is here to help. Simply complete the form and we'll get back to you.
           </p>
         </div>
@@ -202,7 +202,7 @@ export function ContactUsPage() {
             </div>
 
             {/* Right Content */}
-            <div className="absolute content-stretch flex flex-col gap-[48px] items-start left-[432.73px] overflow-clip right-[24px] top-[40px]" data-name="Container">
+            <div className="absolute content-stretch flex flex-col gap-[42px] items-start left-[432.73px] overflow-clip pl-[19px] right-[24px] top-[40px]" data-name="Container">
               {/* Photo + Text */}
               <div className="box-border content-stretch flex flex-col h-[500px] items-start justify-end overflow-clip pl-[32px] pr-[311.75px] py-[32px] relative rounded-[8px] shrink-0" data-name="Photo + Text">
                 <div className="absolute inset-0 rounded-[8px]" data-name="Toq5TsScHq68ZsCqZ1j9EvnD7Gs.jpg">
@@ -224,7 +224,7 @@ export function ContactUsPage() {
               {/* Form Section */}
               <div className="content-stretch flex gap-[42px] items-start overflow-clip relative shrink-0 w-full" data-name="Form">
                 <div className="content-stretch flex flex-col items-start relative shrink-0 w-[273.75px]" data-name="Container">
-                  <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[22px] not-italic relative shrink-0 text-[#020a1c] text-[15px] text-nowrap whitespace-pre">
+                  <div className="flex flex-col font-normal justify-center leading-[22.6px] not-italic relative shrink-0 text-[#020a1c] text-[16.6px] w-full">
                     <p className="mb-0">{`Whether you need more information, `}</p>
                     <p className="mb-0">{`have specific queries or are looking for `}</p>
                     <p className="mb-0">{`further assistance, our team is here to `}</p>
