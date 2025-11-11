@@ -4,6 +4,7 @@ import React from 'react';
 import {
   Header,
   Footer,
+  PageHeader,
 } from '@/components/homepage';
 import DesktopCareers from '@/imports/Frame3';
 import MobileCareers from '@/imports/Frame4';
@@ -26,6 +27,9 @@ export default function CareersPage() {
       <Header />
 
       <main className="pt-16 md:pt-[104px]">
+        {/* Page Header */}
+        <PageHeader pageName="Careers" />
+
         {/* Desktop Version */}
         <div className="hidden md:block" onClick={handleJobCardClick}>
           <DesktopCareers />
