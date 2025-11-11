@@ -32,7 +32,7 @@ export default function AboutUsPage() {
                 className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[84px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[359.39px_84px] not-italic text-[65.4px] top-[42px] translate-y-[-50%] w-full" 
                 style={{ maskImage: `url('${imgAboutUsWatermark}')` }}
               >
-                <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)', textStroke: '0.6px rgba(101, 114, 133, 0.6)' }}>NewsFlash</p>
+                <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>NewsFlash</p>
               </div>
             </div>
           </div>

@@ -64,9 +64,9 @@ const Footer = () => (
             </div>
             <div className="space-y-3 text-[12.9px] leading-[18.2px]">
               <a href="#" className="block text-white/70 hover:text-white">About</a>
-              <a href="#" className="block text-white/70 hover:text-white">Careers</a>
+              <a href="/careers" className="block text-white/70 hover:text-white">Careers</a>
               <a href="#" className="block text-white/70 hover:text-white">Authors</a>
-              <a href="#" className="block text-white/70 hover:text-white">Advertise</a>
+              <a href="/advertise" className="block text-white/70 hover:text-white">Advertise</a>
               <a href="#" className="block text-white/70 hover:text-white">Contact</a>
             </div>
           </div>
@@ -160,9 +160,9 @@ const Footer = () => (
             </div>
             <div className="space-y-3 text-sm">
               <a href="#" className="block text-white/70 hover:text-white">About</a>
-              <a href="#" className="block text-white/70 hover:text-white">Careers</a>
+              <a href="/careers" className="block text-white/70 hover:text-white">Careers</a>
               <a href="#" className="block text-white/70 hover:text-white">Authors</a>
-              <a href="#" className="block text-white/70 hover:text-white">Advertise</a>
+              <a href="/advertise" className="block text-white/70 hover:text-white">Advertise</a>
               <a href="#" className="block text-white/70 hover:text-white">Contact</a>
             </div>
           </div>

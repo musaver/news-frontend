@@ -113,9 +113,9 @@ const Header = () => {
             <div className="h-px bg-slate-300/35"></div>
             <div className="space-y-6">
               <a href="#" className="block text-slate-800">About</a>
-              <a href="#" className="block text-slate-800">Careers</a>
+              <a href="/careers" className="block text-slate-800">Careers</a>
               <a href="#" className="block text-slate-800">Authors</a>
-              <a href="#" className="block text-slate-800">Advertise</a>
+              <a href="/advertise" className="block text-slate-800">Advertise</a>
               <a href="#" className="block text-slate-800">Contact</a>
             </div>
           </div>

@@ -70,7 +70,7 @@ export default function CategoryPage() {
               className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[84px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[405.59px_84px] not-italic text-[65.898px] top-[42px] translate-y-[-50%] w-[405.79px]" 
               style={{ maskImage: `url('${imgLatestNews}')` }}
             >
-              <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', '-webkit-text-stroke': '0.7px rgb(101 114 133)', 'text-stroke': '0.6px rgba(101, 114, 133, 0.6)' }}>Latest News</p>
+              <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>Latest News</p>
             </div>
           </div>
         </div>
