@@ -37,73 +37,31 @@ export function ContactUsPage() {
 
       {/* Mobile Layout */}
       <div className="md:hidden px-4 pb-8">
-        {/* Contact Info Section */}
-        <div className="space-y-6 py-6">
-          {/* Editorial Contact */}
-          <div className="text-[15px] leading-[22px] text-[#020a1c] font-['Satoshi:Regular',_sans-serif]">
-            <p className="mb-0">Have a story that could make headlines? We</p>
-            <p className="mb-0">want to hear from you. Reach our editorial</p>
-            <p className="mb-0">team at <span className="text-[#657285]">content@newsflash.com</span>.</p>
-          </div>
-
-          {/* Media Rights */}
-          <div className="text-[15px] leading-[22px] text-[#020a1c] font-['Satoshi:Regular',_sans-serif]">
-            <p className="mb-0">For inquiries regarding the rights to reproduce</p>
-            <p className="mb-0">or feature our content, connect with us at</p>
-            <p className="mb-0"><span className="text-[#657285]">media@newsflash.com</span>.</p>
-          </div>
-
-          {/* Advertising */}
-          <div className="text-[15px] leading-[22px] text-[#020a1c] font-['Satoshi:Regular',_sans-serif]">
-            <p className="mb-0">Interested in advertising or promotional</p>
-            <p className="mb-0">opportunities on NewsFlash? Contact</p>
-            <p className="mb-0"><span className="text-[#657285]">ads@newsflash.com</span> for more details, or you</p>
-            <p>can also contact us via the form.</p>
-          </div>
-
-          {/* Divider */}
-          <div className="h-px bg-[rgba(203,213,225,0.35)]" />
-
-          {/* Phone */}
+        {/* Mission + Vision Section (from About Us) */}
+        <div className="space-y-8 py-6">
+          {/* Mission */}
           <div className="space-y-2">
-            <div className="text-[#020a1c] text-[16.3px] leading-[22.6px] font-['Satoshi:Medium',_sans-serif]">
-              1-234-567-8910
+            <div className="text-[#020a1c] text-[15.1px] leading-[22px] font-bold">
+              Our Mission
             </div>
-            <div className="text-[#657285] text-[14.8px] leading-[22px] font-['Satoshi:Regular',_sans-serif]">
-              <p className="mb-0">Monday - Friday</p>
-              <p>6am – 6pm</p>
+            <div className="text-[#020a1c] text-[13px] leading-[18.2px] font-['Satoshi:Regular',_sans-serif]">
+              <p className="mb-0">To deliver unbiased, timely, and comprehensive news that</p>
+              <p className="mb-0">empowers readers to make informed decisions and fosters</p>
+              <p>a deeper understanding of global events.</p>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="h-px bg-[rgba(203,213,225,0.35)]" />
-
-          {/* Email */}
+          {/* Vision */}
           <div className="space-y-2">
-            <div className="text-[#020a1c] text-[16.7px] leading-[22.6px] font-['Satoshi:Medium',_sans-serif]">
-              info@newsflash.com
+            <div className="text-[#020a1c] text-[15.1px] leading-[22px] font-bold">
+              Our Vision
             </div>
-            <div className="text-[#657285] text-[14.6px] leading-[22px] font-['Satoshi:Regular',_sans-serif]">
-              We will endeavour to respond within 48 hours.
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="h-px bg-[rgba(203,213,225,0.35)]" />
-
-          {/* Address */}
-          <div className="space-y-2">
-            <div className="text-[#020a1c] text-[16.3px] leading-[22.6px] font-['Satoshi:Medium',_sans-serif]">
-              Address
-            </div>
-            <div className="text-[#657285] text-[14.6px] leading-[22px] font-['Satoshi:Regular',_sans-serif]">
-              <p className="mb-0">1261 Lincoln Street,</p>
-              <p>San Francisco, CA 94134</p>
+            <div className="text-[#020a1c] text-[13.1px] leading-[18.2px] font-['Satoshi:Regular',_sans-serif]">
+              <p className="mb-0">To be the most trusted and influential source of news,</p>
+              <p className="mb-0">shaping global conversations and connecting the world</p>
+              <p>through responsible journalism.</p>
             </div>
           </div>
-
-          {/* Divider */}
-          <div className="h-px bg-[rgba(203,213,225,0.35)]" />
         </div>
 
         {/* Banner Image */}
@@ -471,136 +429,42 @@ export function ContactUsPage() {
               </div>
             </div>
 
-            {/* Left Content - Sticky Sidebar */}
+            {/* Left Content - Sticky Sidebar (Mission + Vision from About Us) */}
             <div className="absolute bottom-0 h-[calc(100%-40px)] left-[24px] pointer-events-none right-[972.27px] top-[40px]">
-              <div className="h-[642px] pointer-events-auto sticky top-0" data-name="Left Content">
-                {/* Main Text Content */}
-                <div className="absolute content-stretch flex flex-col items-start left-0 top-0" data-name="Container">
-                  <div className="h-[264px] relative shrink-0 w-full" data-name="Container">
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[66px] justify-center leading-[22px] left-0 not-italic text-[#020a1c] text-[15px] top-[33px] translate-y-[-50%] w-[314.4px]">
-                      <p className="mb-0">{`Have a story that could make headlines? We `}</p>
-                      <p className="mb-0">{`want to hear from you. Reach our editorial `}</p>
-                      <p>{`team at `}</p>
-                    </div>
-                    <div className="absolute content-stretch flex items-start left-[56.73px] top-[44px]" data-name="Component 2">
-                      <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap">
-                        <p className="leading-[22px] whitespace-pre">content@newsflash.com</p>
-                      </div>
-                    </div>
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[22px] justify-center leading-[0] left-[227.8px] not-italic text-[#020a1c] text-[16px] top-[55px] translate-y-[-50%] w-[8.83px]">
-                      <p className="leading-[22px]">{`. `}</p>
-                    </div>
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[44px] justify-center leading-[22px] left-0 not-italic text-[#020a1c] text-[15px] top-[110px] translate-y-[-50%] w-[326.98px]">
-                      <p className="mb-0">{`For inquiries regarding the rights to reproduce `}</p>
-                      <p>{`or feature our content, connect with us at `}</p>
-                    </div>
-                    <div className="absolute content-stretch flex items-start left-0 top-[132px]" data-name="Component 2">
-                      <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap">
-                        <p className="leading-[22px] whitespace-pre">media@newsflash.com</p>
-                      </div>
-                    </div>
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[22px] justify-center leading-[0] left-[160.8px] not-italic text-[#020a1c] text-[16px] top-[143px] translate-y-[-50%] w-[8.83px]">
-                      <p className="leading-[22px]">{`. `}</p>
-                    </div>
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[44px] justify-center leading-[22px] left-0 not-italic text-[#020a1c] text-[15px] top-[198px] translate-y-[-50%] w-[279.06px]">
-                      <p className="mb-0">{`Interested in advertising or promotional `}</p>
-                      <p>{`opportunities on NewsFlash? Contact `}</p>
-                    </div>
-                    <div className="absolute content-stretch flex items-start left-0 top-[220px]" data-name="Component 2">
-                      <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap">
-                        <p className="leading-[22px] whitespace-pre">ads@newsflash.com</p>
-                      </div>
-                    </div>
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[22px] justify-center leading-[0] left-[142.41px] not-italic text-[#020a1c] text-[15.1px] top-[231px] translate-y-[-50%] w-[170.38px]">
-                      <p className="leading-[22px]">{` for more details, or you `}</p>
-                    </div>
-                    <div className="absolute flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal h-[22px] justify-center leading-[0] left-0 not-italic text-[#020a1c] text-[14.6px] top-[253px] translate-y-[-50%] w-[227px]">
-                      <p className="leading-[22px]">can also contact us via the form.</p>
+              <div className="content-stretch flex flex-col gap-[32px] items-start sticky top-24 self-start pointer-events-auto">
+                {/* Mission */}
+                <div className="content-stretch flex flex-col gap-[8px] items-start overflow-clip relative shrink-0 w-full">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                    <div className="flex flex-col font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
+                      <p className="leading-[22px]">Our Mission</p>
                     </div>
                   </div>
-                </div>
-
-                {/* Divider Lines */}
-                <div className="absolute content-stretch flex flex-col h-px items-start justify-center left-0 top-[288px]" data-name="Container">
-                  <div className="basis-0 bg-[rgba(203,213,225,0.35)] grow min-h-px min-w-px shrink-0 w-[323.73px]" data-name="Dark" />
-                </div>
-                <div className="absolute content-stretch flex flex-col h-px items-start justify-center left-0 top-[413px]" data-name="Container">
-                  <div className="basis-0 bg-[rgba(203,213,225,0.35)] grow min-h-px min-w-px shrink-0 w-[323.73px]" data-name="Dark" />
-                </div>
-                <div className="absolute content-stretch flex flex-col h-px items-start justify-center left-0 top-[516px]" data-name="Container">
-                  <div className="basis-0 bg-[rgba(203,213,225,0.35)] grow min-h-px min-w-px shrink-0 w-[323.73px]" data-name="Dark" />
-                </div>
-                <div className="absolute content-stretch flex flex-col h-px items-start justify-center left-0 top-[641px]" data-name="Container">
-                  <div className="basis-0 bg-[rgba(203,213,225,0.35)] grow min-h-px min-w-px shrink-0 w-[323.73px]" data-name="Dark" />
-                </div>
-
-                {/* Contact Info - Phone */}
-                <div className="absolute content-stretch flex flex-col gap-[8px] items-start left-0 overflow-clip right-0 top-[313px]" data-name="Aside - Call">
-                  <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip relative shrink-0" data-name="Link - Phone Number">
-                    <div className="shrink-0 size-[24px]" data-name="Container" />
-                    <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
-                        <div className="flex flex-col font-['Satoshi:Medium',_sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[16.3px] text-nowrap">
-                          <p className="leading-[22.6px] whitespace-pre">1-234-567-8910</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-full" data-name="Days + Hours">
-                    <div className="content-stretch flex flex-col items-start min-w-[323.73px] relative shrink-0" data-name="Container">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
-                        <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[22px] not-italic relative shrink-0 text-[#657285] text-[14.8px] text-nowrap whitespace-pre">
-                          <p className="mb-0">Monday - Friday</p>
-                          <p>6am – 6pm</p>
-                        </div>
+                  <div className="content-stretch flex flex-col items-start relative shrink-0">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[22px] not-italic relative shrink-0 text-[#020a1c] text-[14.8px] text-nowrap whitespace-pre">
+                        <p className="mb-0">{`To deliver unbiased, timely, and `}</p>
+                        <p className="mb-0">{`comprehensive news that empowers readers `}</p>
+                        <p className="mb-0">{`to make informed decisions and fosters a `}</p>
+                        <p>deeper understanding of global events.</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Contact Info - Email */}
-                <div className="absolute content-stretch flex flex-col gap-[8px] items-start left-0 overflow-clip right-0 top-[438px]" data-name="Aside - Email">
-                  <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip relative shrink-0" data-name="Link - Phone Number">
-                    <div className="shrink-0 size-[24px]" data-name="Container" />
-                    <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
-                        <div className="flex flex-col font-['Satoshi:Medium',_sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[16.7px] text-nowrap">
-                          <p className="leading-[22.6px] whitespace-pre">info@newsflash.com</p>
-                        </div>
-                      </div>
+                {/* Vision */}
+                <div className="content-stretch flex flex-col gap-[8px] items-start overflow-clip relative shrink-0 w-full">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                    <div className="flex flex-col font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
+                      <p className="leading-[22px]">Our Vision</p>
                     </div>
                   </div>
-                  <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-full" data-name="Days + Hours">
-                    <div className="content-stretch flex flex-col items-start min-w-[323.73px] relative shrink-0" data-name="Container">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
-                        <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[22px] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap whitespace-pre">
-                          <p className="mb-0">We will endeavour to respond </p>
-                          <p>within 48 hours.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Contact Info - Address */}
-                <div className="absolute content-stretch flex flex-col gap-[8px] items-start left-0 overflow-clip right-0 top-[541px]" data-name="Aside - Address">
-                  <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip relative shrink-0" data-name="Link - Phone Number">
-                    <div className="shrink-0 size-[24px]" data-name="Container" />
-                    <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
-                        <div className="flex flex-col font-['Satoshi:Medium',_sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[16.3px] text-nowrap">
-                          <p className="leading-[22.6px] whitespace-pre">Address</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-full" data-name="Days + Hours">
-                    <div className="content-stretch flex flex-col items-start min-w-[323.73px] relative shrink-0" data-name="Container">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
-                        <div className="flex flex-col font-['Satoshi:Regular',_sans-serif] font-normal justify-center leading-[22px] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap whitespace-pre">
-                          <p className="mb-0">1261 Lincoln Street,</p>
-                          <p>San Francisco, CA 94134</p>
-                        </div>
+                  <div className="content-stretch flex flex-col items-start relative shrink-0">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[22px] not-italic relative shrink-0 text-[#020a1c] text-[14.8px] text-nowrap whitespace-pre">
+                        <p className="mb-0">{`To be the most trusted and influential source `}</p>
+                        <p className="mb-0">{`of news, shaping global conversations and `}</p>
+                        <p className="mb-0">{`connecting the world through responsible `}</p>
+                        <p>journalism.</p>
                       </div>
                     </div>
                   </div>
