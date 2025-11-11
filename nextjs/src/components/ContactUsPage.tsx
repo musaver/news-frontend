@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import svgPaths from "@/imports/svg-m0otgnt9nn";
 import imgToq5TsScHq68ZsCqZ1J9EvnD7GsJpg from "@/assets/9b0ae3954e9319d29745ea127c2bf2eaa99b7cba.png";
 import { PageHeader } from './homepage/PageHeader';
-import { Footer } from './homepage/Footer';
+import Footer from './homepage/Footer';
 
 export function ContactUsPage() {
   const [formData, setFormData] = useState({
