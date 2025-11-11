@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Header,
@@ -41,11 +41,11 @@ const EyeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-export default function EditArticlePage() {
+function EditArticleContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const articleId = searchParams.get('id');
-  
+
   const [formData, setFormData] = useState({
     title: '',
     category: 'Politics',
@@ -371,3 +371,17 @@ export default function EditArticlePage() {
   );
 }
 
+export default function EditArticlePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000] mx-auto mb-4"></div>
+          <p className="text-[#657285] text-[14px]">Loading article...</p>
+        </div>
+      </div>
+    }>
+      <EditArticleContent />
+    </Suspense>
+  );
+}
