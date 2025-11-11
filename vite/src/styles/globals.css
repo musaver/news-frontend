@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    font-family: 'Satoshi', sans-serif;
+  }
+  
+  body {
+    background-color: white;
+    color: #0f172a;
+  }
+}
+
+/* Make job cards clickable */
+[data-name="Active"],
+[data-name="Phone"] {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-name="Active"]:hover,
+[data-name="Phone"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);
+}
+
+/* Career detail page - Apply button */
+[data-name="Link"]:has(> [data-name="Container"] > [data-name="Container"]:contains("Apply")) {
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+[data-name="Link"]:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Social share buttons */
+[data-name="Facebook"],
+[data-name="Twitter"],
+[data-name="Linkedin"],
+[data-name="WhatsApp"] {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+[data-name="Facebook"]:hover,
+[data-name="Twitter"]:hover,
+[data-name="Linkedin"]:hover,
+[data-name="WhatsApp"]:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}

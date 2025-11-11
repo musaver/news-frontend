@@ -1,0 +1,51 @@
+/* Santoshi Font Family */
+@font-face {
+    font-family: 'Santoshi';
+    src: url('../assets/fonts/Satoshi-Light.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+    ascent-override: 102.23%;
+    descent-override: 24.29%;
+    line-gap-override: 10.12%;
+    size-adjust: 98.8%;
+  }
+  
+  
+  @font-face {
+      font-family: 'Santoshi-Regular';
+      src: url('../assets/fonts/Satoshi-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+      ascent-override: 102.23%;
+      descent-override: 24.29%;
+      line-gap-override: 10.12%;
+      size-adjust: 98.8%;
+    }
+
+    body {
+        font-family: santoshi;
+    }
+    p {
+        font-weight: 600;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 600;
+    }
+    .text-\[18px\] {
+        font-size: 18px;
+    }
+    .mt-2 {
+        margin-top: 8px;
+    }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+

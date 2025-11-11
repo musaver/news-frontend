@@ -1,0 +1,26 @@
+{
+  "name": "newsflash",
+  "version": "1.0.0",
+  "description": "NewsFlash - News Website",
+  "type": "module",
+  "dependencies": {},
+  "resolutions": {
+    "lucide-react": "npm:empty-module@1.0.0",
+    "**/lucide-react": "npm:empty-module@1.0.0",
+    "cmdk": "npm:empty-module@1.0.0",
+    "**/cmdk": "npm:empty-module@1.0.0"
+  },
+  "overrides": {
+    "lucide-react": "npm:empty-module@1.0.0",
+    "cmdk": "npm:empty-module@1.0.0"
+  },
+  "browser": {
+    "lucide-react": false,
+    "cmdk": false,
+    "cmdk@1.1.1": false
+  },
+  "alias": {
+    "lucide-react": "./empty.js",
+    "cmdk": "./empty.js"
+  }
+}
