@@ -4,8 +4,8 @@ import React from 'react';
 import {
   Header,
   Footer,
+  PageHeader,
 } from '@/components/homepage';
-import { imgContainer as imgAdvertiseWatermark } from "@/imports/svg-a7b80";
 
 export default function AdvertisePage() {
   return (
@@ -13,28 +13,8 @@ export default function AdvertisePage() {
       <Header />
 
       <main className="pt-16 md:pt-[104px]">
-
-        <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
-          <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
-            {/* Left Text with Bullet */}
-            <div className="absolute h-[22px] left-[24px] overflow-clip top-1/2 translate-y-[-50%]" data-name="Left Text">
-              <div className="absolute bg-[#cc0000] h-[15px] left-0 top-1/2 translate-y-[-50%] w-[4px]" data-name="bullet" />
-              <div className="absolute flex flex-col font-normal h-[22px] justify-center leading-[0] left-[14px] not-italic text-[#020a1c] text-[14.25px] top-1/2 translate-y-[-50%]">
-                <p className="leading-[22px]">Advertise</p>
-              </div>
-            </div>
-
-            {/* Right Watermark Text with Gradient Mask - Desktop Only */}
-            <div className="hidden md:block absolute bottom-[-5px] h-[84px] right-[24px] w-[359.39px]" data-name="Mask Group">
-              <div
-                className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[84px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[359.39px_84px] not-italic text-[65.4px] top-[42px] translate-y-[-50%] w-full"
-                style={{ maskImage: `url('${imgAdvertiseWatermark}')` }}
-              >
-                <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>NewsFlash</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Page Header */}
+        <PageHeader pageName="Advertise" />
 
         {/* Desktop Version */}
         <div className="hidden md:block">
