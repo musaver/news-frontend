@@ -189,7 +189,7 @@ function Container11() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
       <div className="flex flex-col font-['Inter:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap">
-        <p className="leading-[22px] whitespace-pre">Exprience: 5 Years</p>
+        <p className="leading-[22px] whitespace-pre">Experience: 5 Years</p>
       </div>
     </div>
   );
@@ -333,7 +333,7 @@ function Container23() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
       <div className="flex flex-col font-['Inter:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap">
-        <p className="leading-[22px] whitespace-pre">Exprience: 3 Years</p>
+        <p className="leading-[22px] whitespace-pre">Experience: 3 Years</p>
       </div>
     </div>
   );
@@ -477,7 +477,7 @@ function Container35() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
       <div className="flex flex-col font-['Inter:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.5px] text-nowrap">
-        <p className="leading-[22px] whitespace-pre">Exprience: 1 Year</p>
+        <p className="leading-[22px] whitespace-pre">Experience: 1 Year</p>
       </div>
     </div>
   );
@@ -621,7 +621,7 @@ function Container47() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
       <div className="flex flex-col font-['Inter:Regular',_sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#657285] text-[14.6px] text-nowrap">
-        <p className="leading-[22px] whitespace-pre">Exprience: 5 Years</p>
+        <p className="leading-[22px] whitespace-pre">Experience: 5 Years</p>
       </div>
     </div>
   );
