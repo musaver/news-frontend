@@ -7,10 +7,10 @@ import { eq, and } from 'drizzle-orm';
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Get the session to check if user is authenticated
     const session = await getServerSession(authOptions);
@@ -67,10 +67,10 @@ export async function GET(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Get the session to check if user is authenticated
     const session = await getServerSession(authOptions);
@@ -183,10 +183,10 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Get the session to check if user is authenticated
     const session = await getServerSession(authOptions);
