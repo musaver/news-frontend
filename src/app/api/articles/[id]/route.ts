@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { articles } from '@/lib/schema';
+import { articles, categories } from '@/lib/schema';
 import { eq, and } from 'drizzle-orm';
 
 export async function GET(
@@ -116,6 +116,22 @@ export async function PUT(
       );
     }
 
+    // Look up category ID from category name
+    const categoryResult = await db
+      .select()
+      .from(categories)
+      .where(eq(categories.name, category))
+      .limit(1);
+
+    if (categoryResult.length === 0) {
+      return NextResponse.json(
+        { error: 'Invalid category. Category does not exist.' },
+        { status: 400 }
+      );
+    }
+
+    const categoryId = categoryResult[0].id;
+
     // Validate status
     const validStatuses = ['draft', 'under_review', 'published'];
     const articleStatus = status || 'draft';
@@ -149,7 +165,7 @@ export async function PUT(
     const now = new Date();
     const updateData: any = {
       title,
-      category,
+      categoryId,
       content,
       excerpt: excerpt || null,
       tags: tags || [],

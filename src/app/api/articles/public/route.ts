@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { articles, user } from '@/lib/schema';
+import { articles, user, categories } from '@/lib/schema';
 import { eq, desc, and } from 'drizzle-orm';
 
 export async function GET(req: Request) {
@@ -13,15 +13,15 @@ export async function GET(req: Request) {
     const conditions = [eq(articles.status, 'published')];
 
     if (category) {
-      conditions.push(eq(articles.category, category));
+      conditions.push(eq(categories.name, category));
     }
 
-    // Fetch published articles with author information
+    // Fetch published articles with author and category information
     let query = db
       .select({
         id: articles.id,
         title: articles.title,
-        category: articles.category,
+        category: categories.name,
         content: articles.content,
         excerpt: articles.excerpt,
         tags: articles.tags,
@@ -36,6 +36,7 @@ export async function GET(req: Request) {
       })
       .from(articles)
       .leftJoin(user, eq(articles.authorId, user.id))
+      .leftJoin(categories, eq(articles.categoryId, categories.id))
       .where(and(...conditions))
       .orderBy(desc(articles.publishedAt));
 
