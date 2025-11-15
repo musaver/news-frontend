@@ -16,17 +16,20 @@ declare module "next-auth" {
       email?: string | null;
       name?: string | null;
       image?: string | null;
+      userType?: string | null;
     }
   }
-  
+
   interface User {
     id: string;
+    userType?: string | null;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
     id: string;
+    userType?: string | null;
   }
 }
 
@@ -104,12 +107,21 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        // Fetch user type from database
+        const [dbUser] = await db
+          .select()
+          .from(userTable)
+          .where(eq(userTable.id, user.id));
+        if (dbUser) {
+          token.userType = dbUser.userType;
+        }
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user && token.id) {
         session.user.id = token.id as string;
+        session.user.userType = token.userType as string;
       }
       return session;
     },
