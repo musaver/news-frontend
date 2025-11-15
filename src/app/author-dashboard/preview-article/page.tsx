@@ -79,7 +79,7 @@ export default function PreviewArticlePage() {
                 Back to Edit
               </button>
               <button
-                onClick={() => router.push('/author-dashboard/articles')}
+                onClick={() => router.push('/articles')}
                 className="w-8 h-8 rounded-full hover:bg-[#f7fafc] flex items-center justify-center transition-colors"
               >
                 <XIcon className="w-5 h-5 text-[#657285]" />
@@ -206,7 +206,7 @@ export default function PreviewArticlePage() {
             <button
               onClick={() => {
                 // In a real app, publish the article here
-                router.push('/author-dashboard/articles');
+                router.push('/articles');
               }}
               className="px-6 py-3 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors"
             >

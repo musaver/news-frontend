@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import {
   Header,
   Footer,
@@ -41,8 +41,11 @@ const EyeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-export default function CreateArticlePage() {
+export default function EditArticlePage() {
   const router = useRouter();
+  const params = useParams();
+  const articleId = params?.id as string;
+
   const [formData, setFormData] = useState({
     title: '',
     category: 'Politics',
@@ -54,7 +57,45 @@ export default function CreateArticlePage() {
   });
 
   const [currentTag, setCurrentTag] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (articleId) {
+      fetchArticle();
+    }
+  }, [articleId]);
+
+  const fetchArticle = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/articles/${articleId}`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch article');
+      }
+
+      const data = await response.json();
+      const article = data.article;
+
+      setFormData({
+        title: article.title || '',
+        category: article.category || 'Politics',
+        content: article.content || '',
+        excerpt: article.excerpt || '',
+        tags: article.tags || [],
+        coverImage: article.coverImage || '',
+        status: article.status || 'draft'
+      });
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching article:', err);
+      setError('Failed to load article. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -77,34 +118,34 @@ export default function CreateArticlePage() {
     }));
   };
 
-  const handleSave = async (status: 'draft' | 'under_review' | 'published') => {
-    setIsSubmitting(true);
+  const handleSave = async (status?: 'draft' | 'under_review' | 'published') => {
     try {
-      const response = await fetch('/api/articles', {
-        method: 'POST',
+      setSaving(true);
+      const saveData = {
+        ...formData,
+        status: status || formData.status
+      };
+
+      const response = await fetch(`/api/articles/${articleId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          status,
-        }),
+        body: JSON.stringify(saveData),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        alert(`Error: ${data.error || 'Failed to create article'}`);
-        return;
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to update article');
       }
 
-      alert('Article created successfully!');
+      // Navigate back to articles page
       router.push('/articles');
-    } catch (error) {
-      console.error('Error creating article:', error);
-      alert('Failed to create article. Please try again.');
+    } catch (err) {
+      console.error('Error updating article:', err);
+      alert(err instanceof Error ? err.message : 'Failed to update article. Please try again.');
     } finally {
-      setIsSubmitting(false);
+      setSaving(false);
     }
   };
 
@@ -127,10 +168,39 @@ export default function CreateArticlePage() {
     'Sports'
   ];
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000] mx-auto mb-4"></div>
+          <p className="text-[#657285]">Loading article...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
+            <p className="text-red-600 mb-4">{error}</p>
+            <button
+              onClick={() => router.push('/articles')}
+              className="px-4 py-2 bg-[#cc0000] text-white rounded-lg hover:bg-[#b30000] transition-colors"
+            >
+              Back to Articles
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#f7fafc]">
       <Header />
-      
+
       <main className="pt-16 md:pt-[104px]">
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
@@ -138,10 +208,10 @@ export default function CreateArticlePage() {
             <div className="flex items-center justify-between p-6 border-b border-[rgba(203,213,225,0.35)]">
               <div>
                 <h2 className="text-[#020a1c] text-[24px] leading-[32px] font-bold">
-                  Create New Article
+                  Edit Article
                 </h2>
                 <p className="text-[#657285] text-[14px] leading-[20px] mt-1">
-                  Write and publish your article
+                  Update your article content
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -153,7 +223,7 @@ export default function CreateArticlePage() {
                   Preview
                 </button>
                 <button
-                  onClick={() => router.back()}
+                  onClick={() => router.push('/articles')}
                   className="w-8 h-8 rounded-full hover:bg-[#f7fafc] flex items-center justify-center transition-colors"
                 >
                   <XIcon className="w-5 h-5 text-[#657285]" />
@@ -230,9 +300,9 @@ export default function CreateArticlePage() {
                 </div>
                 {formData.coverImage && (
                   <div className="mt-3 rounded-lg overflow-hidden border border-[rgba(203,213,225,0.35)]">
-                    <img 
-                      src={formData.coverImage} 
-                      alt="Cover preview" 
+                    <img
+                      src={formData.coverImage}
+                      alt="Cover preview"
                       className="w-full h-48 object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800';
@@ -273,7 +343,7 @@ export default function CreateArticlePage() {
                     placeholder="Add a tag..."
                     className="flex-1 px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
                   />
-                  <button 
+                  <button
                     onClick={handleAddTag}
                     className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2"
                   >
@@ -284,8 +354,8 @@ export default function CreateArticlePage() {
                 {formData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {formData.tags.map(tag => (
-                      <span 
-                        key={tag} 
+                      <span
+                        key={tag}
                         className="inline-flex items-center gap-2 px-3 py-1 border border-[rgba(203,213,225,0.5)] rounded text-[12px] font-medium"
                       >
                         {tag}
@@ -320,29 +390,40 @@ export default function CreateArticlePage() {
 
             {/* Footer */}
             <div className="flex items-center justify-between p-6 border-t border-[rgba(203,213,225,0.35)]">
-              <button 
-                onClick={() => router.back()}
+              <button
+                onClick={() => router.push('/articles')}
                 className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors"
+                disabled={saving}
               >
                 Cancel
               </button>
-              
+
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => handleSave('draft')}
-                  disabled={!formData.title || !formData.content || isSubmitting}
+                  disabled={!formData.title || !formData.content || saving}
                   className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Saving...' : 'Save as Draft'}
+                  {saving ? 'Saving...' : 'Save as Draft'}
                 </button>
 
+                {formData.status !== 'published' && (
+                  <button
+                    onClick={() => handleSave('under_review')}
+                    disabled={!formData.title || !formData.content || saving}
+                    className="px-4 py-2 border border-orange-500 text-orange-600 hover:bg-orange-50 rounded-lg text-[14px] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {saving ? 'Saving...' : 'Submit for Review'}
+                  </button>
+                )}
+
                 <button
-                  onClick={() => handleSave('under_review')}
-                  disabled={!formData.title || !formData.content || isSubmitting}
+                  onClick={() => handleSave(formData.status === 'published' ? 'published' : 'under_review')}
+                  disabled={!formData.title || !formData.content || saving}
                   className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <SaveIcon className="w-4 h-4" />
-                  {isSubmitting ? 'Creating...' : 'Create Article'}
+                  {saving ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             </div>
@@ -354,4 +435,3 @@ export default function CreateArticlePage() {
     </div>
   );
 }
-
