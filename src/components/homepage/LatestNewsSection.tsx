@@ -80,7 +80,7 @@ const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => 
                 <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                 <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
               </div>
-              <h3 className="text-lg leading-tight font-semibold">{article.title}</h3>
+              <h3 className="text-sm leading-tight font-medium">{article.title}</h3>
             </div>
           </article>
         ))}

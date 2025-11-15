@@ -53,7 +53,7 @@ const FeaturedSection = ({ mockImages, articles }: FeaturedSectionProps) => {
             <CategoryBadge>{featuredArticle.category}</CategoryBadge>
             <ArticleDate>{formatDate(featuredArticle.publishedAt)}</ArticleDate>
           </div>
-          <h1 className="text-4xl leading-tight font-bold">
+          <h1 className="text-4xl leading-tight font-semibold">
             {featuredArticle.title}
           </h1>
           <p className="leading-relaxed">
