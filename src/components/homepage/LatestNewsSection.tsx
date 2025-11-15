@@ -27,26 +27,26 @@ const LatestNewsSection = ({ mockImages }: LatestNewsSectionProps) => (
       {[
         {
           category: 'Health',
-          date: 'Sep 23, 2024',
-          title: 'The Future of Healthcare Workforce Shines Bright as Non-Clinical Roles Evolve',
+          date: 'Nov 14, 2025',
+          title: 'Breakthrough Gene Therapy Shows 95% Success Rate in Cancer Treatment Trials',
           image: mockImages.healthNews
         },
         {
-          category: 'Fashion', 
-          date: 'Sep 21, 2024',
-          title: 'Bold and Beautiful: Fall 2024 Fashion Trends to Watch',
+          category: 'Fashion',
+          date: 'Nov 13, 2025',
+          title: 'Sustainable Fashion Revolution: Major Brands Commit to Zero-Waste Production by 2026',
           image: mockImages.fashionNews
         },
         {
           category: 'Real Estate',
-          date: 'Sep 20, 2024', 
-          title: 'Mixed-Use Developments, The Future of Urban Living',
+          date: 'Nov 12, 2025',
+          title: 'Smart Cities Initiative Transforms Urban Real Estate Markets Across America',
           image: mockImages.realEstateNews
         },
         {
           category: 'Travel',
-          date: 'Sep 19, 2024', 
-          title: 'Digital Nomads Redefine the New Normal to Work and Travel',
+          date: 'Nov 11, 2025',
+          title: 'Space Tourism Becomes Accessible: First Commercial Flights to Launch Next Quarter',
           image: mockImages.travel
         }
       ].map((article, index) => (
@@ -75,20 +75,20 @@ const LatestNewsSection = ({ mockImages }: LatestNewsSectionProps) => (
       {[
         {
           category: 'Health',
-          date: 'Sep 23, 2024',
-          title: 'The Future of Healthcare Workforce Shines Bright as Non-Clinical Roles Evolve',
+          date: 'Nov 14, 2025',
+          title: 'Breakthrough Gene Therapy Shows 95% Success Rate in Cancer Treatment Trials',
           image: mockImages.healthNews
         },
         {
-          category: 'Fashion', 
-          date: 'Sep 21, 2024',
-          title: 'Bold and Beautiful: Fall 2024 Fashion Trends to Watch',
+          category: 'Fashion',
+          date: 'Nov 13, 2025',
+          title: 'Sustainable Fashion Revolution: Major Brands Commit to Zero-Waste Production by 2026',
           image: mockImages.fashionNews
         },
         {
           category: 'Real Estate',
-          date: 'Sep 20, 2024', 
-          title: 'Mixed-Use Developments, The Future of Urban Living',
+          date: 'Nov 12, 2025',
+          title: 'Smart Cities Initiative Transforms Urban Real Estate Markets Across America',
           image: mockImages.realEstateNews
         }
       ].map((article, index) => (

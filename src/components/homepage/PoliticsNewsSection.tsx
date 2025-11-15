@@ -27,23 +27,23 @@ const PoliticsNewsSection = ({ mockImages }: PoliticsNewsSectionProps) => (
       <div className="md:hidden space-y-6 max-w-[480px] mx-auto">
         {[
           {
-            date: 'Sep 12, 2024',
-            title: 'Rising Candidate Advocates Bold Vision Amid Economic Challenges',
+            date: 'Nov 15, 2025',
+            title: 'Senate Passes Landmark Education Reform Bill with Bipartisan Support',
             image: mockImages.politicsSmall1
           },
           {
-            date: 'Sep 2, 2024', 
-            title: 'Senator Grace Hamilton Gains Momentum as Youth Support Surges',
+            date: 'Nov 14, 2025',
+            title: 'International Trade Agreement Opens New Markets for US Exports',
             image: mockImages.politicsSmall2
           },
           {
-            date: 'Aug 22, 2024',
-            title: 'Melissa Kent\'s Resilient Campaign Rebounds Amid Challenging Polls',
+            date: 'Nov 13, 2025',
+            title: 'Supreme Court Ruling Shapes Future of Digital Privacy Rights',
             image: mockImages.politicsSmall3
           },
           {
-            date: 'Aug 2, 2024',
-            title: 'Ava Mitchell\'s Bold Economic Vision Resonates with Voters',
+            date: 'Nov 12, 2025',
+            title: 'Congressional Committee Approves Major Healthcare Expansion Plan',
             image: mockImages.politicsSmall4
           }
         ].map((article, index) => (
@@ -71,23 +71,23 @@ const PoliticsNewsSection = ({ mockImages }: PoliticsNewsSectionProps) => (
       <div className="hidden md:grid grid-cols-1 md:grid-cols-4 gap-8 mt-6">
         {[
           {
-            date: 'Sep 12, 2024',
-            title: 'Rising Candidate Advocates Bold Vision Amid Economic…',
+            date: 'Nov 15, 2025',
+            title: 'Senate Passes Landmark Education Reform Bill with Bipartisan Support',
             image: mockImages.politicsSmall1
           },
           {
-            date: 'Sep 2, 2024', 
-            title: 'Senator Grace Hamilton Gains Momentum as Youth Support Surges',
+            date: 'Nov 14, 2025',
+            title: 'International Trade Agreement Opens New Markets for US Exports',
             image: mockImages.politicsSmall2
           },
           {
-            date: 'Aug 22, 2024',
-            title: 'Melissa Kent\'s Resilient Campaign Rebounds Amid Challenging Polls',
+            date: 'Nov 13, 2025',
+            title: 'Supreme Court Ruling Shapes Future of Digital Privacy Rights',
             image: mockImages.politicsSmall3
           },
           {
-            date: 'Aug 2, 2024',
-            title: 'Ava Mitchell\'s Bold Economic Vision Resonates with Voters',
+            date: 'Nov 12, 2025',
+            title: 'Congressional Committee Approves Major Healthcare Expansion Plan',
             image: mockImages.politicsSmall4
           }
         ].map((article, index) => (

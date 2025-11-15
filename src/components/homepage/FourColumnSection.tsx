@@ -20,32 +20,32 @@ const FourColumnSection = ({ mockImages }: FourColumnSectionProps) => (
             title: 'Travel',
             image: mockImages.travel,
             articles: [
-              { date: 'Sep 19, 2024', title: 'Digital Nomads Redefine the New Normal to Work and Travel' },
-              { date: 'Sep 9, 2024', title: 'Luxury Train Journeys: A Timeless Adventure on the Rails' }
+              { date: 'Nov 11, 2025', title: 'Sustainable Tourism Initiatives Transform Popular Destinations Worldwide' },
+              { date: 'Nov 10, 2025', title: 'Hidden Gems: Undiscovered Travel Destinations for Adventurous Explorers' }
             ]
           },
           {
-            title: 'Entertainment', 
+            title: 'Entertainment',
             image: mockImages.entertainment,
             articles: [
-              { date: 'Sep 18, 2024', title: 'Timeless TV Shows Make a Spectacular Comeback with Famous Stars' },
-              { date: 'Sep 8, 2024', title: 'Celebrity Collaborations Heat Up: Stars Team Up for Groundbreaking Projects' }
+              { date: 'Nov 13, 2025', title: 'Blockbuster Season: Most Anticipated Films of 2026 Revealed' },
+              { date: 'Nov 12, 2025', title: 'Music Industry Evolution: Virtual Concerts Attract Millions Globally' }
             ]
           },
           {
             title: 'Sports',
-            image: mockImages.sports, 
+            image: mockImages.sports,
             articles: [
-              { date: 'Sep 17, 2024', title: 'US Swimmer Smashes World Record in 2024 Olympics' },
-              { date: 'Sep 7, 2024', title: 'Historic Gold for US Gymnast at 2024 Olympics' }
+              { date: 'Nov 12, 2025', title: 'Championship Finals: Underdog Team Stuns Sports World with Victory' },
+              { date: 'Nov 11, 2025', title: 'Rising Stars: Young Athletes Breaking Records in Major Leagues' }
             ]
           },
           {
             title: 'Tech',
             image: mockImages.tech,
             articles: [
-              { date: 'Sep 16, 2024', title: 'AI Revolution Drives Tech Innovation in 2024' },
-              { date: 'Sep 6, 2024', title: 'Modern tech are revolutionizing how we interact with our devices' }
+              { date: 'Nov 14, 2025', title: 'Next-Gen Smartphones Feature Advanced AI and Extended Battery Life' },
+              { date: 'Nov 13, 2025', title: 'Cybersecurity Breakthrough: New Protocol Promises Unhackable Networks' }
             ]
           }
         ].map((section, index) => (

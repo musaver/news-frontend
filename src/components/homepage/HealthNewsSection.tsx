@@ -40,10 +40,10 @@ const HealthNewsSection = ({ mockImages }: HealthNewsSectionProps) => (
               <div className="flex items-center gap-2 text-[10.9px] mb-1">
                 <span className="text-white/60">Health</span>
                 <div className="w-[3px] h-[3px] bg-white/60 rounded-full"></div>
-                <span className="text-white/60">Sep 23, 2024</span>
+                <span className="text-white/60">Nov 14, 2025</span>
               </div>
               <h3 className="text-[15px] leading-[19.2px] font-normal">
-                The Future of Healthcare Workforce Shines Bright as Non-Clinical Roles Evolve
+                Revolutionary Alzheimer's Treatment Shows Remarkable Results in Clinical Trials
               </h3>
             </div>
           </div>
@@ -51,11 +51,11 @@ const HealthNewsSection = ({ mockImages }: HealthNewsSectionProps) => (
           {/* Article List */}
           <div className="space-y-6">
             {[
-              { date: 'Sep 13, 2024', title: 'Personalized Nutrition for Chronic Disease Management' },
-              { date: 'Sep 3, 2024', title: 'Breakthrough in Diabetes Treatment: New Drug Offers Hope for Millions' },
-              { date: 'Aug 23, 2024', title: 'Shaping the Future of U.S. Healthcare' },
-              { date: 'Aug 13, 2024', title: 'Research Unveils Potential Cure for Cystic Fibrosis' },
-              { date: 'Aug 3, 2024', title: 'Enhancing Doctor-Patient Communication for Better Health Outcomes' }
+              { date: 'Nov 13, 2025', title: 'AI-Powered Diagnostics Reduce Cancer Detection Time by 80 Percent' },
+              { date: 'Nov 12, 2025', title: 'New Mental Health Initiative Expands Access to Therapy Nationwide' },
+              { date: 'Nov 11, 2025', title: 'Telemedicine Adoption Reaches Record High Among Rural Communities' },
+              { date: 'Nov 10, 2025', title: 'Groundbreaking Study Links Gut Health to Improved Cognitive Function' },
+              { date: 'Nov 9, 2025', title: 'Wearable Technology Enables Early Detection of Heart Disease' }
             ].map((article, index) => (
               <article key={index} className="flex gap-2">
                 <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0 bg-slate-200">
@@ -98,10 +98,10 @@ const HealthNewsSection = ({ mockImages }: HealthNewsSectionProps) => (
             <div className="flex items-center gap-2 text-sm mb-3">
               <span className="text-white/60">Health</span>
               <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-              <span className="text-white/60">Sep 23, 2024</span>
+              <span className="text-white/60">Nov 14, 2025</span>
             </div>
             <h3 className="text-xl leading-tight font-semibold">
-              The Future of Healthcare Workforce Shines Bright as Non-Clinical Roles Evolve
+              Revolutionary Alzheimer's Treatment Shows Remarkable Results in Clinical Trials
             </h3>
           </div>
         </div>
@@ -109,11 +109,11 @@ const HealthNewsSection = ({ mockImages }: HealthNewsSectionProps) => (
         {/* Article List */}
         <div className="bg-white rounded-lg border p-5 space-y-6">
           {[
-            { date: 'Sep 13, 2024', title: 'Personalized Nutrition for Chronic Disease Management' },
-            { date: 'Sep 3, 2024', title: 'Breakthrough in Diabetes Treatment: New Drug Offers Hope for Millions' },
-            { date: 'Aug 23, 2024', title: 'Shaping the Future of U.S. Healthcare' },
-            { date: 'Aug 13, 2024', title: 'Research Unveils Potential Cure for Cystic Fibrosis' },
-            { date: 'Aug 3, 2024', title: 'Enhancing Doctor-Patient Communication for Better Health Outcomes' }
+            { date: 'Nov 13, 2025', title: 'AI-Powered Diagnostics Reduce Cancer Detection Time by 80 Percent' },
+            { date: 'Nov 12, 2025', title: 'New Mental Health Initiative Expands Access to Therapy Nationwide' },
+            { date: 'Nov 11, 2025', title: 'Telemedicine Adoption Reaches Record High Among Rural Communities' },
+            { date: 'Nov 10, 2025', title: 'Groundbreaking Study Links Gut Health to Improved Cognitive Function' },
+            { date: 'Nov 9, 2025', title: 'Wearable Technology Enables Early Detection of Heart Disease' }
           ].map((article, index) => (
             <article key={index} className="flex gap-3">
               <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0 bg-slate-200">

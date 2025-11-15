@@ -26,25 +26,25 @@ const PodcastSection = ({ mockImages }: PodcastSectionProps) => (
           <div>
             <SectionHeader title="Podcast" showViewAll={true} />
             <p className="text-slate-700 mt-6 leading-relaxed">
-              Dive into our Top 5 selection of the best podcasts, featuring everything from latest tech to trending tunes. Press the play button now!
+              Discover our curated collection of top podcasts covering technology, culture, environment, and more. Stay informed and entertained with expert insights and engaging conversations.
             </p>
           </div>
           
           <div className="space-y-6">
             {[
               {
-                title: 'Tech Tomorrow',
-                description: 'Stay ahead of the curve with the latest advancements in technology. From AI breakthroughs to the futur… of space exploration, each episode',
+                title: 'Tech Frontiers',
+                description: 'Exploring cutting-edge innovations in AI, quantum computing, and emerging technologies. Weekly episodes feature industry leaders and breakthrough discoveries.',
                 image: mockImages.podcastThumb1
               },
               {
-                title: 'Culture Connect', 
-                description: 'Explore the rich tapestry of global cultures in this podcast that takes you on a journey across continents.… Each episode features in-depth',
+                title: 'Global Perspectives',
+                description: 'In-depth conversations about world events, cultural trends, and social movements. Hear from thought leaders and changemakers shaping our future.',
                 image: mockImages.podcastThumb2
               },
               {
-                title: 'The Green Voices',
-                description: 'Tune into the most pressing environmental issues of our time. From climate change to conservati… efforts, this podcast features',
+                title: 'Sustainable Future',
+                description: 'Climate solutions, renewable energy, and environmental conservation strategies. Learn from scientists, activists, and policy makers driving change.',
                 image: mockImages.podcastThumb3
               }
             ].map((podcast, index) => (

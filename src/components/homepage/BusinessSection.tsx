@@ -19,10 +19,10 @@ const BusinessSection = ({ mockImages }: BusinessSectionProps) => (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 h-[451px]">
             <div className="bg-white rounded border p-6 space-y-6">
               {[
-                { date: 'Sep 15, 2024', title: 'Consumer Confidence Soars as Retail Sales Surge, Signaling Strong Economic Recovery' },
-                { date: 'Sep 5, 2024', title: 'Virtual Reality Shopping Takes Center Stage' },
-                { date: 'Aug 15, 2024', title: 'Renewable Energy Sector Soars with Record Investments from Major Corporations' },
-                { date: 'Aug 5, 2024', title: 'Tech Giant Unveils Groundbreaking AI Platform, Revolutionizing Digital…' }
+                { date: 'Nov 15, 2025', title: 'Global Markets Reach New Heights as Innovation Drives Economic Expansion' },
+                { date: 'Nov 14, 2025', title: 'Startups Secure Record $50 Billion in Venture Capital Funding This Quarter' },
+                { date: 'Nov 13, 2025', title: 'E-Commerce Giants Expand Drone Delivery Networks to 100 Major Cities' },
+                { date: 'Nov 12, 2025', title: 'Corporate Sustainability Programs Show Measurable Impact on Bottom Line' }
               ].map((article, index) => (
                 <article key={index} className="space-y-1">
                   <div className="flex items-center gap-2 text-xs">
@@ -51,10 +51,10 @@ const BusinessSection = ({ mockImages }: BusinessSectionProps) => (
                 <div className="flex items-center gap-2 text-sm mb-3">
                   <span className="text-white/60">Business</span>
                   <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-                  <span className="text-white/60">Sep 15, 2024</span>
+                  <span className="text-white/60">Nov 15, 2025</span>
                 </div>
                 <h3 className="text-lg leading-tight font-semibold">
-                  Consumer Confidence Soars as Retail Sales Surge, Signaling Strong Economic Recovery
+                  Global Markets Reach New Heights as Innovation Drives Economic Expansion
                 </h3>
               </div>
             </div>
@@ -75,10 +75,10 @@ const BusinessSection = ({ mockImages }: BusinessSectionProps) => (
           </div>
           <div className="p-6 space-y-4">
             {[
-              { date: 'Sep 21, 2024', title: 'Bold and Beautiful: Fall 2024 Fashion Trends to Watch', image: mockImages.fashionNews },
-              { date: 'Sep 11, 2024', title: 'Breaking Boundaries and Embracing the Freedom of Gender-Fluid Fashion', image: mockImages.fashionNews },
-              { date: 'Sep 1, 2024', title: 'Monochrome Magic: Mastering the Art of Single-Color Outfits', image: mockImages.fashionNews },
-              { date: 'Sep 11, 2024', title: 'Cottagecore Chic: Embracing the Nostalgic and Nature-Inspired Trend', image: mockImages.fashionNews }
+              { date: 'Nov 13, 2025', title: 'Paris Fashion Week 2026: Preview of Revolutionary Designs and Trends', image: mockImages.fashionNews },
+              { date: 'Nov 12, 2025', title: 'Tech-Infused Clothing: Smart Fabrics Transform the Fashion Industry', image: mockImages.fashionNews },
+              { date: 'Nov 11, 2025', title: 'Luxury Brands Embrace Circular Economy with Resale Platforms', image: mockImages.fashionNews },
+              { date: 'Nov 10, 2025', title: 'Designer Spotlight: Rising Stars Redefining Modern Elegance', image: mockImages.fashionNews }
             ].map((article, index) => (
               <article key={index} className="flex gap-3">
                 <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">

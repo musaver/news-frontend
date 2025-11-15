@@ -22,14 +22,14 @@ const FeaturedSection = ({ mockImages }: FeaturedSectionProps) => (
       <div className="space-y-3 px-1">
         <div className="flex items-center gap-3">
           <CategoryBadge>Business</CategoryBadge>
-          <ArticleDate>Sep 25, 2024</ArticleDate>
+          <ArticleDate>Nov 15, 2025</ArticleDate>
         </div>
         <h1 className="text-[22px] leading-[32px] font-normal">
-          Small Businesses Flourish as US Government Expands Loan Access and Support
+          Tech Giants Announce Record Quarterly Earnings as AI Integration Drives Global Market Surge
         </h1>
         <p className="text-slate-700 leading-[21px] text-[14.6px]">
-          In a year filled with economic challenges, small businesses across the United States 
-          are finding new opportunities for growth and expansion, thanks to the U.S. government's expanded loan…
+          Major technology companies report unprecedented growth in Q4 2025, with artificial intelligence applications
+          transforming industries from healthcare to manufacturing. Market analysts predict continued expansion…
         </p>
       </div>
     </div>
@@ -39,14 +39,14 @@ const FeaturedSection = ({ mockImages }: FeaturedSectionProps) => (
       <div className="flex flex-col justify-center space-y-3">
         <div className="flex items-center gap-3">
           <CategoryBadge>Business</CategoryBadge>
-          <ArticleDate>Sep 25, 2024</ArticleDate>
+          <ArticleDate>Nov 15, 2025</ArticleDate>
         </div>
         <h1 className="text-4xl leading-tight font-bold">
-          Small Businesses Flourish as US Government Expands Loan Access and Support
+          Tech Giants Announce Record Quarterly Earnings as AI Integration Drives Global Market Surge
         </h1>
         <p className="leading-relaxed">
-          In a year filled with economic challenges, small businesses across the United States 
-          are finding new opportunities for growth and expansion, thanks to the U.S.…
+          Major technology companies report unprecedented growth in Q4 2025, with artificial intelligence applications
+          transforming industries from healthcare to manufacturing. Market analysts predict continued expansion…
         </p>
       </div>
       <div className="rounded-lg overflow-hidden">

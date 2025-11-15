@@ -22,14 +22,14 @@ const FinanceSidebar = ({ mockImages }: FinanceSidebarProps) => (
         <SectionHeader title="Finance" showViewAll={true} />
         <div className="space-y-4 mt-4">
           {[
-            { date: 'Sep 14, 2024', title: 'Federal Reserve Signals Potential Rate Cuts Amid Economic Resilience' },
-            { date: 'Sep 4, 2024', title: 'Stocks Surge as Investors Seek Growth Amid Rate Uncertainty' },
-            { date: 'Aug 24, 2024', title: 'The New York Stock Exchange buzzes with activity as U.S. markets reach new all-time highs' },
-            { date: 'Aug 14, 2024', title: 'Stocks Rebound as Market Eyes Potential Rate Cuts' },
-            { date: 'Aug 4, 2024', title: 'Investors Eye Renewable Energy Stocks as Market Shifts to Green Economy' },
-            { date: 'Jul 30, 2024', title: 'Market Optimism Grows as Fintech Trends Drive Future of Finance' },
-            { date: 'Jul 27, 2024', title: 'Saving Strategies to Build Wealth in a High-Interest Environment' },
-            { date: 'Jul 26, 2024', title: 'Smart Budgeting Tips to Maximize Your Savings in 2024' }
+            { date: 'Nov 15, 2025', title: 'Cryptocurrency Markets Hit New Milestone with Institutional Adoption' },
+            { date: 'Nov 14, 2025', title: 'Global Banking System Embraces Blockchain for Faster Transactions' },
+            { date: 'Nov 13, 2025', title: 'Stock Market Rally Continues as Tech Sector Leads Growth' },
+            { date: 'Nov 12, 2025', title: 'Investment Opportunities in Emerging Markets Show Strong Potential' },
+            { date: 'Nov 11, 2025', title: 'ESG Investing Becomes Mainstream Among Retail Investors' },
+            { date: 'Nov 10, 2025', title: 'Central Banks Coordinate Global Economic Stability Initiative' },
+            { date: 'Nov 9, 2025', title: 'Personal Finance Apps Transform How Americans Manage Money' },
+            { date: 'Nov 8, 2025', title: 'Real Estate Investment Trusts Post Record Quarterly Returns' }
           ].map((article, index) => (
             <div key={index} className="border-b border-slate-200 pb-3">
               <div className="flex items-center gap-2 text-xs mb-1">

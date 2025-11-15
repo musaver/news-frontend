@@ -39,10 +39,10 @@ const TopStoriesSection = ({ mockImages }: TopStoriesSectionProps) => (
             <div className="flex items-center gap-2 text-[10.9px] mb-1">
               <span className="text-white/60">Politics</span>
               <div className="w-[3px] h-[3px] bg-white/60 rounded-full"></div>
-              <span className="text-white/60">Sep 22, 2024</span>
+              <span className="text-white/60">Nov 15, 2025</span>
             </div>
             <h3 className="text-[15px] leading-[19.2px] font-normal">
-              Amber Hightower's Message of Unity Gains Momentum Ahead of Election
+              Historic Climate Accord Signed by 150 Nations at Global Summit in Geneva
             </h3>
           </div>
         </div>
@@ -50,10 +50,10 @@ const TopStoriesSection = ({ mockImages }: TopStoriesSectionProps) => (
         {/* Article List */}
         <div className="bg-white rounded-lg p-1 space-y-6">
           {[
-            { category: 'Tech', date: 'Sep 16, 2024', title: 'AI Revolution Drives Tech Innovation in 2024' },
-            { category: 'Entertainment', date: 'Sep 8, 2024', title: 'Celebrity Collaborations Heat Up: Stars Team Up for Groundbreaking Projects' },
-            { category: 'Entertainment', date: 'Aug 18, 2024', title: 'Streaming Services Unveil Innovative Features' },
-            { category: 'Politics', date: 'Aug 12, 2024', title: 'Congress Unites Across the Aisle to Pass Landmark Green Infrastructure Act, Paving Way for a Sustainable Future' }
+            { category: 'Tech', date: 'Nov 14, 2025', title: 'Quantum Computing Milestone: First Commercial Quantum Computer Goes Live' },
+            { category: 'Entertainment', date: 'Nov 13, 2025', title: 'Award-Winning Director Announces Epic Historical Drama Series for 2026' },
+            { category: 'Sports', date: 'Nov 12, 2025', title: 'Olympic Committee Approves New Sports Categories for 2028 Games' },
+            { category: 'Politics', date: 'Nov 11, 2025', title: 'Bipartisan Infrastructure Bill Promises $2 Trillion Investment in Green Energy' }
           ].map((article, index) => (
             <article key={index} className="space-y-1">
               <div className="flex items-center gap-2 text-[10.9px]">
@@ -86,10 +86,10 @@ const TopStoriesSection = ({ mockImages }: TopStoriesSectionProps) => (
             <div className="flex items-center gap-2 text-sm mb-3">
               <span className="text-white/60">Politics</span>
               <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-              <span className="text-white/60">Sep 22, 2024</span>
+              <span className="text-white/60">Nov 15, 2025</span>
             </div>
             <h3 className="text-xl leading-tight font-semibold">
-              Amber Hightower's Message of Unity Gains Momentum Ahead of Election
+              Historic Climate Accord Signed by 150 Nations at Global Summit in Geneva
             </h3>
           </div>
         </div>
@@ -97,10 +97,10 @@ const TopStoriesSection = ({ mockImages }: TopStoriesSectionProps) => (
         {/* Article List */}
         <div className="bg-white rounded border p-6 space-y-6">
           {[
-            { category: 'Tech', date: 'Sep 16, 2024', title: 'AI Revolution Drives Tech Innovation in 2024' },
-            { category: 'Entertainment', date: 'Sep 8, 2024', title: 'Celebrity Collaborations Heat Up: Stars Team Up for Groundbreaking Projects' },
-            { category: 'Entertainment', date: 'Aug 18, 2024', title: 'Streaming Services Unveil Innovative Features' },
-            { category: 'Politics', date: 'Aug 12, 2024', title: 'Congress Unites Across the Aisle to Pass Landmark Green Infrastructure Act, Paving Way…' }
+            { category: 'Tech', date: 'Nov 14, 2025', title: 'Quantum Computing Milestone: First Commercial Quantum Computer Goes Live' },
+            { category: 'Entertainment', date: 'Nov 13, 2025', title: 'Award-Winning Director Announces Epic Historical Drama Series for 2026' },
+            { category: 'Sports', date: 'Nov 12, 2025', title: 'Olympic Committee Approves New Sports Categories for 2028 Games' },
+            { category: 'Politics', date: 'Nov 11, 2025', title: 'Bipartisan Infrastructure Bill Promises $2 Trillion Investment in Green Energy' }
           ].map((article, index) => (
             <article key={index} className="space-y-1">
               <div className="flex items-center gap-2 text-xs">
