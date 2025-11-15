@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import {
   Header,
@@ -14,8 +12,11 @@ import {
   FourColumnSection,
   PodcastSection
 } from '@/components/homepage';
+import { db } from '@/lib/db';
+import { articles, user } from '@/lib/schema';
+import { eq, desc, and } from 'drizzle-orm';
 
-// Mock images - in a real app these would come from the Figma import
+// Mock images - fallback for articles without cover images
 const mockImages = {
   featuredArticle: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop',
   healthNews: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=200&fit=crop',
@@ -39,19 +40,119 @@ const mockImages = {
   politicsSmall4: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=125&h=100&fit=crop'
 };
 
+async function fetchArticlesByCategory(category: string, limit?: number) {
+  try {
+    const conditions = [
+      eq(articles.status, 'published'),
+      eq(articles.category, category)
+    ];
+
+    let query = db
+      .select({
+        id: articles.id,
+        title: articles.title,
+        category: articles.category,
+        content: articles.content,
+        excerpt: articles.excerpt,
+        tags: articles.tags,
+        coverImage: articles.coverImage,
+        publishedAt: articles.publishedAt,
+        createdAt: articles.createdAt,
+        author: {
+          id: user.id,
+          name: user.name,
+          image: user.image,
+        },
+      })
+      .from(articles)
+      .leftJoin(user, eq(articles.authorId, user.id))
+      .where(and(...conditions))
+      .orderBy(desc(articles.publishedAt));
+
+    if (limit) {
+      query = query.limit(limit) as any;
+    }
+
+    const result = await query;
+    return result.map(article => ({
+      ...article,
+      tags: Array.isArray(article.tags) ? article.tags : [],
+    }));
+  } catch (error) {
+    console.error(`Error fetching ${category} articles:`, error);
+    return [];
+  }
+}
+
+async function fetchLatestArticles(limit: number = 10) {
+  try {
+    const result = await db
+      .select({
+        id: articles.id,
+        title: articles.title,
+        category: articles.category,
+        content: articles.content,
+        excerpt: articles.excerpt,
+        tags: articles.tags,
+        coverImage: articles.coverImage,
+        publishedAt: articles.publishedAt,
+        createdAt: articles.createdAt,
+        author: {
+          id: user.id,
+          name: user.name,
+          image: user.image,
+        },
+      })
+      .from(articles)
+      .leftJoin(user, eq(articles.authorId, user.id))
+      .where(eq(articles.status, 'published'))
+      .orderBy(desc(articles.publishedAt))
+      .limit(limit);
+
+    return result.map(article => ({
+      ...article,
+      tags: Array.isArray(article.tags) ? article.tags : [],
+    }));
+  } catch (error) {
+    console.error('Error fetching latest articles:', error);
+    return [];
+  }
+}
 
 // Main App Component
-export default function Home() {
+export default async function Home() {
+  // Fetch articles for each category
+  const businessArticles = await fetchArticlesByCategory('Business', 5);
+  const financeArticles = await fetchArticlesByCategory('Finance', 8);
+  const politicsArticles = await fetchArticlesByCategory('Politics', 5);
+  const healthArticles = await fetchArticlesByCategory('Health', 6);
+  const fashionArticles = await fetchArticlesByCategory('Fashion', 4);
+  const realEstateArticles = await fetchArticlesByCategory('Real Estate', 3);
+  const travelArticles = await fetchArticlesByCategory('Travel', 3);
+  const entertainmentArticles = await fetchArticlesByCategory('Entertainment', 3);
+  const sportsArticles = await fetchArticlesByCategory('Sports', 3);
+  const techArticles = await fetchArticlesByCategory('Tech', 4);
+  const latestArticles = await fetchLatestArticles(10);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
+
       <main className="pt-16 md:pt-[104px]">
         {/* Mobile Layout */}
         <div className="md:hidden px-4 py-6 space-y-12 max-w-[480px] mx-auto">
-          <FeaturedSection mockImages={mockImages} />
-          <LatestNewsSection mockImages={mockImages} />
-          <TopStoriesSection mockImages={mockImages} />
+          <FeaturedSection
+            mockImages={mockImages}
+            articles={businessArticles}
+          />
+          <LatestNewsSection
+            mockImages={mockImages}
+            articles={latestArticles}
+          />
+          <TopStoriesSection
+            mockImages={mockImages}
+            articles={latestArticles}
+          />
         </div>
 
         {/* Desktop Layout */}
@@ -60,28 +161,58 @@ export default function Home() {
           <div className="max-w-[1320px] mx-auto px-6 py-12">
             <div className="flex grid-cols-1 lg:grid-cols-4 gap-2">
               <div className="lg:col-span-3 space-y-12">
-                <FeaturedSection mockImages={mockImages} />
-                <LatestNewsSection mockImages={mockImages} />
-                <TopStoriesSection mockImages={mockImages} />
+                <FeaturedSection
+                  mockImages={mockImages}
+                  articles={businessArticles}
+                />
+                <LatestNewsSection
+                  mockImages={mockImages}
+                  articles={latestArticles}
+                />
+                <TopStoriesSection
+                  mockImages={mockImages}
+                  articles={latestArticles}
+                />
               </div>
               {/* Vertical Divider */}
               <div className="hidden lg:block w-px bg-slate-200 mx-3"></div>
               <div className="lg:col-span-1">
-                <FinanceSidebar mockImages={mockImages} />
+                <FinanceSidebar
+                  mockImages={mockImages}
+                  articles={financeArticles}
+                />
               </div>
             </div>
           </div>
         </div>
-        
-        <PoliticsNewsSection mockImages={mockImages} />
-        <HealthNewsSection mockImages={mockImages} />
-        <BusinessSection mockImages={mockImages} />
-        <FourColumnSection mockImages={mockImages} />
-        <PodcastSection mockImages={mockImages} />
+
+        <PoliticsNewsSection
+          mockImages={mockImages}
+          articles={politicsArticles}
+        />
+        <HealthNewsSection
+          mockImages={mockImages}
+          articles={healthArticles}
+        />
+        <BusinessSection
+          mockImages={mockImages}
+          businessArticles={businessArticles}
+          fashionArticles={fashionArticles}
+        />
+        <FourColumnSection
+          mockImages={mockImages}
+          travelArticles={travelArticles}
+          entertainmentArticles={entertainmentArticles}
+          sportsArticles={sportsArticles}
+          techArticles={techArticles}
+        />
+        <PodcastSection
+          mockImages={mockImages}
+          articles={[...techArticles, ...entertainmentArticles].slice(0, 3)}
+        />
       </main>
-      
+
       <Footer />
     </div>
   );
 }
-
