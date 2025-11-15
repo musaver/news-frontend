@@ -111,7 +111,7 @@ function EditArticleContent() {
     console.log('Updating article:', { ...formData, status, id: articleId });
     
     // Navigate back to articles page
-    router.push('/author-dashboard/articles');
+    router.push('/articles');
   };
 
   const handlePreview = () => {

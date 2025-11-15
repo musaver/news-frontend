@@ -4,6 +4,50 @@ import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { articles } from '@/lib/schema';
 import { v4 as uuidv4 } from 'uuid';
+import { eq, and, desc } from 'drizzle-orm';
+
+export async function GET(req: Request) {
+  try {
+    // Get the session to check if user is authenticated
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+      return NextResponse.json(
+        { error: 'Unauthorized. Please log in.' },
+        { status: 401 }
+      );
+    }
+
+    // Check if user is an author
+    if (session.user.userType !== 'author') {
+      return NextResponse.json(
+        { error: 'Forbidden. Only authors can view their articles.' },
+        { status: 403 }
+      );
+    }
+
+    // Fetch all articles for this author
+    const userArticles = await db
+      .select()
+      .from(articles)
+      .where(eq(articles.authorId, session.user.id))
+      .orderBy(desc(articles.createdAt));
+
+    return NextResponse.json(
+      {
+        success: true,
+        articles: userArticles,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    return NextResponse.json(
+      { error: 'Internal server error.' },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req: Request) {
   try {

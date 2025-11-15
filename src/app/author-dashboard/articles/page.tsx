@@ -227,7 +227,7 @@ export default function AuthorArticlesPage() {
               <LayoutDashboardIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Overview</span>
             </a>
-            <a href="/author-dashboard/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
+            <a href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
               <FileTextIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Articles</span>
             </a>
@@ -338,7 +338,7 @@ export default function AuthorArticlesPage() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <a href={`/author-dashboard/edit-article?id=${article.id}`} className="px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2">
+                      <a href={`/articles/${article.id}/edit`} className="px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2">
                         <EditIcon className="w-4 h-4" />
                         Edit
                       </a>
