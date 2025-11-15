@@ -34,8 +34,8 @@ async function fetchLatestArticles(limit?: number) {
     }
   })
     .from(articles)
+    .innerJoin(categories, eq(articles.categoryId, categories.id))
     .leftJoin(user, eq(articles.authorId, user.id))
-    .leftJoin(categories, eq(articles.categoryId, categories.id))
     .where(and(...conditions))
     .orderBy(desc(articles.publishedAt));
 
@@ -69,8 +69,8 @@ async function fetchArticlesByCategory(category: string, limit?: number) {
     }
   })
     .from(articles)
+    .innerJoin(categories, eq(articles.categoryId, categories.id))
     .leftJoin(user, eq(articles.authorId, user.id))
-    .leftJoin(categories, eq(articles.categoryId, categories.id))
     .where(and(...conditions))
     .orderBy(desc(articles.publishedAt));
 
