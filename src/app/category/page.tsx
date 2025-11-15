@@ -1,23 +1,83 @@
-'use client'
-
 import React from 'react';
 import {
   Header,
   Footer,
   FeaturedSection,
   LatestNewsSection,
-  TopStoriesSection,
   FinanceSidebar,
-  PoliticsNewsSection,
-  HealthNewsSection,
-  BusinessSection,
-  FourColumnSection,
   PodcastSection
 } from '@/components/homepage';
 import { imgLatestNews } from "@/imports/svg-92wog";
-import { imgContainer } from "@/imports/svg-4a9ab";
-import { imgContainer as imgAboutUs } from "@/imports/svg-a7b80";
+import { db } from '@/lib/db';
+import { articles, user } from '@/lib/schema';
+import { eq, desc, and } from 'drizzle-orm';
+import { Article } from '@/types/article';
 
+// Fetch articles from database
+async function fetchLatestArticles(limit?: number) {
+  const conditions = [eq(articles.status, 'published')];
+
+  let query = db.select({
+    id: articles.id,
+    title: articles.title,
+    category: articles.category,
+    content: articles.content,
+    excerpt: articles.excerpt,
+    tags: articles.tags,
+    coverImage: articles.coverImage,
+    publishedAt: articles.publishedAt,
+    createdAt: articles.createdAt,
+    author: {
+      id: user.id,
+      name: user.name,
+      image: user.image,
+    }
+  })
+    .from(articles)
+    .leftJoin(user, eq(articles.authorId, user.id))
+    .where(and(...conditions))
+    .orderBy(desc(articles.publishedAt));
+
+  if (limit) {
+    query = query.limit(limit) as any;
+  }
+
+  return await query;
+}
+
+async function fetchArticlesByCategory(category: string, limit?: number) {
+  const conditions = [
+    eq(articles.status, 'published'),
+    eq(articles.category, category)
+  ];
+
+  let query = db.select({
+    id: articles.id,
+    title: articles.title,
+    category: articles.category,
+    content: articles.content,
+    excerpt: articles.excerpt,
+    tags: articles.tags,
+    coverImage: articles.coverImage,
+    publishedAt: articles.publishedAt,
+    createdAt: articles.createdAt,
+    author: {
+      id: user.id,
+      name: user.name,
+      image: user.image,
+    }
+  })
+    .from(articles)
+    .leftJoin(user, eq(articles.authorId, user.id))
+    .where(and(...conditions))
+    .orderBy(desc(articles.publishedAt));
+
+  if (limit) {
+    query = query.limit(limit) as any;
+  }
+
+  return await query;
+}
 
 // Mock images - in a real app these would come from the Figma import
 const mockImages = {
@@ -44,8 +104,16 @@ const mockImages = {
 };
 
 
+// Force dynamic rendering for database queries
+export const dynamic = 'force-dynamic';
+
 // Main App Component
-export default function CategoryPage() {
+export default async function CategoryPage() {
+  // Fetch articles for the category page
+  const latestArticles = await fetchLatestArticles(10);
+  const financeArticles = await fetchArticlesByCategory('Finance', 8);
+  const podcastArticles = await fetchArticlesByCategory('Podcasts', 3);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -78,8 +146,8 @@ export default function CategoryPage() {
 
         {/* Mobile Layout */}
         <div className="md:hidden px-4 py-6 space-y-12 max-w-[480px] mx-auto">
-          <FeaturedSection mockImages={mockImages} />
-          <LatestNewsSection mockImages={mockImages} />
+          <FeaturedSection mockImages={mockImages} articles={latestArticles} />
+          <LatestNewsSection mockImages={mockImages} articles={latestArticles} />
         </div>
 
         {/* Desktop Layout */}
@@ -88,19 +156,19 @@ export default function CategoryPage() {
           <div className="max-w-[1320px] mx-auto px-6 py-12">
             <div className="flex grid-cols-1 lg:grid-cols-4 gap-2">
               <div className="lg:col-span-3 space-y-12">
-                <FeaturedSection mockImages={mockImages} />
-                <LatestNewsSection mockImages={mockImages} />
+                <FeaturedSection mockImages={mockImages} articles={latestArticles} />
+                <LatestNewsSection mockImages={mockImages} articles={latestArticles} />
               </div>
               {/* Vertical Divider */}
               <div className="hidden lg:block w-px bg-slate-200 mx-3"></div>
               <div className="lg:col-span-1">
-                <FinanceSidebar mockImages={mockImages} />
+                <FinanceSidebar mockImages={mockImages} articles={financeArticles} />
               </div>
             </div>
           </div>
         </div>
-        
-        <PodcastSection mockImages={mockImages} />
+
+        <PodcastSection mockImages={mockImages} articles={podcastArticles} />
       </main>
       
       <Footer />

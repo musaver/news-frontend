@@ -5,7 +5,7 @@ export interface Article {
   category: string;
   content: string;
   excerpt: string | null;
-  tags: string[];
+  tags: string[] | null;
   coverImage: string | null;
   publishedAt: Date | null;
   createdAt: Date;

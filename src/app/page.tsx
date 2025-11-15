@@ -16,6 +16,9 @@ import { db } from '@/lib/db';
 import { articles, user } from '@/lib/schema';
 import { eq, desc, and } from 'drizzle-orm';
 
+// Force dynamic rendering for database queries
+export const dynamic = 'force-dynamic';
+
 // Mock images - fallback for articles without cover images
 const mockImages = {
   featuredArticle: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop',
