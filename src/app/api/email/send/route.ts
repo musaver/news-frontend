@@ -23,12 +23,11 @@ export async function POST(req: Request) {
 
    // Expiration time (15 minutes from now)
   const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
-  const email = 'musaverleo@gmail.com';
-  const verificationLink = `${process.env.NEXTAUTH_URL}/verify-otp?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
+  const verificationLink = `${process.env.NEXTAUTH_URL}/verify-otp?email=${encodeURIComponent(to)}&token=${encodeURIComponent(token)}`;
 
    // Upsert: replace any existing token for this email
-  await db.delete(verification_tokens).where(eq(verification_tokens.identifier, email));
-  await db.insert(verification_tokens).values({ identifier: email, token: hashedToken, otp: hashedOtp, expires: expiresAt });
+  await db.delete(verification_tokens).where(eq(verification_tokens.identifier, to));
+  await db.insert(verification_tokens).values({ identifier: to, token: hashedToken, otp: hashedOtp, expires: expiresAt });
 
   const message = `Your OTP is: ${otp}\nYour verification link is: ${verificationLink}`;
 
