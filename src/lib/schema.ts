@@ -4,6 +4,8 @@ import {
   datetime,
   text,
   primaryKey,
+  json,
+  timestamp,
 } from 'drizzle-orm/mysql-core';
 
 // ✅ User table (required)
@@ -57,3 +59,19 @@ export const verification_tokens = mysqlTable(
     pk: primaryKey({ columns: [table.identifier, table.token, table.otp] }),
   })
 );
+
+// ✅ Articles table (for news articles created by authors)
+export const articles = mysqlTable('articles', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  authorId: varchar('author_id', { length: 255 }).notNull(), // Foreign key to user.id
+  title: varchar('title', { length: 500 }).notNull(),
+  category: varchar('category', { length: 100 }).notNull(),
+  content: text('content').notNull(),
+  excerpt: varchar('excerpt', { length: 150 }),
+  tags: json('tags').$type<string[]>(),
+  coverImage: text('cover_image'),
+  status: varchar('status', { length: 50 }).notNull().default('draft'), // 'draft', 'under_review', 'published'
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow(),
+  publishedAt: datetime('published_at'),
+});
