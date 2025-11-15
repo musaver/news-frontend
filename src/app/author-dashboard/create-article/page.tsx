@@ -54,6 +54,7 @@ export default function CreateArticlePage() {
   });
 
   const [currentTag, setCurrentTag] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -76,12 +77,35 @@ export default function CreateArticlePage() {
     }));
   };
 
-  const handleSave = (status: 'draft' | 'under_review' | 'published') => {
-    // In a real app, you would save to backend/database here
-    console.log('Saving article:', { ...formData, status });
-    
-    // Navigate back to articles page
-    router.push('/author-dashboard/articles');
+  const handleSave = async (status: 'draft' | 'under_review' | 'published') => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/articles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          status,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(`Error: ${data.error || 'Failed to create article'}`);
+        return;
+      }
+
+      alert('Article created successfully!');
+      router.push('/author-dashboard/articles');
+    } catch (error) {
+      console.error('Error creating article:', error);
+      alert('Failed to create article. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handlePreview = () => {
@@ -306,19 +330,19 @@ export default function CreateArticlePage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => handleSave('draft')}
-                  disabled={!formData.title || !formData.content}
+                  disabled={!formData.title || !formData.content || isSubmitting}
                   className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save as Draft
+                  {isSubmitting ? 'Saving...' : 'Save as Draft'}
                 </button>
-                
+
                 <button
                   onClick={() => handleSave('under_review')}
-                  disabled={!formData.title || !formData.content}
+                  disabled={!formData.title || !formData.content || isSubmitting}
                   className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <SaveIcon className="w-4 h-4" />
-                  Create Article
+                  {isSubmitting ? 'Creating...' : 'Create Article'}
                 </button>
               </div>
             </div>
