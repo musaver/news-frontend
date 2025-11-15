@@ -353,7 +353,7 @@ export default function AuthorDashboardPage() {
                   Quick Actions
                 </h3>
                 <div className="space-y-3">
-                  <a href="/author-dashboard/create-article" className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left">
+                  <a href="/create-article" className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left">
                     <PlusCircleIcon className="w-5 h-5 text-[#cc0000]" />
                     <div>
                       <p className="text-[#020a1c] text-[14px] font-medium">
