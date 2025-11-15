@@ -62,40 +62,40 @@ export default function EditArticlePage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (articleId) {
-      fetchArticle();
-    }
-  }, [articleId]);
+    const fetchArticle = async () => {
+      if (!articleId) return;
 
-  const fetchArticle = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`/api/articles/${articleId}`);
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/articles/${articleId}`);
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch article');
+        if (!response.ok) {
+          throw new Error('Failed to fetch article');
+        }
+
+        const data = await response.json();
+        const article = data.article;
+
+        setFormData({
+          title: article.title || '',
+          category: article.category || 'Politics',
+          content: article.content || '',
+          excerpt: article.excerpt || '',
+          tags: article.tags || [],
+          coverImage: article.coverImage || '',
+          status: article.status || 'draft'
+        });
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching article:', err);
+        setError('Failed to load article. Please try again.');
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const data = await response.json();
-      const article = data.article;
-
-      setFormData({
-        title: article.title || '',
-        category: article.category || 'Politics',
-        content: article.content || '',
-        excerpt: article.excerpt || '',
-        tags: article.tags || [],
-        coverImage: article.coverImage || '',
-        status: article.status || 'draft'
-      });
-      setError(null);
-    } catch (err) {
-      console.error('Error fetching article:', err);
-      setError('Failed to load article. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchArticle();
+  }, [articleId]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
