@@ -49,10 +49,18 @@ export async function GET(
       );
     }
 
+    // Ensure tags is always an array
+    const articleData = {
+      ...article[0],
+      tags: Array.isArray(article[0].tags)
+        ? article[0].tags
+        : (article[0].tags ? JSON.parse(article[0].tags as string) : [])
+    };
+
     return NextResponse.json(
       {
         success: true,
-        article: article[0],
+        article: articleData,
       },
       { status: 200 }
     );
