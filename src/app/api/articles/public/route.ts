@@ -35,8 +35,8 @@ export async function GET(req: Request) {
         },
       })
       .from(articles)
+      .innerJoin(categories, eq(articles.categoryId, categories.id))
       .leftJoin(user, eq(articles.authorId, user.id))
-      .leftJoin(categories, eq(articles.categoryId, categories.id))
       .where(and(...conditions))
       .orderBy(desc(articles.publishedAt));
 
