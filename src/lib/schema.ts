@@ -6,6 +6,7 @@ import {
   primaryKey,
   json,
   timestamp,
+  int,
 } from 'drizzle-orm/mysql-core';
 
 // ✅ User table (required)
@@ -60,12 +61,20 @@ export const verification_tokens = mysqlTable(
   })
 );
 
+// ✅ Categories table (for article categories)
+export const categories = mysqlTable('categories', {
+  id: int('id').primaryKey().autoincrement(),
+  name: varchar('name', { length: 100 }).notNull().unique(),
+  slug: varchar('slug', { length: 100 }).notNull().unique(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
 // ✅ Articles table (for news articles created by authors)
 export const articles = mysqlTable('articles', {
   id: varchar('id', { length: 255 }).primaryKey(),
   authorId: varchar('author_id', { length: 255 }).notNull(), // Foreign key to user.id
   title: varchar('title', { length: 500 }).notNull(),
-  category: varchar('category', { length: 100 }).notNull(),
+  categoryId: int('category_id').notNull(), // Foreign key to categories.id
   content: text('content').notNull(),
   excerpt: varchar('excerpt', { length: 150 }),
   tags: json('tags').$type<string[]>(),

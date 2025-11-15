@@ -9,7 +9,7 @@ import {
 } from '@/components/homepage';
 import { imgLatestNews } from "@/imports/svg-92wog";
 import { db } from '@/lib/db';
-import { articles, user } from '@/lib/schema';
+import { articles, user, categories } from '@/lib/schema';
 import { eq, desc, and } from 'drizzle-orm';
 import { Article } from '@/types/article';
 
@@ -20,7 +20,7 @@ async function fetchLatestArticles(limit?: number) {
   let query = db.select({
     id: articles.id,
     title: articles.title,
-    category: articles.category,
+    category: categories.name,
     content: articles.content,
     excerpt: articles.excerpt,
     tags: articles.tags,
@@ -35,6 +35,7 @@ async function fetchLatestArticles(limit?: number) {
   })
     .from(articles)
     .leftJoin(user, eq(articles.authorId, user.id))
+    .leftJoin(categories, eq(articles.categoryId, categories.id))
     .where(and(...conditions))
     .orderBy(desc(articles.publishedAt));
 
@@ -48,13 +49,13 @@ async function fetchLatestArticles(limit?: number) {
 async function fetchArticlesByCategory(category: string, limit?: number) {
   const conditions = [
     eq(articles.status, 'published'),
-    eq(articles.category, category)
+    eq(categories.name, category)
   ];
 
   let query = db.select({
     id: articles.id,
     title: articles.title,
-    category: articles.category,
+    category: categories.name,
     content: articles.content,
     excerpt: articles.excerpt,
     tags: articles.tags,
@@ -69,6 +70,7 @@ async function fetchArticlesByCategory(category: string, limit?: number) {
   })
     .from(articles)
     .leftJoin(user, eq(articles.authorId, user.id))
+    .leftJoin(categories, eq(articles.categoryId, categories.id))
     .where(and(...conditions))
     .orderBy(desc(articles.publishedAt));
 

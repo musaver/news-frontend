@@ -13,7 +13,7 @@ import {
   PodcastSection
 } from '@/components/homepage';
 import { db } from '@/lib/db';
-import { articles, user } from '@/lib/schema';
+import { articles, user, categories } from '@/lib/schema';
 import { eq, desc, and } from 'drizzle-orm';
 
 // Force dynamic rendering for database queries
@@ -47,14 +47,14 @@ async function fetchArticlesByCategory(category: string, limit?: number) {
   try {
     const conditions = [
       eq(articles.status, 'published'),
-      eq(articles.category, category)
+      eq(categories.name, category)
     ];
 
     let query = db
       .select({
         id: articles.id,
         title: articles.title,
-        category: articles.category,
+        category: categories.name,
         content: articles.content,
         excerpt: articles.excerpt,
         tags: articles.tags,
@@ -69,6 +69,7 @@ async function fetchArticlesByCategory(category: string, limit?: number) {
       })
       .from(articles)
       .leftJoin(user, eq(articles.authorId, user.id))
+      .leftJoin(categories, eq(articles.categoryId, categories.id))
       .where(and(...conditions))
       .orderBy(desc(articles.publishedAt));
 
@@ -93,7 +94,7 @@ async function fetchLatestArticles(limit: number = 10) {
       .select({
         id: articles.id,
         title: articles.title,
-        category: articles.category,
+        category: categories.name,
         content: articles.content,
         excerpt: articles.excerpt,
         tags: articles.tags,
@@ -108,6 +109,7 @@ async function fetchLatestArticles(limit: number = 10) {
       })
       .from(articles)
       .leftJoin(user, eq(articles.authorId, user.id))
+      .leftJoin(categories, eq(articles.categoryId, categories.id))
       .where(eq(articles.status, 'published'))
       .orderBy(desc(articles.publishedAt))
       .limit(limit);
