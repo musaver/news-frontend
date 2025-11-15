@@ -42,6 +42,7 @@ export async function POST(req: Request) {
     id: uuidv4(),
     email,
     name: name || null,
+    userType: 'user', // Default to 'user', can be changed to 'author' via admin panel
   });
 
   await sendWelcomeEmail(email, name || undefined);

@@ -13,6 +13,7 @@ export const user = mysqlTable('user', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   emailVerified: datetime('emailVerified'),
   image: text('image'),
+  userType: varchar('user_type', { length: 50 }).notNull().default('user'), // 'user' or 'author'
 });
 
 // ✅ Accounts table (OAuth support: Google, Facebook)
