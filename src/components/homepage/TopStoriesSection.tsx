@@ -1,120 +1,123 @@
 import React from 'react';
 import ArticleDate from './ArticleDate';
+import { Article, formatDate } from '@/types/article';
 
 interface TopStoriesSectionProps {
   mockImages: {
     politicsLarge: string;
   };
+  articles: Article[];
 }
 
-const TopStoriesSection = ({ mockImages }: TopStoriesSectionProps) => (
-  <section className="md:bg-[#f7fafc] md:rounded-lg md:border md:border-slate-200/20 md:p-6">
-    <div className="max-w-[917px] md:max-w-none">
-      <div className="flex items-center gap-5 mb-4 px-1 md:px-0">
-        <div className="w-1 h-4 bg-[#cc0000]"></div>
-        <h2 className="text-[12.6px] leading-[19px] md:text-lg font-normal">Top Stories</h2>
-        <div className="flex-1 h-px bg-slate-300/35"></div>
-        <div className="flex items-center gap-1 text-[12.8px] leading-[19px] md:text-sm text-slate-700 font-normal">
-          <span>view all</span>
-          <div className="w-2.5 h-2.5"></div>
-        </div>
-      </div>
+const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => {
+  const featuredArticle = articles[0];
+  const sideArticles = articles.slice(1, 5); // Get next 4 articles
 
-      {/* Mobile Layout */}
-      <div className="md:hidden space-y-6">
-        {/* Large Story */}
-        <div className="relative rounded-lg overflow-hidden h-[300px]">
-          <img 
-            src={mockImages.politicsLarge} 
-            alt="Top story"
-            className="w-full h-full object-cover"
-          />
-          <div 
-            className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
-            style={{
-              background: `linear-gradient(180deg, transparent 60%, rgba(2, 10, 28, 0.8) 100%)`
-            }}
-          ></div>
-          <div className="absolute bottom-6 left-6 right-6 text-white">
-            <div className="flex items-center gap-2 text-[10.9px] mb-1">
-              <span className="text-white/60">Politics</span>
-              <div className="w-[3px] h-[3px] bg-white/60 rounded-full"></div>
-              <span className="text-white/60">Nov 15, 2025</span>
-            </div>
-            <h3 className="text-[15px] leading-[19.2px] font-normal">
-              Historic Climate Accord Signed by 150 Nations at Global Summit in Geneva
-            </h3>
+  if (!featuredArticle) {
+    return null;
+  }
+
+  const featuredImageUrl = featuredArticle.coverImage || mockImages.politicsLarge;
+
+  return (
+    <section className="md:bg-[#f7fafc] md:rounded-lg md:border md:border-slate-200/20 md:p-6">
+      <div className="max-w-[917px] md:max-w-none">
+        <div className="flex items-center gap-5 mb-4 px-1 md:px-0">
+          <div className="w-1 h-4 bg-[#cc0000]"></div>
+          <h2 className="text-[12.6px] leading-[19px] md:text-lg font-normal">Top Stories</h2>
+          <div className="flex-1 h-px bg-slate-300/35"></div>
+          <div className="flex items-center gap-1 text-[12.8px] leading-[19px] md:text-sm text-slate-700 font-normal">
+            <span>view all</span>
+            <div className="w-2.5 h-2.5"></div>
           </div>
         </div>
-        
-        {/* Article List */}
-        <div className="bg-white rounded-lg p-1 space-y-6">
-          {[
-            { category: 'Tech', date: 'Nov 14, 2025', title: 'Quantum Computing Milestone: First Commercial Quantum Computer Goes Live' },
-            { category: 'Entertainment', date: 'Nov 13, 2025', title: 'Award-Winning Director Announces Epic Historical Drama Series for 2026' },
-            { category: 'Sports', date: 'Nov 12, 2025', title: 'Olympic Committee Approves New Sports Categories for 2028 Games' },
-            { category: 'Politics', date: 'Nov 11, 2025', title: 'Bipartisan Infrastructure Bill Promises $2 Trillion Investment in Green Energy' }
-          ].map((article, index) => (
-            <article key={index} className="space-y-1">
-              <div className="flex items-center gap-2 text-[10.9px]">
-                <span className="text-slate-500">{article.category}</span>
-                <div className="w-[3px] h-[3px] bg-slate-300 rounded-full"></div>
-                <ArticleDate>{article.date}</ArticleDate>
-              </div>
-              <h4 className="text-[14.9px] leading-[19.2px] font-normal">{article.title}</h4>
-            </article>
-          ))}
-        </div>
-      </div>
 
-      {/* Desktop Layout */}
-      <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        {/* Large Story */}
-        <div className="relative rounded-lg overflow-hidden h-[428px]">
-          <img 
-            src={mockImages.politicsLarge} 
-            alt="Top story"
-            className="w-full h-full object-cover"
-          />
-          <div 
-            className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
-            style={{
-              background: `linear-gradient(180deg, transparent 60%, rgba(2, 10, 28, 0.8) 100%)`
-            }}
-          ></div>
-          <div className="absolute bottom-6 left-6 right-6 text-white">
-            <div className="flex items-center gap-2 text-sm mb-3">
-              <span className="text-white/60">Politics</span>
-              <div className="w-1 h-1 bg-white/60 rounded-full"></div>
-              <span className="text-white/60">Nov 15, 2025</span>
+        {/* Mobile Layout */}
+        <div className="md:hidden space-y-6">
+          {/* Large Story */}
+          <div className="relative rounded-lg overflow-hidden h-[300px]">
+            <img
+              src={featuredImageUrl}
+              alt={featuredArticle.title}
+              className="w-full h-full object-cover"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+              style={{
+                background: `linear-gradient(180deg, transparent 60%, rgba(2, 10, 28, 0.8) 100%)`
+              }}
+            ></div>
+            <div className="absolute bottom-6 left-6 right-6 text-white">
+              <div className="flex items-center gap-2 text-[10.9px] mb-1">
+                <span className="text-white/60">{featuredArticle.category}</span>
+                <div className="w-[3px] h-[3px] bg-white/60 rounded-full"></div>
+                <span className="text-white/60">{formatDate(featuredArticle.publishedAt)}</span>
+              </div>
+              <h3 className="text-[15px] leading-[19.2px] font-normal">
+                {featuredArticle.title}
+              </h3>
             </div>
-            <h3 className="text-xl leading-tight font-semibold">
-              Historic Climate Accord Signed by 150 Nations at Global Summit in Geneva
-            </h3>
+          </div>
+
+          {/* Article List */}
+          <div className="bg-white rounded-lg p-1 space-y-6">
+            {sideArticles.map((article, index) => (
+              <article key={article.id || index} className="space-y-1">
+                <div className="flex items-center gap-2 text-[10.9px]">
+                  <span className="text-slate-500">{article.category}</span>
+                  <div className="w-[3px] h-[3px] bg-slate-300 rounded-full"></div>
+                  <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
+                </div>
+                <h4 className="text-[14.9px] leading-[19.2px] font-normal">{article.title}</h4>
+              </article>
+            ))}
           </div>
         </div>
-        
-        {/* Article List */}
-        <div className="bg-white rounded border p-6 space-y-6">
-          {[
-            { category: 'Tech', date: 'Nov 14, 2025', title: 'Quantum Computing Milestone: First Commercial Quantum Computer Goes Live' },
-            { category: 'Entertainment', date: 'Nov 13, 2025', title: 'Award-Winning Director Announces Epic Historical Drama Series for 2026' },
-            { category: 'Sports', date: 'Nov 12, 2025', title: 'Olympic Committee Approves New Sports Categories for 2028 Games' },
-            { category: 'Politics', date: 'Nov 11, 2025', title: 'Bipartisan Infrastructure Bill Promises $2 Trillion Investment in Green Energy' }
-          ].map((article, index) => (
-            <article key={index} className="space-y-1">
-              <div className="flex items-center gap-2 text-xs">
-                <span className="text-slate-500">{article.category}</span>
-                <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
-                <ArticleDate>{article.date}</ArticleDate>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          {/* Large Story */}
+          <div className="relative rounded-lg overflow-hidden h-[428px]">
+            <img
+              src={featuredImageUrl}
+              alt={featuredArticle.title}
+              className="w-full h-full object-cover"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+              style={{
+                background: `linear-gradient(180deg, transparent 60%, rgba(2, 10, 28, 0.8) 100%)`
+              }}
+            ></div>
+            <div className="absolute bottom-6 left-6 right-6 text-white">
+              <div className="flex items-center gap-2 text-sm mb-3">
+                <span className="text-white/60">{featuredArticle.category}</span>
+                <div className="w-1 h-1 bg-white/60 rounded-full"></div>
+                <span className="text-white/60">{formatDate(featuredArticle.publishedAt)}</span>
               </div>
-              <h4 className="text-base leading-tight font-medium">{article.title}</h4>
-            </article>
-          ))}
+              <h3 className="text-xl leading-tight font-semibold">
+                {featuredArticle.title}
+              </h3>
+            </div>
+          </div>
+
+          {/* Article List */}
+          <div className="bg-white rounded border p-6 space-y-6">
+            {sideArticles.map((article, index) => (
+              <article key={article.id || index} className="space-y-1">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-slate-500">{article.category}</span>
+                  <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
+                  <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
+                </div>
+                <h4 className="text-base leading-tight font-medium">{article.title}</h4>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default TopStoriesSection;
