@@ -8,9 +8,10 @@ interface FinanceSidebarProps {
     finance: string;
   };
   articles: Article[];
+  title?: string;
 }
 
-const FinanceSidebar = ({ mockImages, articles }: FinanceSidebarProps) => {
+const FinanceSidebar = ({ mockImages, articles, title = "Finance" }: FinanceSidebarProps) => {
   const displayArticles = articles.slice(0, 8);
 
   return (
@@ -19,12 +20,12 @@ const FinanceSidebar = ({ mockImages, articles }: FinanceSidebarProps) => {
         <div className="rounded-lg overflow-hidden h-[250px]">
           <img
             src={displayArticles[0]?.coverImage || mockImages.finance}
-            alt="Finance"
+            alt={title}
             className="w-full h-full object-cover"
           />
         </div>
         <div>
-          <SectionHeader title="Finance" showViewAll={true} />
+          <SectionHeader title={title} showViewAll={true} />
           <div className="space-y-4 mt-4">
             {displayArticles.map((article, index) => (
               <div key={article.id || index} className="border-b border-slate-200 pb-3">
