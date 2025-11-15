@@ -33,10 +33,18 @@ export async function GET(req: Request) {
       .where(eq(articles.authorId, session.user.id))
       .orderBy(desc(articles.createdAt));
 
+    // Ensure tags is always an array for each article
+    const articlesWithParsedTags = userArticles.map(article => ({
+      ...article,
+      tags: Array.isArray(article.tags)
+        ? article.tags
+        : (article.tags ? JSON.parse(article.tags as string) : [])
+    }));
+
     return NextResponse.json(
       {
         success: true,
-        articles: userArticles,
+        articles: articlesWithParsedTags,
       },
       { status: 200 }
     );

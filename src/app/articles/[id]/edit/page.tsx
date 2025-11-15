@@ -81,7 +81,7 @@ export default function EditArticlePage() {
           category: article.category || 'Politics',
           content: article.content || '',
           excerpt: article.excerpt || '',
-          tags: article.tags || [],
+          tags: Array.isArray(article.tags) ? article.tags : [],
           coverImage: article.coverImage || '',
           status: article.status || 'draft'
         });
@@ -351,7 +351,7 @@ export default function EditArticlePage() {
                     Add
                   </button>
                 </div>
-                {formData.tags.length > 0 && (
+                {Array.isArray(formData.tags) && formData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {formData.tags.map(tag => (
                       <span
