@@ -50,7 +50,7 @@ export default function RegisterPage() {
     const res = await fetch('/api/email/send', {
       method: 'POST',
       body: JSON.stringify({
-        to: 'musaverleo@gmail.com',
+        to: email,
         subject: 'Hello from Dashboard',
         //message: 'This is a test email from your app.',
       }),
