@@ -263,7 +263,7 @@ export default function AuthorArticlesPage() {
               <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-bold">
                 My Articles
               </h1>
-              <a href="/author-dashboard/create-article" className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
+              <a href="/create-article" className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
                 <PlusCircleIcon className="w-4 h-4" />
                 Create New Article
               </a>

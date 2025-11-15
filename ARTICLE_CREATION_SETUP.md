@@ -67,7 +67,7 @@ Creates a new article. Requires authentication and author role.
 ## Usage
 
 1. Ensure user is logged in with `userType = 'author'`
-2. Navigate to `/author-dashboard/create-article`
+2. Navigate to `/create-article`
 3. Fill in the article form with title, category, content, etc.
 4. Click "Save as Draft" or "Create Article" to submit
 5. Article will be saved to the database and user redirected to articles page
