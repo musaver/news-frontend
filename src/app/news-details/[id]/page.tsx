@@ -191,10 +191,6 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
     <>
       <Header categories={allCategories} />
 
-      <div className="pt-16 md:pt-[104px]">
-
-      </div>
-
       <main>
         <div className="max-w-[1320px] mx-auto px-6 py-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_354px] gap-8">
