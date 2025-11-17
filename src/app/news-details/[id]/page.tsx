@@ -216,7 +216,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
               <div className="bg-white box-border content-stretch flex gap-[12px] items-center overflow-clip pl-[4px] pr-0 py-0 relative shrink-0 w-full md:w-[476px] mt-2">
                 {/* Author */}
                 {article.author && (
-                  <div className="content-stretch flex gap-[8px] items-center justify-center overflow-clip relative shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
+                  <Link href={`/authors/${article.author.id}`} className="content-stretch flex gap-[8px] items-center justify-center overflow-clip relative shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
                     {/* Author Photo */}
                     {article.author.image && (
                       <div className="overflow-clip relative rounded-[99px] shrink-0 size-[30px]">
@@ -236,12 +236,12 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                     {/* Author Name */}
                     <div className="content-stretch flex flex-col items-start relative shrink-0">
                       <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[12.906px] text-nowrap">
+                        <div className="flex flex-col font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[12.906px] text-nowrap hover:text-[#cc0000] transition-colors">
                           <p className="leading-[18.2px] text-[12.906px] whitespace-pre">{article.author.name}</p>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 )}
 
                 {/* Red Divider Dot */}
