@@ -6,6 +6,9 @@ import {
 import Image from 'next/image';
 import { imgContainer } from "@/imports/svg-4a9ab";
 import Link from 'next/link';
+import { db } from '@/lib/db';
+import { user, articles } from '@/lib/schema';
+import { eq } from 'drizzle-orm';
 
 interface Author {
   id: string;
@@ -16,17 +19,20 @@ interface Author {
 
 async function getAuthors(): Promise<Author[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/authors`, {
-      cache: 'no-store',
-    });
+    // Fetch all users who have at least one published article
+    const authors = await db
+      .select({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+      })
+      .from(user)
+      .innerJoin(articles, eq(user.id, articles.authorId))
+      .where(eq(articles.status, "published"))
+      .groupBy(user.id);
 
-    if (!res.ok) {
-      console.error('Failed to fetch authors');
-      return [];
-    }
-
-    return res.json();
+    return authors;
   } catch (error) {
     console.error('Error fetching authors:', error);
     return [];
