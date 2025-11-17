@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { imgContainer } from "@/imports/svg-4a9ab";
 import Link from 'next/link';
 import { db } from '@/lib/db';
-import { user, articles } from '@/lib/schema';
+import { user, articles, categories } from '@/lib/schema';
 import { eq } from 'drizzle-orm';
 
 interface Author {
@@ -15,6 +15,24 @@ interface Author {
   name: string | null;
   email: string | null;
   image: string | null;
+}
+
+// Fetch all categories
+async function fetchCategories() {
+  try {
+    const result = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
+      .from(categories)
+      .orderBy(categories.name);
+    return result;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
 }
 
 async function getAuthors(): Promise<Author[]> {
@@ -41,10 +59,11 @@ async function getAuthors(): Promise<Author[]> {
 
 export default async function AuthorsPage() {
   const authors = await getAuthors();
+  const allCategories = await fetchCategories();
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={allCategories} />
       
       <main>
         

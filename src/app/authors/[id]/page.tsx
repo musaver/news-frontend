@@ -40,6 +40,24 @@ interface AuthorData {
   articles: Article[];
 }
 
+// Fetch all categories
+async function fetchCategories() {
+  try {
+    const result = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
+      .from(categories)
+      .orderBy(categories.name);
+    return result;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
 async function getAuthorData(id: string): Promise<AuthorData | null> {
   try {
     // Fetch the author
@@ -132,13 +150,14 @@ export default async function AuthorDetailsPage({ params }: { params: Promise<{ 
 
   const { author, articles } = data;
   const allAuthors = await getAllAuthors();
+  const allCategories = await fetchCategories();
 
   // Filter out current author from the list
   const otherAuthors = allAuthors.filter(a => a.id !== author.id).slice(0, 5);
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={allCategories} />
 
       <main>
 
