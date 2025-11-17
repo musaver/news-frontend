@@ -9,12 +9,45 @@ export async function GET(req: Request) {
     const query = searchParams.get('q') || '';
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 10;
 
-    // If no query, return empty results
+    // If no query, return limited recent articles and categories
     if (!query || query.trim() === '') {
+      // Fetch limited categories (3-4)
+      const limitedCategories = await db
+        .select({
+          id: categories.id,
+          name: categories.name,
+          slug: categories.slug,
+        })
+        .from(categories)
+        .orderBy(categories.name)
+        .limit(4);
+
+      // Fetch limited recent published articles (3-4)
+      const limitedArticles = await db
+        .select({
+          id: articles.id,
+          title: articles.title,
+          category: categories.name,
+          excerpt: articles.excerpt,
+          coverImage: articles.coverImage,
+          publishedAt: articles.publishedAt,
+          author: {
+            id: user.id,
+            name: user.name,
+            image: user.image,
+          },
+        })
+        .from(articles)
+        .innerJoin(categories, eq(articles.categoryId, categories.id))
+        .leftJoin(user, eq(articles.authorId, user.id))
+        .where(eq(articles.status, 'published'))
+        .orderBy(desc(articles.publishedAt))
+        .limit(4);
+
       return NextResponse.json({
         success: true,
-        categories: [],
-        articles: [],
+        categories: limitedCategories,
+        articles: limitedArticles,
       });
     }
 
