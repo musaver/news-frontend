@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import {
   Header,
@@ -7,76 +5,36 @@ import {
 } from '@/components/homepage';
 import Image from 'next/image';
 import { imgContainer } from "@/imports/svg-4a9ab";
+import Link from 'next/link';
 
-export default function AuthorsPage() {
-  const authors = [
-    {
-      id: 1,
-      name: 'Amara Okafor',
-      role: 'National Politics and Policy',
-      image: 'https://images.unsplash.com/photo-1581065178047-8ee15951ede6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMHBvcnRyYWl0fGVufDF8fHx8MTc2MTM0OTczOHww&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 2,
-      name: 'Chris Evans',
-      role: 'International Business and Development',
-      image: 'https://images.unsplash.com/photo-1601489865452-407a1b801dde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBzdWl0fGVufDF8fHx8MTc2MTMxNDc1MXww&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 3,
-      name: 'Rachel Johnson',
-      role: 'Health and Wellness',
-      image: 'https://images.unsplash.com/photo-1585554414787-09b821c321c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHdvbWFuJTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc2MTMzOTY5Nnww&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 4,
-      name: 'David Brown',
-      role: 'Finance and Markets',
-      image: 'https://images.unsplash.com/photo-1495603889488-42d1d66e5523?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwYnVzaW5lc3MlMjBtYW58ZW58MXx8fHwxNzYxMzk3NDkwfDA&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 5,
-      name: 'Emily Chen',
-      role: 'Technology and Innovation',
-      image: 'https://images.unsplash.com/photo-1581065178026-390bc4e78dad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMHdvbWFuJTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc2MTM5NzQ5MHww&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 6,
-      name: 'James Carter',
-      role: 'Sports and Entertainment',
-      image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGV4ZWN1dGl2ZXxlbnwxfHx8fDE3NjEzMDU1ODR8MA&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 7,
-      name: 'Samuel Adeyemi',
-      role: 'Culture and Society',
-      image: 'https://images.unsplash.com/photo-1711439858551-c96a3c310075?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxqb3VybmFsaXN0JTIwcmVwb3J0ZXJ8ZW58MXx8fHwxNzYxMzI2NDk4fDA&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 8,
-      name: 'Michael Thompson',
-      role: 'Real Estate and Development',
-      image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3Jwb3JhdGUlMjBoZWFkc2hvdHxlbnwxfHx8fDE3NjEzMjY1OTB8MA&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 9,
-      name: 'Sarah Mitchell',
-      role: 'Fashion and Lifestyle',
-      image: 'https://images.unsplash.com/photo-1581065178047-8ee15951ede6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdCUyMHdvbWFufGVufDF8fHx8MTc2MTM1MTc2NXww&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 10,
-      name: 'Sophia Wu',
-      role: 'Environment and Sustainability',
-      image: 'https://images.unsplash.com/photo-1680356475155-3ca8fa2192aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3cml0ZXIlMjBhdXRob3IlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjEzMDA4Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080'
-    },
-    {
-      id: 11,
-      name: 'Joseph Clark',
-      role: 'Travel and Adventure',
-      image: 'https://images.unsplash.com/photo-1650984661525-7e6b1b874e47?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXdzJTIwYW5jaG9yJTIwam91cm5hbGlzdHxlbnwxfHx8fDE3NjEzOTc0OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080'
+interface Author {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
+}
+
+async function getAuthors(): Promise<Author[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/authors`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch authors');
+      return [];
     }
-  ];
+
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching authors:', error);
+    return [];
+  }
+}
+
+export default async function AuthorsPage() {
+  const authors = await getAuthors();
 
   return (
     <div className="min-h-screen bg-white">
@@ -129,28 +87,39 @@ export default function AuthorsPage() {
 
               {/* Right Column - Authors Grid */}
               <div className="grid grid-cols-3 gap-x-6 gap-y-8">
-                {authors.map((author) => (
-                  <div 
-                    key={author.id} 
-                    className="space-y-3 cursor-pointer group"
-                  >
-                    <div className="aspect-square rounded-lg overflow-hidden bg-slate-100">
-                      <img
-                        src={author.image}
-                        alt={author.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="text-[16px] leading-[22px] font-normal text-[#020a1c] group-hover:text-[#cc0000] transition-colors">
-                        {author.name}
-                      </h3>
-                      <p className="text-[13px] leading-[18px] text-[#657285]">
-                        {author.role}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {authors.length > 0 ? (
+                  authors.map((author) => (
+                    <Link
+                      key={author.id}
+                      href={`/authors/${author.id}`}
+                      className="space-y-3 cursor-pointer group"
+                    >
+                      <div className="aspect-square rounded-lg overflow-hidden bg-slate-100">
+                        {author.image ? (
+                          <img
+                            src={author.image}
+                            alt={author.name || 'Author'}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-slate-600 text-4xl font-bold">
+                            {author.name?.charAt(0) || 'A'}
+                          </div>
+                        )}
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className="text-[16px] leading-[22px] font-normal text-[#020a1c] group-hover:text-[#cc0000] transition-colors">
+                          {author.name || 'Unknown Author'}
+                        </h3>
+                        <p className="text-[13px] leading-[18px] text-[#657285]">
+                          Author
+                        </p>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <p className="col-span-3 text-center text-[#657285] py-12">No authors found.</p>
+                )}
               </div>
             </div>
           </div>
@@ -174,28 +143,39 @@ export default function AuthorsPage() {
 
               {/* Authors Grid */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-                {authors.map((author) => (
-                  <div 
-                    key={author.id} 
-                    className="space-y-2 cursor-pointer"
-                  >
-                    <div className="aspect-square rounded-lg overflow-hidden bg-slate-100">
-                      <img
-                        src={author.image}
-                        alt={author.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="space-y-0.5">
-                      <h3 className="text-[14px] leading-[20px] font-normal text-[#020a1c]">
-                        {author.name}
-                      </h3>
-                      <p className="text-[11px] leading-[16px] text-[#657285]">
-                        {author.role}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {authors.length > 0 ? (
+                  authors.map((author) => (
+                    <Link
+                      key={author.id}
+                      href={`/authors/${author.id}`}
+                      className="space-y-2 cursor-pointer"
+                    >
+                      <div className="aspect-square rounded-lg overflow-hidden bg-slate-100">
+                        {author.image ? (
+                          <img
+                            src={author.image}
+                            alt={author.name || 'Author'}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-slate-600 text-3xl font-bold">
+                            {author.name?.charAt(0) || 'A'}
+                          </div>
+                        )}
+                      </div>
+                      <div className="space-y-0.5">
+                        <h3 className="text-[14px] leading-[20px] font-normal text-[#020a1c]">
+                          {author.name || 'Unknown Author'}
+                        </h3>
+                        <p className="text-[11px] leading-[16px] text-[#657285]">
+                          Author
+                        </p>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <p className="col-span-2 text-center text-[#657285] py-12">No authors found.</p>
+                )}
               </div>
             </div>
           </div>
