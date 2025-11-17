@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => (
   <footer className="bg-[#020a1c] text-white pb-6">
@@ -40,18 +41,18 @@ const Footer = () => (
             </div>
             <div className="flex gap-15">
               <div className="space-y-3 text-[12.6px] leading-[18.2px]">
-                <a href="#" className="block text-white/70 hover:text-white">Business</a>
-                <a href="#" className="block text-white/70 hover:text-white">Health</a>
-                <a href="#" className="block text-white/70 hover:text-white">Fashion</a>
-                <a href="#" className="block text-white/70 hover:text-white">Travel</a>
-                <a href="#" className="block text-white/70 hover:text-white">Sports</a>
+                <Link href="#" className="block text-white/70 hover:text-white">Business</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Health</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Fashion</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Travel</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Sports</Link>
               </div>
               <div className="space-y-3 text-[12.7px] leading-[18.2px] ml-[60px]">
-                <a href="#" className="block text-white/70 hover:text-white">Finance</a>
-                <a href="#" className="block text-white/70 hover:text-white">Politics</a>
-                <a href="#" className="block text-white/70 hover:text-white">Real Estate</a>
-                <a href="#" className="block text-white/70 hover:text-white">Entertainment</a>
-                <a href="#" className="block text-white/70 hover:text-white">Tech</a>
+                <Link href="#" className="block text-white/70 hover:text-white">Finance</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Politics</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Real Estate</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Entertainment</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Tech</Link>
               </div>
             </div>
           </div>
@@ -63,11 +64,11 @@ const Footer = () => (
               <h3 className="text-[13.3px] leading-[19px] font-normal">Company</h3>
             </div>
             <div className="space-y-3 text-[12.9px] leading-[18.2px]">
-              <a href="#" className="block text-white/70 hover:text-white">About</a>
-              <a href="#" className="block text-white/70 hover:text-white">Careers</a>
-              <a href="#" className="block text-white/70 hover:text-white">Authors</a>
-              <a href="#" className="block text-white/70 hover:text-white">Advertise</a>
-              <a href="#" className="block text-white/70 hover:text-white">Contact</a>
+              <Link href="/about-us" className="block text-white/70 hover:text-white">About</Link>
+              <Link href="#" className="block text-white/70 hover:text-white">Careers</Link>
+              <Link href="/authors" className="block text-white/70 hover:text-white">Authors</Link>
+              <Link href="#" className="block text-white/70 hover:text-white">Advertise</Link>
+              <Link href="#" className="block text-white/70 hover:text-white">Contact</Link>
             </div>
           </div>
 
@@ -78,26 +79,26 @@ const Footer = () => (
               <h3 className="text-[12.9px] leading-[19px] font-normal">Social Media</h3>
             </div>
             <div className="space-y-3 text-[12.9px] leading-[18.2px]">
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-[18px] h-[18px]"></div>
                 <span>Facebook</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-[18px] h-[18px]"></div>
                 <span>Instagram</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-[18px] h-[18px]"></div>
                 <span>Twitter</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-[18px] h-[18px]"></div>
                 <span>LinkedIn</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-[18px] h-[18px]"></div>
                 <span>YouTube</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -159,11 +160,11 @@ const Footer = () => (
               <h3 className="text-lg font-semibold">Company</h3>
             </div>
             <div className="space-y-3 text-sm">
-              <a href="#" className="block text-white/70 hover:text-white">About</a>
-              <a href="#" className="block text-white/70 hover:text-white">Careers</a>
-              <a href="#" className="block text-white/70 hover:text-white">Authors</a>
-              <a href="#" className="block text-white/70 hover:text-white">Advertise</a>
-              <a href="#" className="block text-white/70 hover:text-white">Contact</a>
+              <Link href="/about-us" className="block text-white/70 hover:text-white">About</Link>
+              <Link href="#" className="block text-white/70 hover:text-white">Careers</Link>
+              <Link href="/authors" className="block text-white/70 hover:text-white">Authors</Link>
+              <Link href="#" className="block text-white/70 hover:text-white">Advertise</Link>
+              <Link href="#" className="block text-white/70 hover:text-white">Contact</Link>
             </div>
           </div>
           
@@ -175,18 +176,18 @@ const Footer = () => (
             </div>
             <div className="grid grid-cols-2 gap-12 text-sm">
               <div className="space-y-3">
-                <a href="#" className="block text-white/70 hover:text-white">Business</a>
-                <a href="#" className="block text-white/70 hover:text-white">Health</a>
-                <a href="#" className="block text-white/70 hover:text-white">Fashion</a>
-                <a href="#" className="block text-white/70 hover:text-white">Travel</a>
-                <a href="#" className="block text-white/70 hover:text-white">Sports</a>
+                <Link href="#" className="block text-white/70 hover:text-white">Business</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Health</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Fashion</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Travel</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Sports</Link>
               </div>
               <div className="space-y-3">
-                <a href="#" className="block text-white/70 hover:text-white">Finance</a>
-                <a href="#" className="block text-white/70 hover:text-white">Politics</a>
-                <a href="#" className="block text-white/70 hover:text-white">Real Estate</a>
-                <a href="#" className="block text-white/70 hover:text-white">Entertainment</a>
-                <a href="#" className="block text-white/70 hover:text-white">Tech</a>
+                <Link href="#" className="block text-white/70 hover:text-white">Finance</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Politics</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Real Estate</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Entertainment</Link>
+                <Link href="#" className="block text-white/70 hover:text-white">Tech</Link>
               </div>
             </div>
           </div>
@@ -198,26 +199,26 @@ const Footer = () => (
               <h3 className="text-lg font-semibold">Social Media</h3>
             </div>
             <div className="space-y-3 text-sm">
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-4 h-4"></div>
                 <span>Facebook</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-4 h-4"></div>
                 <span>Instagram</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-4 h-4"></div>
                 <span>Twitter</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-4 h-4"></div>
                 <span>LinkedIn</span>
-              </a>
-              <a href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
+              </Link>
+              <Link href="#" className="flex items-center gap-1 text-white/70 hover:text-white">
                 <div className="w-4 h-4"></div>
                 <span>YouTube</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
