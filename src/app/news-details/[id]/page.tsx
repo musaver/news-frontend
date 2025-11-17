@@ -1,5 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import {
   Header,
   Footer,
@@ -12,6 +13,24 @@ import { formatDate } from '@/types/article';
 
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
+
+// Fetch all categories for navigation
+async function fetchCategories() {
+  try {
+    const result = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
+      .from(categories)
+      .orderBy(categories.name);
+    return result;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
 
 // Category Badge Component
 const CategoryBadge = ({ children }: { children: React.ReactNode }) => (
@@ -158,16 +177,19 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
     notFound();
   }
 
-  // Fetch related and recent articles
-  const relatedArticles = await fetchRelatedArticles(article.categoryId, article.id, 6);
-  const mostRecentArticles = await fetchMostRecentArticles(5);
+  // Fetch related articles, recent articles, and categories in parallel
+  const [allCategories, relatedArticles, mostRecentArticles] = await Promise.all([
+    fetchCategories(),
+    fetchRelatedArticles(article.categoryId, article.id, 6),
+    fetchMostRecentArticles(5)
+  ]);
 
   // Calculate reading time
   const readingTime = calculateReadingTime(article.content);
 
   return (
     <>
-      <Header />
+      <Header categories={allCategories} />
 
       <div className="pt-16 md:pt-[104px]">
 
@@ -181,7 +203,9 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
               {/* Article Header */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <CategoryBadge>{article.category}</CategoryBadge>
+                  <Link href={`/category/${article.categoryId}`}>
+                    <CategoryBadge>{article.category}</CategoryBadge>
+                  </Link>
                   <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                 </div>
                 <h1 className="text-[32px] md:text-[40px] leading-[1.2] font-normal text-[#020a1c]">
@@ -336,7 +360,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {relatedArticles.map((relArticle) => (
-                      <a
+                      <Link
                         key={relArticle.id}
                         href={`/news-details/${relArticle.id}`}
                         className="flex flex-col gap-[12px] cursor-pointer"
@@ -362,7 +386,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                             {relArticle.title}
                           </h4>
                         </div>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -382,7 +406,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                   <div className="space-y-6">
                     {mostRecentArticles.map((recentArticle, index) => (
                       <div key={recentArticle.id}>
-                        <a href={`/news-details/${recentArticle.id}`}>
+                        <Link href={`/news-details/${recentArticle.id}`}>
                           <article className="flex gap-4">
                             {recentArticle.coverImage && (
                               <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
@@ -406,7 +430,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                               </h4>
                             </div>
                           </article>
-                        </a>
+                        </Link>
                         {index < mostRecentArticles.length - 1 && (
                           <div className="h-px bg-[rgba(203,213,225,0.35)] mt-6"></div>
                         )}

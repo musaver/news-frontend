@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
 
@@ -44,20 +45,22 @@ const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => 
       <div className="md:hidden space-y-6">
         {mobileArticles.map((article, index) => (
           <article key={article.id || index} className="flex gap-2">
-            <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
+            <Link href={`/news-details/${article.id}`} className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
               <img
                 src={article.coverImage || getFallbackImage(article.category)}
                 alt={article.title}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </Link>
             <div className="flex-1 space-y-1">
               <div className="flex items-center gap-2 text-[10.9px]">
                 <span className="text-slate-500">{article.category}</span>
                 <div className="w-[3px] h-[3px] bg-slate-300 rounded-full"></div>
                 <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
               </div>
-              <h3 className="text-[14.8px] leading-[20px] font-normal">{article.title}</h3>
+              <Link href={`/news-details/${article.id}`}>
+                <h3 className="text-[14.8px] leading-[20px] font-normal hover:text-[#cc0000] transition-colors">{article.title}</h3>
+              </Link>
             </div>
           </article>
         ))}
@@ -67,20 +70,22 @@ const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => 
       <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
         {desktopArticles.map((article, index) => (
           <article key={article.id || index} className="space-y-3">
-            <div className="rounded-lg overflow-hidden h-[200px]">
+            <Link href={`/news-details/${article.id}`} className="block rounded-lg overflow-hidden h-[200px]">
               <img
                 src={article.coverImage || getFallbackImage(article.category)}
                 alt={article.title}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </Link>
             <div className="space-y-2 px-1">
               <div className="flex items-center gap-2 text-xs">
                 <span className="text-slate-500">{article.category}</span>
                 <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                 <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
               </div>
-              <h3 className="text-sm leading-tight font-medium">{article.title}</h3>
+              <Link href={`/news-details/${article.id}`}>
+                <h3 className="text-sm leading-tight font-medium hover:text-[#cc0000] transition-colors">{article.title}</h3>
+              </Link>
             </div>
           </article>
         ))}

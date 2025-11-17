@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import SectionHeader from './SectionHeader';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
@@ -33,18 +34,22 @@ const BusinessSection = ({ mockImages, businessArticles, fashionArticles }: Busi
                       <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                       <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                     </div>
-                    <h4 className="text-base leading-tight">{article.title}</h4>
+                    <Link href={`/news-details/${article.id}`}>
+                      <h4 className="text-base leading-tight hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                    </Link>
                   </article>
                 ))}
               </div>
 
               {featuredBusiness && (
                 <div className="relative rounded-lg overflow-hidden">
-                  <img
-                    src={featuredBusiness.coverImage || mockImages.businessLarge}
-                    alt={featuredBusiness.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <Link href={`/news-details/${featuredBusiness.id}`}>
+                    <img
+                      src={featuredBusiness.coverImage || mockImages.businessLarge}
+                      alt={featuredBusiness.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
                   <div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
                     style={{
@@ -57,9 +62,11 @@ const BusinessSection = ({ mockImages, businessArticles, fashionArticles }: Busi
                       <div className="w-1 h-1 bg-white/60 rounded-full"></div>
                       <span className="text-white/60">{formatDate(featuredBusiness.publishedAt)}</span>
                     </div>
-                    <h3 className="text-lg leading-tight font-semibold">
-                      {featuredBusiness.title}
-                    </h3>
+                    <Link href={`/news-details/${featuredBusiness.id}`}>
+                      <h3 className="text-lg leading-tight font-semibold hover:text-[#cc0000] transition-colors">
+                        {featuredBusiness.title}
+                      </h3>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -81,20 +88,22 @@ const BusinessSection = ({ mockImages, businessArticles, fashionArticles }: Busi
             <div className="p-6 space-y-4">
               {displayFashionArticles.map((article, index) => (
                 <article key={article.id || index} className="flex gap-3">
-                  <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
+                  <Link href={`/news-details/${article.id}`} className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
                     <img
                       src={article.coverImage || mockImages.fashionNews}
                       alt={article.title}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </Link>
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center gap-2 text-xs">
                       <span className="text-slate-500">{article.category}</span>
                       <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                       <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                     </div>
-                    <h4 className="text-sm leading-tight">{article.title}</h4>
+                    <Link href={`/news-details/${article.id}`}>
+                      <h4 className="text-sm leading-tight hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                    </Link>
                   </div>
                 </article>
               ))}

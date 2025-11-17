@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import SectionHeader from './SectionHeader';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
@@ -53,13 +54,13 @@ const FourColumnSection = ({
           {sections.map((section, index) => (
             <div key={index} className="space-y-6">
               <SectionHeader title={section.title} showViewAll={true} />
-              <div className="rounded-lg overflow-hidden h-[200px]">
+              <Link href={`/news-details/${section.articles[0]?.id}`} className="rounded-lg overflow-hidden h-[200px] block">
                 <img
                   src={section.articles[0]?.coverImage || section.image}
                   alt={section.title}
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </Link>
               <div className="space-y-6">
                 {section.articles.map((article, articleIndex) => (
                   <article key={article.id || articleIndex} className="space-y-1">
@@ -68,7 +69,9 @@ const FourColumnSection = ({
                       <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                       <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                     </div>
-                    <h4 className="text-base leading-tight">{article.title}</h4>
+                    <Link href={`/news-details/${article.id}`}>
+                      <h4 className="text-base leading-tight hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                    </Link>
                   </article>
                 ))}
               </div>
