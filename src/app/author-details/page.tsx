@@ -95,10 +95,10 @@ export default function AuthorDetailsPage() {
             </div>
             
             {/* Right Watermark Text with Gradient Mask - Desktop Only */}
-            <div className="hidden md:block absolute bottom-[-10px] h-[94.8px] right-[24px] w-[415.53px]" data-name="Mask Group">
-              <div 
-                className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[94.8px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[415.53px_94.8px] not-italic text-[68.18px] top-1/2 translate-y-[-50%] w-full" 
-                style={{ maskImage: `url('${imgContainer}')` }}
+            <div className="hidden md:block absolute bottom-[-10px] h-[94.8px] right-[24px] w-fit" data-name="Mask Group">
+              <div
+                className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[94.8px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] not-italic text-[68.18px] top-1/2 translate-y-[-50%] w-full"
+                style={{ maskImage: `url('${imgContainer}')`, maskSize: 'cover' }}
               >
                 <p className="leading-[94.8px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>Emily Davis</p>
               </div>
