@@ -28,22 +28,26 @@ const FourColumnSection = ({
     {
       title: 'Travel',
       image: mockImages.travel,
-      articles: travelArticles.slice(0, 2)
+      articles: travelArticles.slice(0, 2),
+      categoryLink: '/category/travel'
     },
     {
       title: 'Entertainment',
       image: mockImages.entertainment,
-      articles: entertainmentArticles.slice(0, 2)
+      articles: entertainmentArticles.slice(0, 2),
+      categoryLink: '/category/entertainment'
     },
     {
       title: 'Sports',
       image: mockImages.sports,
-      articles: sportsArticles.slice(0, 2)
+      articles: sportsArticles.slice(0, 2),
+      categoryLink: '/category/sports'
     },
     {
       title: 'Tech',
       image: mockImages.tech,
-      articles: techArticles.slice(0, 2)
+      articles: techArticles.slice(0, 2),
+      categoryLink: '/category/tech'
     }
   ];
 
@@ -53,7 +57,7 @@ const FourColumnSection = ({
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           {sections.map((section, index) => (
             <div key={index} className="space-y-6">
-              <SectionHeader title={section.title} showViewAll={true} />
+              <SectionHeader title={section.title} showViewAll={true} categoryLink={section.categoryLink} />
               <Link href={`/news-details/${section.articles[0]?.id}`} className="rounded-lg overflow-hidden h-[200px] block">
                 <img
                   src={section.articles[0]?.coverImage || section.image}

@@ -27,10 +27,10 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
           <div className="w-1 h-4 bg-[#cc0000]"></div>
           <h2 className="text-[12.6px] leading-[19px] md:text-lg font-normal">Top Stories</h2>
           <div className="flex-1 h-px bg-slate-300/35"></div>
-          <div className="flex items-center gap-1 text-[12.8px] leading-[19px] md:text-sm text-slate-700 font-normal">
+          <Link href="/articles" className="flex items-center gap-1 text-[12.8px] leading-[19px] md:text-sm text-slate-700 font-normal hover:text-[#cc0000] transition-colors cursor-pointer">
             <span>view all</span>
             <div className="w-2.5 h-2.5"></div>
-          </div>
+          </Link>
         </div>
 
         {/* Mobile Layout */}
