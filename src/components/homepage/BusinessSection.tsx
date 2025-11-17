@@ -3,7 +3,6 @@ import Link from 'next/link';
 import SectionHeader from './SectionHeader';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
-import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface BusinessSectionProps {
   mockImages: {
@@ -45,7 +44,7 @@ const BusinessSection = ({ mockImages, businessArticles, fashionArticles }: Busi
               {featuredBusiness && (
                 <div className="relative rounded-lg overflow-hidden">
                   <Link href={`/news-details/${featuredBusiness.id}`}>
-                    <OptimizedImage
+                    <img
                       src={featuredBusiness.coverImage || mockImages.businessLarge}
                       alt={featuredBusiness.title}
                       className="w-full h-full object-cover"
@@ -90,7 +89,7 @@ const BusinessSection = ({ mockImages, businessArticles, fashionArticles }: Busi
               {displayFashionArticles.map((article, index) => (
                 <article key={article.id || index} className="flex gap-3">
                   <Link href={`/news-details/${article.id}`} className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
-                    <OptimizedImage
+                    <img
                       src={article.coverImage || mockImages.fashionNews}
                       alt={article.title}
                       className="w-full h-full object-cover"

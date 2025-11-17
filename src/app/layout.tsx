@@ -14,16 +14,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* DNS Prefetch for external resources */}
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-
-        {/* Preconnect to important domains */}
-        <link rel="preconnect" href="https://images.unsplash.com" />
-
-        {/* Optimize font loading */}
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-      </head>
       <body
         className={`antialiased`}
       >
