@@ -65,9 +65,16 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
   return (
     <>
       {isLoading && (
-        <div className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-transparent">
-          <div className="h-full bg-[#cc0000] animate-pulse w-full"></div>
-        </div>
+        <>
+          {/* Loading bar at top */}
+          <div className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-transparent">
+            <div className="h-full bg-[#cc0000] animate-pulse w-full"></div>
+          </div>
+          {/* Small loading icon on top left */}
+          <div className="fixed top-4 left-4 z-[9999]">
+            <div className="w-8 h-8 border-3 border-gray-200 border-t-[#cc0000] rounded-full animate-spin"></div>
+          </div>
+        </>
       )}
       {children}
     </>
