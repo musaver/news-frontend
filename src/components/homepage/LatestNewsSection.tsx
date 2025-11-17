@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
-import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface LatestNewsSectionProps {
   mockImages: {
@@ -47,7 +46,7 @@ const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => 
         {mobileArticles.map((article, index) => (
           <article key={article.id || index} className="flex gap-2">
             <Link href={`/news-details/${article.id}`} className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0">
-              <OptimizedImage
+              <img
                 src={article.coverImage || getFallbackImage(article.category)}
                 alt={article.title}
                 className="w-full h-full object-cover"
@@ -72,7 +71,7 @@ const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => 
         {desktopArticles.map((article, index) => (
           <article key={article.id || index} className="space-y-3">
             <Link href={`/news-details/${article.id}`} className="block rounded-lg overflow-hidden h-[200px]">
-              <OptimizedImage
+              <img
                 src={article.coverImage || getFallbackImage(article.category)}
                 alt={article.title}
                 className="w-full h-full object-cover"

@@ -41,7 +41,7 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
     };
   }, [pathname, searchParams, isInitialLoad]);
 
-  // Listen for link clicks to show loading instantly and prefetch on hover
+  // Listen for link clicks to show loading instantly
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -58,37 +58,8 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
       }
     };
 
-    // Prefetch links on hover for faster navigation
-    const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a');
-
-      if (anchor && anchor.href) {
-        const url = new URL(anchor.href);
-        const currentUrl = new URL(window.location.href);
-
-        // Only prefetch internal links
-        if (url.origin === currentUrl.origin && url.pathname !== currentUrl.pathname) {
-          // Create a prefetch link element
-          const prefetchLink = document.createElement('link');
-          prefetchLink.rel = 'prefetch';
-          prefetchLink.href = url.pathname;
-
-          // Only add if not already prefetched
-          if (!document.querySelector(`link[rel="prefetch"][href="${url.pathname}"]`)) {
-            document.head.appendChild(prefetchLink);
-          }
-        }
-      }
-    };
-
     document.addEventListener('click', handleClick, true);
-    document.addEventListener('mouseenter', handleMouseEnter, true);
-
-    return () => {
-      document.removeEventListener('click', handleClick, true);
-      document.removeEventListener('mouseenter', handleMouseEnter, true);
-    };
+    return () => document.removeEventListener('click', handleClick, true);
   }, []);
 
   return (
