@@ -122,7 +122,7 @@ export default async function CategoryPage() {
 
       
       
-      <main className="pt-16 md:pt-[104px]">
+      <main>
 
       <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
         <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
