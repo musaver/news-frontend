@@ -14,7 +14,7 @@ export default async function DashboardPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <main className="pt-16 md:pt-[104px]">
+      <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="bg-white rounded-lg shadow-md p-6">
             <h1 className="text-3xl font-semibold mb-6">Welcome to your Dashboard</h1>

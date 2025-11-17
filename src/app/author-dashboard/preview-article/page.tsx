@@ -60,7 +60,7 @@ export default function PreviewArticlePage() {
     <div className="min-h-screen bg-[#f7fafc]">
       <Header />
       
-      <main className="pt-16 md:pt-[104px]">
+      <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Preview Header */}
           <div className="bg-white rounded-[12px] border border-[rgba(203,213,225,0.35)] p-4 mb-6 flex items-center justify-between">

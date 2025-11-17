@@ -49,7 +49,7 @@ function VerifyOTPContent() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <main className="pt-16 md:pt-[104px]">
+      <main>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <h1 className="text-2xl font-semibold mb-4">Verifying your email...</h1>
@@ -68,7 +68,7 @@ export default function VerifyOTP() {
     <Suspense fallback={
       <div className="min-h-screen bg-white">
         <Header />
-        <main className="pt-16 md:pt-[104px]">
+        <main>
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
               <h1 className="text-2xl font-semibold mb-4">Loading...</h1>
