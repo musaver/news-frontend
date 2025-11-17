@@ -65,13 +65,11 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
   return (
     <>
       {isLoading && (
-        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div className="fixed top-32 left-0 right-0 bottom-32 bg-white z-40 flex items-center justify-center">
           <LoadingSpinner />
         </div>
       )}
-      <div className={isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100 transition-opacity duration-150'}>
-        {children}
-      </div>
+      {children}
     </>
   );
 }
