@@ -64,7 +64,12 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {isLoading ? <LoadingSpinner /> : children}
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 z-[9999] h-1 bg-transparent">
+          <div className="h-full bg-[#cc0000] animate-pulse w-full"></div>
+        </div>
+      )}
+      {children}
     </>
   );
 }
