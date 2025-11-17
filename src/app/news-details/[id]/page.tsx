@@ -349,9 +349,14 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
               {/* Related Articles */}
               {relatedArticles.length > 0 && (
                 <div className="mt-12 pt-8 border-t border-slate-200">
-                  <div className="flex items-center gap-[10px] mb-6">
-                    <div className="w-[4px] h-[15px] bg-[#cc0000]"></div>
-                    <h2 className="text-[14.5px] leading-[22px] font-normal text-[#020a1c]">Related Articles</h2>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-[10px]">
+                      <div className="w-[4px] h-[15px] bg-[#cc0000]"></div>
+                      <h2 className="text-[14.5px] leading-[22px] font-normal text-[#020a1c]">Related Articles</h2>
+                    </div>
+                    <Link href={`/category/${article.categoryId}`} className="flex items-center gap-1 text-sm text-slate-700 font-medium hover:text-[#cc0000] transition-colors cursor-pointer">
+                      <span>view all</span>
+                    </Link>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

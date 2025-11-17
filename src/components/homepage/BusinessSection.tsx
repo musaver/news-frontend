@@ -24,7 +24,7 @@ const BusinessSection = ({ mockImages, businessArticles, fashionArticles }: Busi
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative">
           {/* Business News */}
           <div className="lg:col-span-2 bg-[#f7fafc] rounded-lg border border-slate-200/20 p-6">
-            <SectionHeader title="Business" showViewAll={true} />
+            <SectionHeader title="Business" showViewAll={true} categoryLink="/category/business" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 h-[451px]">
               <div className="bg-white rounded border p-6 space-y-6">
                 {sideBusinessArticles.map((article, index) => (
