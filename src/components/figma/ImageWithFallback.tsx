@@ -1,27 +1,72 @@
-import React, { useState } from 'react'
+'use client'
+
+import React, { useState, useEffect } from 'react'
+import { Skeleton } from '../ui/skeleton'
 
 const ERROR_IMG_SRC =
   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODgiIGhlaWdodD0iODgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjMDAwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIzLjciPjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjU2IiByeD0iNiIvPjxwYXRoIGQ9Im0xNiA1OCAxNi0xOCAzMiAzMiIvPjxjaXJjbGUgY3g9IjUzIiBjeT0iMzUiIHI9IjciLz48L3N2Zz4KCg=='
 
-export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElement>) {
+interface ImageWithFallbackProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  showPlaceholder?: boolean
+}
+
+export function ImageWithFallback({
+  src,
+  alt,
+  style,
+  className,
+  showPlaceholder = true,
+  ...rest
+}: ImageWithFallbackProps) {
   const [didError, setDidError] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const handleError = () => {
     setDidError(true)
+    setLoading(false)
   }
 
-  const { src, alt, style, className, ...rest } = props
+  const handleLoad = () => {
+    setLoading(false)
+  }
 
-  return didError ? (
-    <div
-      className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
-      style={style}
-    >
-      <div className="flex items-center justify-center w-full h-full">
-        <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
+  // Reset states when src changes
+  useEffect(() => {
+    if (src) {
+      setLoading(true)
+      setDidError(false)
+    }
+  }, [src])
+
+  if (didError) {
+    return (
+      <div
+        className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
+        style={style}
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          <img src={ERROR_IMG_SRC} alt="Error loading image" className="opacity-30" {...rest} data-original-url={src} />
+        </div>
       </div>
+    )
+  }
+
+  return (
+    <div className="relative inline-block w-full h-full" style={style}>
+      {/* Loading Skeleton */}
+      {loading && showPlaceholder && (
+        <Skeleton className="absolute inset-0 w-full h-full" />
+      )}
+
+      {/* Actual Image */}
+      <img
+        src={src}
+        alt={alt}
+        className={`${className ?? ''} ${loading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        onError={handleError}
+        onLoad={handleLoad}
+        {...rest}
+      />
     </div>
-  ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
   )
 }
