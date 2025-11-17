@@ -64,12 +64,7 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {isLoading && (
-        <div className="fixed top-32 left-0 right-0 bottom-32 bg-white z-40 flex items-center justify-center">
-          <LoadingSpinner />
-        </div>
-      )}
-      {children}
+      {isLoading ? <LoadingSpinner /> : children}
     </>
   );
 }
