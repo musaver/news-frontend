@@ -3,6 +3,7 @@
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { Header, Footer } from '@/components/homepage';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -45,9 +46,9 @@ export default function LoginPage() {
           <div className="mt-4 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <a href="/register" className="text-blue-600 hover:underline">
+              <Link href="/register" className="text-blue-600 hover:underline">
                 Sign up
-              </a>
+              </Link>
             </p>
           </div>
         </div>

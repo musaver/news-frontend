@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   Header,
   Footer,
@@ -194,30 +195,30 @@ export default function AuthorDashboardPage() {
       <div className="md:top-[168px] left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
           <div className="flex items-center justify-center gap-2 px-4 py-4 overflow-x-auto">
-            <a href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
+            <Link href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
               <LayoutDashboardIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Overview</span>
-            </a>
-            <a href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            </Link>
+            <Link href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <FileTextIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Articles</span>
-            </a>
-            <a href="/author-dashboard/analytics" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            </Link>
+            <Link href="/author-dashboard/analytics" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <BarChart3Icon className="w-4 h-4" />
               <span className="hidden sm:inline">Analytics</span>
-            </a>
-            <a href="/author-dashboard/comments" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            </Link>
+            <Link href="/author-dashboard/comments" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <MessageSquareIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Comments</span>
-            </a>
-            <a href="/author-dashboard/earnings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            </Link>
+            <Link href="/author-dashboard/earnings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <DollarSignIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Earnings</span>
-            </a>
-            <a href="/author-dashboard/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            </Link>
+            <Link href="/author-dashboard/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <SettingsIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Settings</span>
-            </a>
+            </Link>
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
             <button className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium">
               <LogOutIcon className="w-4 h-4" />
@@ -353,7 +354,7 @@ export default function AuthorDashboardPage() {
                   Quick Actions
                 </h3>
                 <div className="space-y-3">
-                  <a href="/create-article" className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left">
+                  <Link href="/create-article" className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left">
                     <PlusCircleIcon className="w-5 h-5 text-[#cc0000]" />
                     <div>
                       <p className="text-[#020a1c] text-[14px] font-medium">
@@ -363,8 +364,8 @@ export default function AuthorDashboardPage() {
                         Start creating content
                       </p>
                     </div>
-                  </a>
-                  <a 
+                  </Link>
+                  <Link
                     href="/author-dashboard/analytics"
                     className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left"
                   >
@@ -377,8 +378,8 @@ export default function AuthorDashboardPage() {
                         Check your performance
                       </p>
                     </div>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/articles"
                     className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left"
                   >
@@ -391,7 +392,7 @@ export default function AuthorDashboardPage() {
                         Manage your content
                       </p>
                     </div>
-                  </a>
+                  </Link>
                   <button className="w-full flex items-center gap-3 p-4 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors text-left">
                     <UsersIcon className="w-5 h-5 text-[#cc0000]" />
                     <div>
