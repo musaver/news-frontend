@@ -143,7 +143,7 @@ export default async function Home() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="pt-16 md:pt-[104px]">
+      <main>
         {/* Mobile Layout */}
         <div className="md:hidden px-4 py-6 space-y-12 max-w-[480px] mx-auto">
           <FeaturedSection

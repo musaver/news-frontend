@@ -70,7 +70,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <main className="pt-16 md:pt-[104px]">
+      <main>
         <div className="max-w-md mx-auto px-4 py-8">
           <h1 className="text-2xl font-semibold mb-6">Register</h1>
           {error && <p className="text-red-600 mb-4">{error}</p>}
