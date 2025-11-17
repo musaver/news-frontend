@@ -3,6 +3,7 @@ import Link from 'next/link';
 import CategoryBadge from './CategoryBadge';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
+import { OptimizedImage } from '@/components/OptimizedImage';
 
 interface FeaturedSectionProps {
   mockImages: {
@@ -28,10 +29,11 @@ const FeaturedSection = ({ mockImages, articles }: FeaturedSectionProps) => {
       <div className="md:hidden space-y-4">
         <Link href={`/news-details/${featuredArticle.id}`}>
           <div className="rounded-lg overflow-hidden h-[300px]">
-            <img
+            <OptimizedImage
               src={imageUrl}
               alt={featuredArticle.title}
               className="w-full h-full object-cover"
+              lazy={false}
             />
           </div>
         </Link>
@@ -69,10 +71,11 @@ const FeaturedSection = ({ mockImages, articles }: FeaturedSectionProps) => {
         </div>
         <Link href={`/news-details/${featuredArticle.id}`}>
           <div className="rounded-lg overflow-hidden">
-            <img
+            <OptimizedImage
               src={imageUrl}
               alt={featuredArticle.title}
               className="w-full h-full object-cover"
+              lazy={false}
             />
           </div>
         </Link>
