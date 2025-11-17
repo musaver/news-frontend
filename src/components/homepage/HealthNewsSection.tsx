@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
 
@@ -36,7 +37,7 @@ const HealthNewsSection = ({ mockImages, articles }: HealthNewsSectionProps) => 
         <div className="md:hidden max-w-[480px] mx-auto">
           <div className="space-y-6">
             {/* Large Story */}
-            <div className="relative rounded-lg overflow-hidden h-[300px]">
+            <Link href={`/news-details/${featuredArticle.id}`} className="relative block rounded-lg overflow-hidden h-[300px]">
               <img
                 src={featuredImageUrl}
                 alt={featuredArticle.title}
@@ -58,26 +59,28 @@ const HealthNewsSection = ({ mockImages, articles }: HealthNewsSectionProps) => 
                   {featuredArticle.title}
                 </h3>
               </div>
-            </div>
+            </Link>
 
             {/* Article List */}
             <div className="space-y-6">
               {sideArticles.map((article, index) => (
                 <article key={article.id || index} className="flex gap-2">
-                  <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0 bg-slate-200">
+                  <Link href={`/news-details/${article.id}`} className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0 bg-slate-200">
                     <img
                       src={article.coverImage || mockImages.healthLarge}
                       alt={article.title}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </Link>
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center gap-2 text-[10.9px]">
                       <span className="text-slate-500">{article.category}</span>
                       <div className="w-[3px] h-[3px] bg-slate-300 rounded-full"></div>
                       <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                     </div>
-                    <h4 className="text-[14.9px] leading-[20px] font-normal">{article.title}</h4>
+                    <Link href={`/news-details/${article.id}`}>
+                      <h4 className="text-[14.9px] leading-[20px] font-normal hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -88,7 +91,7 @@ const HealthNewsSection = ({ mockImages, articles }: HealthNewsSectionProps) => 
         {/* Desktop Layout */}
         <div className="hidden md:grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Large Story */}
-          <div className="lg:col-span-2 relative rounded-lg overflow-hidden h-[628px]">
+          <Link href={`/news-details/${featuredArticle.id}`} className="lg:col-span-2 relative block rounded-lg overflow-hidden h-[628px]">
             <img
               src={featuredImageUrl}
               alt={featuredArticle.title}
@@ -110,26 +113,28 @@ const HealthNewsSection = ({ mockImages, articles }: HealthNewsSectionProps) => 
                 {featuredArticle.title}
               </h3>
             </div>
-          </div>
+          </Link>
 
           {/* Article List */}
           <div className="bg-white rounded-lg border p-5 space-y-6">
             {sideArticles.map((article, index) => (
               <article key={article.id || index} className="flex gap-3">
-                <div className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0 bg-slate-200">
+                <Link href={`/news-details/${article.id}`} className="rounded-lg overflow-hidden w-[125px] h-[100px] flex-shrink-0 bg-slate-200">
                   <img
                     src={article.coverImage || mockImages.healthLarge}
                     alt={article.title}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </Link>
                 <div className="flex-1 space-y-1">
                   <div className="flex items-center gap-2 text-xs">
                     <span className="text-slate-500">{article.category}</span>
                     <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                     <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                   </div>
-                  <h4 className="text-sm leading-tight">{article.title}</h4>
+                  <Link href={`/news-details/${article.id}`}>
+                    <h4 className="text-sm leading-tight hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                  </Link>
                 </div>
               </article>
             ))}

@@ -41,6 +41,24 @@ const mockImages = {
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
 
+// Fetch all categories for navigation
+async function fetchCategories() {
+  try {
+    const result = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
+      .from(categories)
+      .orderBy(categories.name);
+    return result;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
 // Fetch category by slug or ID
 async function fetchCategory(categoryId: string) {
   try {
@@ -169,13 +187,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  // Fetch articles for this category
-  const categoryArticles = await fetchArticlesByCategory(category.id, 20);
-  const sidebarArticles = await fetchLatestArticles(8);
+  // Fetch articles and categories in parallel
+  const [allCategories, categoryArticles, sidebarArticles] = await Promise.all([
+    fetchCategories(),
+    fetchArticlesByCategory(category.id, 20),
+    fetchLatestArticles(8)
+  ]);
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={allCategories} />
 
       <main>
         {/* Category Header Banner */}

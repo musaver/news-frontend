@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
 
@@ -35,7 +36,7 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
         {/* Mobile Layout */}
         <div className="md:hidden space-y-6">
           {/* Large Story */}
-          <div className="relative rounded-lg overflow-hidden h-[300px]">
+          <Link href={`/news-details/${featuredArticle.id}`} className="relative block rounded-lg overflow-hidden h-[300px]">
             <img
               src={featuredImageUrl}
               alt={featuredArticle.title}
@@ -57,7 +58,7 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
                 {featuredArticle.title}
               </h3>
             </div>
-          </div>
+          </Link>
 
           {/* Article List */}
           <div className="bg-white rounded-lg p-1 space-y-6">
@@ -68,7 +69,9 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
                   <div className="w-[3px] h-[3px] bg-slate-300 rounded-full"></div>
                   <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                 </div>
-                <h4 className="text-[14.9px] leading-[19.2px] font-normal">{article.title}</h4>
+                <Link href={`/news-details/${article.id}`}>
+                  <h4 className="text-[14.9px] leading-[19.2px] font-normal hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                </Link>
               </article>
             ))}
           </div>
@@ -77,7 +80,7 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
         {/* Desktop Layout */}
         <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
           {/* Large Story */}
-          <div className="relative rounded-lg overflow-hidden h-[428px]">
+          <Link href={`/news-details/${featuredArticle.id}`} className="relative block rounded-lg overflow-hidden h-[428px]">
             <img
               src={featuredImageUrl}
               alt={featuredArticle.title}
@@ -99,7 +102,7 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
                 {featuredArticle.title}
               </h3>
             </div>
-          </div>
+          </Link>
 
           {/* Article List */}
           <div className="bg-white rounded border p-6 space-y-6">
@@ -110,7 +113,9 @@ const TopStoriesSection = ({ mockImages, articles }: TopStoriesSectionProps) => 
                   <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
                   <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
                 </div>
-                <h4 className="text-base leading-tight font-medium">{article.title}</h4>
+                <Link href={`/news-details/${article.id}`}>
+                  <h4 className="text-base leading-tight font-medium hover:text-[#cc0000] transition-colors">{article.title}</h4>
+                </Link>
               </article>
             ))}
           </div>

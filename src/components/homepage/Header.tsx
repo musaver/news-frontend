@@ -1,11 +1,22 @@
 'use client'
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Search, Menu, X } from 'lucide-react';
 import svgPaths from '@/imports/svg-ykc7st1had';
 import NewsFlashLogo from './NewsFlashLogo';
 
-const Header = () => {
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface HeaderProps {
+  categories?: Category[];
+}
+
+const Header = ({ categories = [] }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -19,9 +30,9 @@ const Header = () => {
             <div className="text-sm text-slate-600 font-medium">
               September 27 - 06:54 AM
             </div>
-            <div className="flex justify-center">
+            <Link href="/" className="flex justify-center">
               <NewsFlashLogo />
-            </div>
+            </Link>
             <div className="text-sm text-slate-600 font-medium text-right">
               New York, US: 20.2°C
             </div>
@@ -32,21 +43,19 @@ const Header = () => {
         <div className="bg-[#cc0000] border-b border-slate-200">
           <div className="max-w-[1320px] mx-auto px-6 h-10 flex items-center justify-between">
             <nav className="flex items-center gap-6 text-white text-sm font-medium">
-              <a href="#" className="hover:opacity-80">Latest News</a>
+              <Link href="/" className="hover:opacity-80">Latest News</Link>
               <div className="w-px h-4 bg-white/30"></div>
-              <a href="#" className="hover:opacity-80">Business</a>
-              <a href="#" className="hover:opacity-80">Finance</a>
-              <a href="#" className="hover:opacity-80">Health</a>
-              <a href="#" className="hover:opacity-80">Politics</a>
-              <a href="#" className="hover:opacity-80">Fashion</a>
-              <a href="#" className="hover:opacity-80">Real Estate</a>
-              <a href="#" className="hover:opacity-80">Travel</a>
-              <a href="#" className="hover:opacity-80">Entertainment</a>
-              <a href="#" className="hover:opacity-80">Sports</a>
-              <a href="#" className="hover:opacity-80">Tech</a>
-              <a href="#" className="hover:opacity-80">Podcast</a>
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/category/${category.id}`}
+                  className="hover:opacity-80"
+                >
+                  {category.name}
+                </Link>
+              ))}
             </nav>
-            <button 
+            <button
               onClick={() => setIsSearchOpen(true)}
               className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
             >
@@ -58,7 +67,7 @@ const Header = () => {
 
       {/* Mobile Header */}
       <div className="md:hidden bg-[#cc0000] h-16 flex items-center justify-between px-4">
-        <div className="w-[150px] h-[35px]">
+        <Link href="/" className="w-[150px] h-[35px]">
           <svg viewBox="0 0 150 30" fill="none" className="w-full h-full">
             <g clipPath="url(#clip0_mobile)">
               <path d={svgPaths.p1a725800} fill="white" opacity="0.4" />
@@ -70,7 +79,7 @@ const Header = () => {
               </clipPath>
             </defs>
           </svg>
-        </div>
+        </Link>
         
         <div className="flex items-center gap-2">
           <button 
@@ -94,29 +103,27 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-slate-200 z-40">
           <div className="px-6 py-8 space-y-8">
             <div className="space-y-8">
-              <a href="#" className="block text-slate-800">Top Stories</a>
-              <a href="#" className="block text-slate-800">Business</a>
-              <a href="#" className="block text-slate-800">Finance</a>
-              <a href="#" className="block text-slate-800">Health</a>
-              <a href="#" className="block text-slate-800">Politics</a>
-              <a href="#" className="block text-slate-800">Fashion</a>
-              <a href="#" className="block text-slate-800">Real Estate</a>
-              <a href="#" className="block text-slate-800">Travel</a>
-              <a href="#" className="block text-slate-800">Entertainment</a>
-              <a href="#" className="block text-slate-800">Sports</a>
-              <a href="#" className="block text-slate-800">Tech</a>
-              <a href="#" className="block text-slate-800">Podcast</a>
+              <Link href="/" className="block text-slate-800">Top Stories</Link>
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/category/${category.id}`}
+                  className="block text-slate-800"
+                >
+                  {category.name}
+                </Link>
+              ))}
             </div>
             <div className="h-px bg-slate-300/35"></div>
             <div className="space-y-6">
-              <a href="#" className="block text-slate-800">About</a>
-              <a href="#" className="block text-slate-800">Careers</a>
-              <a href="#" className="block text-slate-800">Authors</a>
-              <a href="#" className="block text-slate-800">Advertise</a>
-              <a href="#" className="block text-slate-800">Contact</a>
+              <Link href="/about-us" className="block text-slate-800">About</Link>
+              <Link href="#" className="block text-slate-800">Careers</Link>
+              <Link href="/authors" className="block text-slate-800">Authors</Link>
+              <Link href="#" className="block text-slate-800">Advertise</Link>
+              <Link href="#" className="block text-slate-800">Contact</Link>
             </div>
           </div>
         </div>
