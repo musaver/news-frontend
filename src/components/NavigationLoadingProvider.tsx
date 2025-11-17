@@ -71,8 +71,8 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
             <div className="h-full bg-[#cc0000] animate-pulse w-full"></div>
           </div>
           {/* Small loading icon on top left */}
-          <div className="fixed top-4 left-4 z-[9999]">
-            <div className="w-8 h-8 border-3 border-gray-200 border-t-[#cc0000] rounded-full animate-spin"></div>
+          <div className="fixed top-4 left-4 z-[9999] bg-white rounded-full p-1 shadow-lg">
+            <div className="w-6 h-6 border-4 border-gray-200 border-t-[#cc0000] rounded-full animate-spin"></div>
           </div>
         </>
       )}
