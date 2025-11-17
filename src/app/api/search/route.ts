@@ -9,44 +9,12 @@ export async function GET(req: Request) {
     const query = searchParams.get('q') || '';
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 10;
 
-    // If no query, return recent articles and all categories
+    // If no query, return empty results
     if (!query || query.trim() === '') {
-      // Fetch all categories
-      const allCategories = await db
-        .select({
-          id: categories.id,
-          name: categories.name,
-          slug: categories.slug,
-        })
-        .from(categories)
-        .orderBy(categories.name);
-
-      // Fetch recent published articles
-      const recentArticles = await db
-        .select({
-          id: articles.id,
-          title: articles.title,
-          category: categories.name,
-          excerpt: articles.excerpt,
-          coverImage: articles.coverImage,
-          publishedAt: articles.publishedAt,
-          author: {
-            id: user.id,
-            name: user.name,
-            image: user.image,
-          },
-        })
-        .from(articles)
-        .innerJoin(categories, eq(articles.categoryId, categories.id))
-        .leftJoin(user, eq(articles.authorId, user.id))
-        .where(eq(articles.status, 'published'))
-        .orderBy(desc(articles.publishedAt))
-        .limit(limit);
-
       return NextResponse.json({
         success: true,
-        categories: allCategories,
-        articles: recentArticles,
+        categories: [],
+        articles: [],
       });
     }
 

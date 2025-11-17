@@ -265,7 +265,7 @@ const Header = ({ categories = [] }: HeaderProps) => {
                           {searchResults.articles.map((article) => (
                             <Link
                               key={article.id}
-                              href={`/article/${article.id}`}
+                              href={`/news-details/${article.id}`}
                               onClick={handleArticleClick}
                               className="flex items-start gap-3 p-2 hover:bg-slate-50 rounded cursor-pointer transition-colors"
                             >
