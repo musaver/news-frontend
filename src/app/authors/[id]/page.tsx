@@ -7,6 +7,9 @@ import Image from 'next/image';
 import { imgContainer } from "@/imports/svg-4a9ab";
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { db } from '@/lib/db';
+import { user, articles, categories } from '@/lib/schema';
+import { eq, desc, and } from 'drizzle-orm';
 
 interface Author {
   id: string;
@@ -39,16 +42,52 @@ interface AuthorData {
 
 async function getAuthorData(id: string): Promise<AuthorData | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/authors/${id}`, {
-      cache: 'no-store',
-    });
+    // Fetch the author
+    const [author] = await db
+      .select({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+      })
+      .from(user)
+      .where(eq(user.id, id));
 
-    if (!res.ok) {
+    if (!author) {
       return null;
     }
 
-    return res.json();
+    // Fetch all published articles by this author
+    const authorArticles = await db
+      .select({
+        id: articles.id,
+        title: articles.title,
+        category: categories.name,
+        content: articles.content,
+        excerpt: articles.excerpt,
+        tags: articles.tags,
+        coverImage: articles.coverImage,
+        publishedAt: articles.publishedAt,
+        createdAt: articles.createdAt,
+        author: {
+          id: user.id,
+          name: user.name,
+          image: user.image,
+        },
+      })
+      .from(articles)
+      .innerJoin(user, eq(articles.authorId, user.id))
+      .innerJoin(categories, eq(articles.categoryId, categories.id))
+      .where(and(
+        eq(articles.authorId, id),
+        eq(articles.status, "published")
+      ))
+      .orderBy(desc(articles.publishedAt));
+
+    return {
+      author,
+      articles: authorArticles,
+    };
   } catch (error) {
     console.error('Error fetching author data:', error);
     return null;
@@ -57,16 +96,20 @@ async function getAuthorData(id: string): Promise<AuthorData | null> {
 
 async function getAllAuthors(): Promise<Author[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/authors`, {
-      cache: 'no-store',
-    });
+    // Fetch all users who have at least one published article
+    const authors = await db
+      .select({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+      })
+      .from(user)
+      .innerJoin(articles, eq(user.id, articles.authorId))
+      .where(eq(articles.status, "published"))
+      .groupBy(user.id);
 
-    if (!res.ok) {
-      return [];
-    }
-
-    return res.json();
+    return authors;
   } catch (error) {
     console.error('Error fetching authors:', error);
     return [];
