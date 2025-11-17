@@ -19,6 +19,24 @@ import { eq, desc, and } from 'drizzle-orm';
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
 
+// Fetch all categories
+async function fetchCategories() {
+  try {
+    const result = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
+      .from(categories)
+      .orderBy(categories.name);
+    return result;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
 // Mock images - fallback for articles without cover images
 const mockImages = {
   featuredArticle: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop',
@@ -126,22 +144,38 @@ async function fetchLatestArticles(limit: number = 10) {
 
 // Main App Component
 export default async function Home() {
-  // Fetch articles for each category
-  const businessArticles = await fetchArticlesByCategory('Business', 5);
-  const financeArticles = await fetchArticlesByCategory('Finance', 8);
-  const politicsArticles = await fetchArticlesByCategory('Politics', 5);
-  const healthArticles = await fetchArticlesByCategory('Health', 6);
-  const fashionArticles = await fetchArticlesByCategory('Fashion', 4);
-  const realEstateArticles = await fetchArticlesByCategory('Real Estate', 3);
-  const travelArticles = await fetchArticlesByCategory('Travel', 3);
-  const entertainmentArticles = await fetchArticlesByCategory('Entertainment', 3);
-  const sportsArticles = await fetchArticlesByCategory('Sports', 3);
-  const techArticles = await fetchArticlesByCategory('Tech', 4);
-  const latestArticles = await fetchLatestArticles(10);
+  // Fetch categories and articles in parallel
+  const [
+    allCategories,
+    businessArticles,
+    financeArticles,
+    politicsArticles,
+    healthArticles,
+    fashionArticles,
+    realEstateArticles,
+    travelArticles,
+    entertainmentArticles,
+    sportsArticles,
+    techArticles,
+    latestArticles
+  ] = await Promise.all([
+    fetchCategories(),
+    fetchArticlesByCategory('Business', 5),
+    fetchArticlesByCategory('Finance', 8),
+    fetchArticlesByCategory('Politics', 5),
+    fetchArticlesByCategory('Health', 6),
+    fetchArticlesByCategory('Fashion', 4),
+    fetchArticlesByCategory('Real Estate', 3),
+    fetchArticlesByCategory('Travel', 3),
+    fetchArticlesByCategory('Entertainment', 3),
+    fetchArticlesByCategory('Sports', 3),
+    fetchArticlesByCategory('Tech', 4),
+    fetchLatestArticles(10)
+  ]);
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={allCategories} />
 
       <main>
         {/* Mobile Layout */}

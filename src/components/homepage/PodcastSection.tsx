@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import SectionHeader from './SectionHeader';
 import { Article } from '@/types/article';
 
@@ -20,13 +21,13 @@ const PodcastSection = ({ mockImages, articles }: PodcastSectionProps) => {
     <section className="bg-[#f7fafc] py-20">
       <div className="max-w-[1320px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative">
-          <div className="rounded-lg overflow-hidden">
+          <Link href={`/news-details/${podcastArticles[0]?.id}`} className="rounded-lg overflow-hidden block">
             <img
               src={podcastArticles[0]?.coverImage || mockImages.podcast}
               alt="Podcast"
               className="w-full h-full object-cover"
             />
-          </div>
+          </Link>
 
           <div className="bg-white rounded-lg border border-slate-300/30 p-6 space-y-6">
             <div>
@@ -39,15 +40,17 @@ const PodcastSection = ({ mockImages, articles }: PodcastSectionProps) => {
             <div className="space-y-6">
               {podcastArticles.map((podcast, index) => (
                 <div key={podcast.id || index} className="flex gap-4">
-                  <div className="rounded-lg overflow-hidden w-[140px] h-[110px] flex-shrink-0">
+                  <Link href={`/news-details/${podcast.id}`} className="rounded-lg overflow-hidden w-[140px] h-[110px] flex-shrink-0">
                     <img
                       src={podcast.coverImage || fallbackThumbs[index % fallbackThumbs.length]}
                       alt={podcast.title}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </Link>
                   <div className="flex-1 space-y-1">
-                    <h4 className="text-base text-[#cc0000] font-semibold">{podcast.title}</h4>
+                    <Link href={`/news-details/${podcast.id}`}>
+                      <h4 className="text-base text-[#cc0000] font-semibold hover:text-[#cc0000] transition-colors">{podcast.title}</h4>
+                    </Link>
                     <p className="text-sm text-slate-700 leading-relaxed">
                       {podcast.excerpt || podcast.content.substring(0, 150) + '...'}
                     </p>
