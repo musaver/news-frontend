@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import '@/styles/globals.css'
+import NavigationLoadingProvider from '@/components/NavigationLoadingProvider';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,9 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        {children}
+        <NavigationLoadingProvider>
+          {children}
+        </NavigationLoadingProvider>
       </body>
     </html>
   );
