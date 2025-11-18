@@ -105,7 +105,17 @@ export default function ActivityPage() {
           My Activity
         </h1>
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="text-center py-12">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#cc0000] border-r-transparent"></div>
+            <p className="mt-4 text-[#657285]">Loading your activity...</p>
+          </div>
+        )}
+
         {/* Stats Grid */}
+        {!isLoading && (
+        <>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
             <div className="flex items-center gap-4">
@@ -117,7 +127,7 @@ export default function ActivityPage() {
                   Total Comments
                 </p>
                 <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                  {isLoading ? '...' : commentsCount}
+                  {commentsCount}
                 </p>
               </div>
             </div>
@@ -133,7 +143,7 @@ export default function ActivityPage() {
                   Saved
                 </p>
                 <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                  {isLoading ? '...' : savedCount}
+                  {savedCount}
                 </p>
               </div>
             </div>
@@ -149,7 +159,7 @@ export default function ActivityPage() {
                   History
                 </p>
                 <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                  {isLoading ? '...' : historyCount}
+                  {historyCount}
                 </p>
               </div>
             </div>
@@ -161,9 +171,7 @@ export default function ActivityPage() {
           <h3 className="text-[#020a1c] text-[18px] leading-[24px] font-bold mb-4">
             Recent Comments
           </h3>
-          {isLoading ? (
-            <p className="text-[#657285] text-[14px]">Loading comments...</p>
-          ) : recentComments.length === 0 ? (
+          {recentComments.length === 0 ? (
             <p className="text-[#657285] text-[14px]">No comments yet. Start engaging with articles!</p>
           ) : (
             <div className="space-y-4">
@@ -180,6 +188,8 @@ export default function ActivityPage() {
             </div>
           )}
         </div>
+        </>
+        )}
       </div>
     </DashboardLayout>
   );
