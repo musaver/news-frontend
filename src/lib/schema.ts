@@ -95,3 +95,11 @@ export const comments = mysqlTable('comments', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow(),
 });
+
+// ✅ Saved Articles table (for users to save articles for later reading)
+export const savedArticles = mysqlTable('saved_articles', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  userId: varchar('user_id', { length: 255 }).notNull(), // Foreign key to user.id
+  articleId: varchar('article_id', { length: 255 }).notNull(), // Foreign key to articles.id
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
