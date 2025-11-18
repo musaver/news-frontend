@@ -103,3 +103,13 @@ export const savedArticles = mysqlTable('saved_articles', {
   articleId: varchar('article_id', { length: 255 }).notNull(), // Foreign key to articles.id
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
+
+// ✅ Article Visits table (for tracking article detail page visits)
+export const articleVisits = mysqlTable('article_visits', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  articleId: varchar('article_id', { length: 255 }).notNull(), // Foreign key to articles.id
+  userId: varchar('user_id', { length: 255 }), // Foreign key to user.id (nullable for anonymous visits)
+  visitedAt: timestamp('visited_at').notNull().defaultNow(),
+  ipAddress: varchar('ip_address', { length: 45 }), // IPv4 or IPv6 address
+  userAgent: text('user_agent'), // Browser and device information
+});

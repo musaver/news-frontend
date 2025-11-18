@@ -12,6 +12,7 @@ import { eq, desc, and, ne } from 'drizzle-orm';
 import { formatDate } from '@/types/article';
 import CommentsSection from '@/components/comments/CommentsSection';
 import SaveButton from '@/components/SaveButton';
+import VisitTracker from '@/components/VisitTracker';
 
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
@@ -192,6 +193,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
   return (
     <>
       <Header categories={allCategories} />
+      <VisitTracker articleId={article.id} />
 
       <main>
         <div className="max-w-[1320px] mx-auto px-6 py-10">
