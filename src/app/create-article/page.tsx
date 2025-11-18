@@ -7,6 +7,7 @@ import {
   Footer,
 } from '@/components/homepage';
 import TiptapEditor from '@/components/TiptapEditor';
+import { useCategories } from '@/hooks/useCategories';
 
 // SVG Icons
 const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -44,6 +45,7 @@ const EyeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 export default function CreateArticlePage() {
   const router = useRouter();
+  const { categories } = useCategories();
   const [formData, setFormData] = useState({
     title: '',
     category: 'Politics',
@@ -115,7 +117,7 @@ export default function CreateArticlePage() {
     router.push('/author-dashboard/preview-article');
   };
 
-  const categories = [
+  const categoryOptions = [
     'Politics',
     'Tech',
     'Entertainment',
@@ -130,8 +132,8 @@ export default function CreateArticlePage() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
-      
+      <Header categories={categories} />
+
       <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
@@ -189,7 +191,7 @@ export default function CreateArticlePage() {
                     onChange={(e) => handleInputChange('category', e.target.value)}
                     className="w-full px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
                   >
-                    {categories.map(cat => (
+                    {categoryOptions.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>

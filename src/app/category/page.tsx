@@ -109,16 +109,35 @@ const mockImages = {
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
 
+// Fetch all categories
+async function fetchCategories() {
+  try {
+    const result = await db
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
+      .from(categories)
+      .orderBy(categories.name);
+    return result;
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
 // Main App Component
 export default async function CategoryPage() {
   // Fetch articles for the category page
   const latestArticles = await fetchLatestArticles(10);
   const financeArticles = await fetchArticlesByCategory('Finance', 8);
   const podcastArticles = await fetchArticlesByCategory('Podcasts', 3);
+  const allCategories = await fetchCategories();
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={allCategories} />
 
       
       

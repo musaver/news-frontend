@@ -4,8 +4,10 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { Header, Footer } from '@/components/homepage';
 import Link from 'next/link';
+import { useCategories } from '@/hooks/useCategories';
 
 export default function LoginPage() {
+  const { categories } = useCategories();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,7 +19,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={categories} />
       <main>
         <div className="max-w-md mx-auto px-4 py-8">
           <h1 className="text-2xl font-semibold mb-6">Login</h1>

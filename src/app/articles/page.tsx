@@ -7,6 +7,7 @@ import {
   Header,
   Footer,
 } from '@/components/homepage';
+import { useCategories } from '@/hooks/useCategories';
 
 // SVG Icons
 const EyeIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -139,6 +140,7 @@ interface Article {
 
 export default function ArticlesPage() {
   const router = useRouter();
+  const { categories } = useCategories();
   const [articleFilter, setArticleFilter] = useState('published');
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
@@ -213,7 +215,7 @@ export default function ArticlesPage() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
+      <Header categories={categories} />
 
       {/* Secondary Dashboard Header */}
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] z-40">

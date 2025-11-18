@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Header,
   Footer,
@@ -9,10 +9,33 @@ import Image from 'next/image';
 import imgAboutUs from '@/assets/6d00fa3c2d7790e1cd6b7cdb3f89652742305c58.png';
 import { imgContainer as imgAboutUsWatermark } from "@/imports/svg-a7b80";
 
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 export default function AboutUsPage() {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await fetch('/api/categories');
+        const data = await response.json();
+        if (data.success) {
+          setCategories(data.categories);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    }
+    fetchCategories();
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={categories} />
       
       <main>
         

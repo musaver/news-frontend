@@ -6,11 +6,14 @@ import {
   Footer,
 } from '@/components/homepage';
 import { imgContainer as imgCareersWatermark } from "@/imports/svg-a7b80";
+import { useCategories } from '@/hooks/useCategories';
 
 export default function CareersPage() {
+  const { categories } = useCategories();
+
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={categories} />
 
       <main>
 
