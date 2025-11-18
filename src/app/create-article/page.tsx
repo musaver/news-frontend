@@ -1,12 +1,18 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Header,
   Footer,
 } from '@/components/homepage';
 import TiptapEditor from '@/components/TiptapEditor';
+
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 // SVG Icons
 const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -44,6 +50,23 @@ const EyeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 export default function CreateArticlePage() {
   const router = useRouter();
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategoriesData = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        const data = await response.json();
+        if (data.success) {
+          setCategories(data.categories);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategoriesData();
+  }, []);
+
   const [formData, setFormData] = useState({
     title: '',
     category: 'Politics',
@@ -130,7 +153,7 @@ export default function CreateArticlePage() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
+      <Header categories={categories} />
       
       <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
