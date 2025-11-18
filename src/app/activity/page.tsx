@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DashboardLayout } from '@/components/homepage';
 
 // SVG Icons
@@ -10,23 +10,23 @@ const MessageSquareIcon = ({ className = "w-6 h-6" }: { className?: string }) =>
   </svg>
 );
 
-const HeartIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+const BookmarkIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
   </svg>
 );
 
-const Share2Icon = ({ className = "w-6 h-6" }: { className?: string }) => (
+const ClockIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <circle cx="18" cy="5" r="3"/>
-    <circle cx="6" cy="12" r="3"/>
-    <circle cx="18" cy="19" r="3"/>
-    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
   </svg>
 );
 
 export default function ActivityPage() {
+  const [savedCount, setSavedCount] = useState<number>(0);
+  const [historyCount, setHistoryCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const recentComments = [
     {
       id: 1,
@@ -47,6 +47,35 @@ export default function ActivityPage() {
       time: "5 days ago"
     }
   ];
+
+  // Fetch saved articles and history counts
+  useEffect(() => {
+    async function fetchCounts() {
+      try {
+        setIsLoading(true);
+
+        // Fetch saved articles count
+        const savedResponse = await fetch('/api/saved-articles');
+        if (savedResponse.ok) {
+          const savedData = await savedResponse.json();
+          setSavedCount(savedData.savedArticles?.length || 0);
+        }
+
+        // Fetch article visits count
+        const visitsResponse = await fetch('/api/article-visits');
+        if (visitsResponse.ok) {
+          const visitsData = await visitsResponse.json();
+          setHistoryCount(visitsData.visits?.length || 0);
+        }
+      } catch (error) {
+        console.error('Error fetching counts:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchCounts();
+  }, []);
 
   return (
     <DashboardLayout activeTab="activity">
@@ -76,15 +105,15 @@ export default function ActivityPage() {
 
           <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-                <HeartIcon className="w-6 h-6 text-pink-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <BookmarkIcon className="w-6 h-6 text-blue-600" />
               </div>
               <div>
                 <p className="text-[#657285] text-[13px] leading-[18px]">
-                  Articles Liked
+                  Saved
                 </p>
                 <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                  132
+                  {isLoading ? '...' : savedCount}
                 </p>
               </div>
             </div>
@@ -92,15 +121,15 @@ export default function ActivityPage() {
 
           <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Share2Icon className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <ClockIcon className="w-6 h-6 text-purple-600" />
               </div>
               <div>
                 <p className="text-[#657285] text-[13px] leading-[18px]">
-                  Articles Shared
+                  History
                 </p>
                 <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                  28
+                  {isLoading ? '...' : historyCount}
                 </p>
               </div>
             </div>
