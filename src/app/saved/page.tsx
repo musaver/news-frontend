@@ -105,8 +105,9 @@ export default function SavedPage() {
   if (isLoading || status === 'loading') {
     return (
       <DashboardLayout activeTab="saved">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-[#657285] text-[16px]">Loading saved articles...</div>
+        <div className="text-center py-12">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#cc0000] border-r-transparent"></div>
+          <p className="mt-4 text-[#657285]">Loading saved articles...</p>
         </div>
       </DashboardLayout>
     );
