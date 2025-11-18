@@ -90,7 +90,7 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
       <Header />
       
       {/* Secondary Dashboard Header */}
-      <div className="fixed top-16 md:top-[104px] left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] z-40">
+      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] z-40">
         <div className="flex items-center justify-between px-6 h-16">
           <h2 className="text-[#020a1c] text-[18px] leading-[24px] font-bold">
             User Dashboard
@@ -121,7 +121,7 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
       </div>
 
       {/* Tab Navigation */}
-      <div className="fixed top-32 md:top-[168px] left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
+      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
           <div className="flex items-center justify-center gap-2 px-4 py-4 overflow-x-auto">
             {tabs.map(({ id, icon: Icon, label, path }) => (
@@ -146,7 +146,7 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
       </div>
 
       {/* Main Content */}
-      <main className="pt-44 md:pt-[224px]">
+      <main className="">
         <div className="p-6 lg:p-8 max-w-7xl mx-auto">
           {children}
         </div>
