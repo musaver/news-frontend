@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { Header, Footer } from '@/components/homepage';
+import { useCategories } from '@/hooks/useCategories';
 
 export default function RegisterPage() {
+  const { categories } = useCategories();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -69,7 +71,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={categories} />
       <main>
         <div className="max-w-md mx-auto px-4 py-8">
           <h1 className="text-2xl font-semibold mb-6">Register</h1>
