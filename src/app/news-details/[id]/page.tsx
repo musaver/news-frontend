@@ -10,6 +10,7 @@ import { db } from '@/lib/db';
 import { articles, user, categories } from '@/lib/schema';
 import { eq, desc, and, ne } from 'drizzle-orm';
 import { formatDate } from '@/types/article';
+import CommentsSection from '@/components/comments/CommentsSection';
 
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
@@ -392,6 +393,9 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                   </div>
                 </div>
               )}
+
+              {/* Comments Section */}
+              <CommentsSection articleId={article.id} />
             </div>
 
             {/* Sidebar */}

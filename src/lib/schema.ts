@@ -84,3 +84,14 @@ export const articles = mysqlTable('articles', {
   updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow(),
   publishedAt: datetime('published_at'),
 });
+
+// ✅ Comments table (for comments on articles with nested replies support)
+export const comments = mysqlTable('comments', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  articleId: varchar('article_id', { length: 255 }).notNull(), // Foreign key to articles.id
+  userId: varchar('user_id', { length: 255 }).notNull(), // Foreign key to user.id
+  parentId: varchar('parent_id', { length: 255 }), // Self-referencing for replies (null for top-level comments)
+  content: text('content').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow(),
+});
