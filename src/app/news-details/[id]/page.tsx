@@ -11,6 +11,7 @@ import { articles, user, categories } from '@/lib/schema';
 import { eq, desc, and, ne } from 'drizzle-orm';
 import { formatDate } from '@/types/article';
 import CommentsSection from '@/components/comments/CommentsSection';
+import SaveButton from '@/components/SaveButton';
 
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
@@ -288,6 +289,9 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                 {/* Social Share Icons - Left Side (Sticky) */}
                 <div className="hidden lg:block">
                   <div className="sticky top-32 flex flex-col gap-4">
+                    {/* Save Button */}
+                    <SaveButton articleId={article.id} />
+
                     {/* Facebook */}
                     <button className="w-10 h-10 rounded-full border border-[rgba(203,213,225,0.35)] flex items-center justify-center hover:bg-[#f7fafc] transition-colors">
                       <svg className="w-5 h-5 text-[#657285]" fill="currentColor" viewBox="0 0 24 24">
