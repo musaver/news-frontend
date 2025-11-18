@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { Header, Footer } from '@/components/homepage';
 import Link from 'next/link';
+import { fetchCategories } from '@/lib/fetchCategories';
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -12,9 +13,11 @@ export default async function DashboardPage() {
     redirect('/register');
   }
 
+  const allCategories = await fetchCategories();
+
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header categories={allCategories} />
       <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="bg-white rounded-lg shadow-md p-6">

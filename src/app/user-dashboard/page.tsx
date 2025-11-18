@@ -1,7 +1,13 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header, Footer } from '@/components/homepage';
+
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 // SVG Icons (matching Vite exactly)
 const HomeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -85,6 +91,22 @@ const Share2Icon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 export default function UserDashboardPage() {
   const [activeTab, setActiveTab] = useState('feed');
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategoriesData = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        const data = await response.json();
+        if (data.success) {
+          setCategories(data.categories);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategoriesData();
+  }, []);
   
   const userData = {
     name: 'Sarah Johnson',
@@ -131,7 +153,7 @@ export default function UserDashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
+      <Header categories={categories} />
 
       {/* Tab Navigation */}
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
