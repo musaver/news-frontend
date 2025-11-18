@@ -138,7 +138,7 @@ export default function CreateArticlePage() {
     router.push('/author-dashboard/preview-article');
   };
 
-  const categories = [
+  const categoryOptions = [
     'Politics',
     'Tech',
     'Entertainment',
@@ -212,7 +212,7 @@ export default function CreateArticlePage() {
                     onChange={(e) => handleInputChange('category', e.target.value)}
                     className="w-full px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
                   >
-                    {categories.map(cat => (
+                    {categoryOptions.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>
