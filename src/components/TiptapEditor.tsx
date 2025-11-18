@@ -291,7 +291,6 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           background-color: #f7fafc;
           padding: 0.2em 0.4em;
           border-radius: 3px;
-          font-family: monospace;
           font-size: 0.9em;
         }
 
