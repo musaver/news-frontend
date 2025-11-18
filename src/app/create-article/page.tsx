@@ -6,6 +6,7 @@ import {
   Header,
   Footer,
 } from '@/components/homepage';
+import TiptapEditor from '@/components/TiptapEditor';
 
 // SVG Icons
 const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -306,14 +307,13 @@ export default function CreateArticlePage() {
                 <label className="text-[#020a1c] text-[14px] font-medium mb-2 block">
                   Article Content *
                 </label>
-                <textarea
+                <TiptapEditor
                   value={formData.content}
-                  onChange={(e) => handleInputChange('content', e.target.value)}
-                  placeholder="Write your article content here... Use markdown for formatting."
-                  className="w-full px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors min-h-[400px]"
+                  onChange={(value) => handleInputChange('content', value)}
+                  placeholder="Write your article content here... Use the toolbar for rich text formatting."
                 />
                 <p className="text-[#657285] text-[12px] mt-1">
-                  {formData.content.split(' ').filter(w => w).length} words
+                  {formData.content.replace(/<[^>]*>/g, '').split(' ').filter(w => w).length} words
                 </p>
               </div>
             </div>
