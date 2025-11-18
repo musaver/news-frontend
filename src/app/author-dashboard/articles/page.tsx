@@ -190,7 +190,7 @@ export default function AuthorArticlesPage() {
       <Header />
 
       {/* Secondary Dashboard Header */}
-      <div className="fixed top-16 md:top-[104px] left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] z-40">
+      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] z-40">
         <div className="flex items-center justify-between px-6 h-16">
           <h2 className="text-[#020a1c] text-[18px] leading-[24px] font-bold">
             Author Dashboard
@@ -221,7 +221,7 @@ export default function AuthorArticlesPage() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="fixed top-32 md:top-[168px] left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
+      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
           <div className="flex items-center justify-center gap-2 px-4 py-4 overflow-x-auto">
             <Link href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
@@ -257,7 +257,7 @@ export default function AuthorArticlesPage() {
         </div>
       </div>
 
-      <main className="pt-44 md:pt-[224px]">
+      <main className="">
         <div className="p-6 lg:p-8 max-w-7xl mx-auto">
           <div className="space-y-6">
             <div className="flex items-center justify-between">
