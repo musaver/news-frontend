@@ -86,37 +86,6 @@ export default function AuthorCommentsPage() {
     <div className="min-h-screen bg-[#f7fafc]">
       <Header />
 
-      {/* Secondary Dashboard Header */}
-      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] z-40">
-        <div className="flex items-center justify-between px-6 h-16">
-          <h2 className="text-[#020a1c] text-[18px] leading-[24px] font-bold">
-            Author Dashboard
-          </h2>
-          <div className="hidden md:flex flex-1 max-w-md mx-8">
-            <div className="relative w-full">
-              <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#657285]" />
-              <input
-                placeholder="Search articles..."
-                className="w-full pl-10 pr-3 h-10 bg-[#f7fafc] border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
-              />
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="relative p-2 hover:bg-[#f7fafc] rounded-lg transition-colors">
-              <BellIcon className="w-5 h-5 text-[#657285]" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-[#cc0000] rounded-full"></span>
-            </button>
-            <div className="flex items-center gap-3 cursor-pointer hover:bg-[#f7fafc] p-2 rounded-lg transition-colors">
-              <img src={authorData.avatar} alt={authorData.name} className="w-8 h-8 rounded-full object-cover" />
-              <div className="hidden md:block">
-                <p className="text-[#020a1c] text-[13px] leading-[18px] font-medium">{authorData.name}</p>
-              </div>
-              <ChevronDownIcon className="w-4 h-4 text-[#657285]" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Tab Navigation */}
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
