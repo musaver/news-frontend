@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, User } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import svgPaths from '@/imports/svg-ykc7st1had';
 import NewsFlashLogo from './NewsFlashLogo';
 
@@ -36,6 +37,7 @@ interface HeaderProps {
 }
 
 const Header = ({ categories = [] }: HeaderProps) => {
+  const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -128,12 +130,20 @@ const Header = ({ categories = [] }: HeaderProps) => {
                 </Link>
               ))}
             </nav>
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
-            >
-              <Search className="w-4 h-4 text-white/80" />
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                href={session ? '/dashboard' : '/register'}
+                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+              >
+                <User className="w-4 h-4 text-white/80" />
+              </Link>
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+              >
+                <Search className="w-4 h-4 text-white/80" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -155,13 +165,19 @@ const Header = ({ categories = [] }: HeaderProps) => {
         </Link>
         
         <div className="flex items-center gap-2">
-          <button 
+          <Link
+            href={session ? '/dashboard' : '/register'}
+            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+          >
+            <User className="w-[18px] h-[18px] text-white/80" />
+          </Link>
+          <button
             onClick={() => setIsSearchOpen(true)}
             className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
           >
             <Search className="w-[18px] h-[18px] text-white/80" />
           </button>
-          <button 
+          <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="w-10 h-10 bg-white rounded-full flex items-center justify-center"
           >
