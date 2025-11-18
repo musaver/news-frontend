@@ -23,32 +23,43 @@ const ClockIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
   </svg>
 );
 
+interface Comment {
+  id: string;
+  articleId: string;
+  articleTitle: string;
+  content: string;
+  createdAt: string;
+}
+
+// Helper function to format the time since comment was created
+function getTimeAgo(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInSeconds = Math.floor(diffInMs / 1000);
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInDays > 0) {
+    return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+  } else if (diffInHours > 0) {
+    return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+  } else if (diffInMinutes > 0) {
+    return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+  } else {
+    return 'Just now';
+  }
+}
+
 export default function ActivityPage() {
   const [savedCount, setSavedCount] = useState<number>(0);
   const [historyCount, setHistoryCount] = useState<number>(0);
+  const [commentsCount, setCommentsCount] = useState<number>(0);
+  const [recentComments, setRecentComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const recentComments = [
-    {
-      id: 1,
-      comment: "Great article! Really insightful perspective on the current political climate.",
-      article: "Amber Hightower's Message of Unity",
-      time: "2 days ago"
-    },
-    {
-      id: 2,
-      comment: "This is exactly what we need right now. Well written and thoroughly researched.",
-      article: "AI Revolution Drives Tech Innovation",
-      time: "3 days ago"
-    },
-    {
-      id: 3,
-      comment: "Fascinating read! The future of streaming looks incredibly promising.",
-      article: "Streaming Services Unveil New Features",
-      time: "5 days ago"
-    }
-  ];
 
-  // Fetch saved articles and history counts
+  // Fetch saved articles, history counts, and user comments
   useEffect(() => {
     async function fetchCounts() {
       try {
@@ -66,6 +77,15 @@ export default function ActivityPage() {
         if (visitsResponse.ok) {
           const visitsData = await visitsResponse.json();
           setHistoryCount(visitsData.visits?.length || 0);
+        }
+
+        // Fetch user comments
+        const commentsResponse = await fetch('/api/user-comments');
+        if (commentsResponse.ok) {
+          const commentsData = await commentsResponse.json();
+          setCommentsCount(commentsData.totalComments || 0);
+          // Get the 3 most recent comments
+          setRecentComments(commentsData.comments?.slice(0, 3) || []);
         }
       } catch (error) {
         console.error('Error fetching counts:', error);
@@ -97,7 +117,7 @@ export default function ActivityPage() {
                   Total Comments
                 </p>
                 <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                  47
+                  {isLoading ? '...' : commentsCount}
                 </p>
               </div>
             </div>
@@ -141,18 +161,24 @@ export default function ActivityPage() {
           <h3 className="text-[#020a1c] text-[18px] leading-[24px] font-bold mb-4">
             Recent Comments
           </h3>
-          <div className="space-y-4">
-            {recentComments.map(item => (
-              <div key={item.id} className="p-4 bg-[#f7fafc] rounded-lg">
-                <p className="text-[#020a1c] text-[14px] leading-[22px] mb-2">
-                  "{item.comment}"
-                </p>
-                <p className="text-[#657285] text-[12px]">
-                  On: {item.article} • {item.time}
-                </p>
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <p className="text-[#657285] text-[14px]">Loading comments...</p>
+          ) : recentComments.length === 0 ? (
+            <p className="text-[#657285] text-[14px]">No comments yet. Start engaging with articles!</p>
+          ) : (
+            <div className="space-y-4">
+              {recentComments.map(item => (
+                <div key={item.id} className="p-4 bg-[#f7fafc] rounded-lg">
+                  <p className="text-[#020a1c] text-[14px] leading-[22px] mb-2">
+                    "{item.content}"
+                  </p>
+                  <p className="text-[#657285] text-[12px]">
+                    On: {item.articleTitle || 'Untitled Article'} • {getTimeAgo(item.createdAt)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </DashboardLayout>
