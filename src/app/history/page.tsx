@@ -1,53 +1,86 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { DashboardLayout } from '@/components/homepage';
 
+interface ArticleVisit {
+  id: string;
+  articleId: string;
+  visitedAt: Date;
+  article: {
+    id: string;
+    title: string;
+    excerpt: string | null;
+    coverImage: string | null;
+    publishedAt: Date | null;
+    category: string;
+    categoryId: number;
+    author: {
+      id: string;
+      name: string | null;
+      image: string | null;
+    } | null;
+  };
+}
+
 export default function HistoryPage() {
-  const readingHistory = [
-    {
-      id: 1,
-      title: "Senator Grace Hamilton Gains Momentum as Youth Support Surges",
-      category: 'Politics',
-      readDate: '2 hours ago',
-      progress: 100
-    },
-    {
-      id: 2,
-      title: "Melissa Kent's Resilient Campaign Rebounds Amid Challenging Polls",
-      category: 'Politics',
-      readDate: '5 hours ago',
-      progress: 75
-    },
-    {
-      id: 3,
-      title: "Ava Mitchell's Bold Economic Vision Resonates with Voters",
-      category: 'Politics',
-      readDate: '1 day ago',
-      progress: 100
-    },
-    {
-      id: 4,
-      title: 'AI Revolution Drives Tech Innovation in 2024',
-      category: 'Tech',
-      readDate: '2 days ago',
-      progress: 60
-    },
-    {
-      id: 5,
-      title: 'Streaming Services Unveil Innovative Features',
-      category: 'Entertainment',
-      readDate: '3 days ago',
-      progress: 100
-    },
-    {
-      id: 6,
-      title: 'Global Markets React to Economic Policy Changes',
-      category: 'Business',
-      readDate: '4 days ago',
-      progress: 45
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [visits, setVisits] = useState<ArticleVisit[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Redirect to login if not authenticated
+    if (status === 'unauthenticated') {
+      router.push('/login');
+      return;
     }
-  ];
+
+    // Fetch visit history once authenticated
+    if (status === 'authenticated') {
+      fetchVisitHistory();
+    }
+  }, [status, router]);
+
+  const fetchVisitHistory = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await fetch('/api/article-visits');
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch visit history');
+      }
+
+      const data = await response.json();
+      setVisits(data.visits || []);
+    } catch (err) {
+      console.error('Error fetching visit history:', err);
+      setError('Failed to load your reading history. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formatTimeAgo = (date: Date) => {
+    const now = new Date();
+    const visitDate = new Date(date);
+    const diffInSeconds = Math.floor((now.getTime() - visitDate.getTime()) / 1000);
+
+    if (diffInSeconds < 60) return 'Just now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+    if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+
+    return visitDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
+  const handleViewArticle = (articleId: string) => {
+    router.push(`/news/${articleId}`);
+  };
 
   return (
     <DashboardLayout activeTab="history">
@@ -57,42 +90,62 @@ export default function HistoryPage() {
           Reading History
         </h1>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#cc0000] border-r-transparent"></div>
+            <p className="mt-4 text-[#657285]">Loading your reading history...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && !loading && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-800">{error}</p>
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && !error && visits.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-[#657285] text-lg">No reading history yet.</p>
+            <p className="text-[#657285] text-sm mt-2">Start reading articles to see your history here.</p>
+          </div>
+        )}
+
         {/* List of History Items */}
-        <div className="space-y-4">
-          {readingHistory.map(article => (
-            <div key={article.id} className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <span className="inline-block px-3 py-1 text-xs font-medium text-[#657285] bg-white border border-[rgba(203,213,225,0.35)] rounded mb-2">
-                    {article.category}
-                  </span>
-                  <h3 className="text-[#020a1c] text-[18px] leading-[26px] font-bold mb-2">
-                    {article.title}
-                  </h3>
-                  <p className="text-[#657285] text-[13px] leading-[18px] mb-3">
-                    Read {article.readDate}
-                  </p>
-                  
-                  {/* Progress Bar */}
-                  <div className="flex items-center gap-3">
-                    <div className="flex-1 h-2 bg-[#f7fafc] rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-[#cc0000] transition-all"
-                        style={{ width: `${article.progress}%` }}
-                      />
-                    </div>
-                    <span className="text-[#657285] text-[12px] font-medium">
-                      {article.progress}%
+        {!loading && !error && visits.length > 0 && (
+          <div className="space-y-4">
+            {visits.map(visit => (
+              <div key={visit.id} className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <span className="inline-block px-3 py-1 text-xs font-medium text-[#657285] bg-white border border-[rgba(203,213,225,0.35)] rounded mb-2">
+                      {visit.article.category}
                     </span>
+                    <h3 className="text-[#020a1c] text-[18px] leading-[26px] font-bold mb-2">
+                      {visit.article.title}
+                    </h3>
+                    {visit.article.excerpt && (
+                      <p className="text-[#657285] text-[14px] leading-[20px] mb-2 line-clamp-2">
+                        {visit.article.excerpt}
+                      </p>
+                    )}
+                    <p className="text-[#657285] text-[13px] leading-[18px]">
+                      Visited {formatTimeAgo(visit.visitedAt)}
+                    </p>
                   </div>
+                  <button
+                    onClick={() => handleViewArticle(visit.articleId)}
+                    className="px-3 py-1.5 text-[13px] font-medium border border-[rgba(203,213,225,0.35)] rounded-md text-[#020a1c] hover:bg-[#f7fafc] transition-colors whitespace-nowrap"
+                  >
+                    View Article
+                  </button>
                 </div>
-                <button className="px-3 py-1.5 text-[13px] font-medium border border-[rgba(203,213,225,0.35)] rounded-md text-[#020a1c] hover:bg-[#f7fafc] transition-colors whitespace-nowrap">
-                  {article.progress === 100 ? 'Read Again' : 'Continue'}
-                </button>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
