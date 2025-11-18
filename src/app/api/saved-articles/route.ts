@@ -20,25 +20,20 @@ export async function GET(req: Request) {
     }
 
     // Fetch all saved articles for this user with article details
-    const userSavedArticles = await db
+    const results = await db
       .select({
         id: savedArticles.id,
         articleId: savedArticles.articleId,
         savedAt: savedArticles.createdAt,
-        article: {
-          id: articles.id,
-          title: articles.title,
-          excerpt: articles.excerpt,
-          coverImage: articles.coverImage,
-          publishedAt: articles.publishedAt,
-          category: categories.name,
-          categoryId: categories.id,
-          author: {
-            id: user.id,
-            name: user.name,
-            image: user.image,
-          },
-        },
+        articleTitle: articles.title,
+        articleExcerpt: articles.excerpt,
+        articleCoverImage: articles.coverImage,
+        articlePublishedAt: articles.publishedAt,
+        categoryName: categories.name,
+        categoryId: categories.id,
+        authorId: user.id,
+        authorName: user.name,
+        authorImage: user.image,
       })
       .from(savedArticles)
       .innerJoin(articles, eq(savedArticles.articleId, articles.id))
@@ -46,6 +41,27 @@ export async function GET(req: Request) {
       .leftJoin(user, eq(articles.authorId, user.id))
       .where(and(eq(savedArticles.userId, session.user.id), eq(articles.status, 'published')))
       .orderBy(desc(savedArticles.createdAt));
+
+    // Transform the flat structure into the nested structure expected by the frontend
+    const userSavedArticles = results.map(row => ({
+      id: row.id,
+      articleId: row.articleId,
+      savedAt: row.savedAt,
+      article: {
+        id: row.articleId,
+        title: row.articleTitle,
+        excerpt: row.articleExcerpt,
+        coverImage: row.articleCoverImage,
+        publishedAt: row.articlePublishedAt,
+        category: row.categoryName,
+        categoryId: row.categoryId,
+        author: row.authorId ? {
+          id: row.authorId,
+          name: row.authorName,
+          image: row.authorImage,
+        } : null,
+      },
+    }));
 
     return NextResponse.json(
       {
