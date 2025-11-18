@@ -147,6 +147,7 @@ export default function ArticlesPage() {
   const router = useRouter();
   const [articleFilter, setArticleFilter] = useState('published');
   const [articles, setArticles] = useState<Article[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -157,7 +158,20 @@ export default function ArticlesPage() {
 
   useEffect(() => {
     fetchArticles();
+    fetchCategoriesData();
   }, []);
+
+  const fetchCategoriesData = async () => {
+    try {
+      const response = await fetch('/api/categories');
+      const data = await response.json();
+      if (data.success) {
+        setCategories(data.categories);
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
 
   const fetchArticles = async () => {
     try {
