@@ -70,7 +70,7 @@ const ChevronDownIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  activeTab: 'feed' | 'saved' | 'history' | 'activity' | 'notifications' | 'preferences';
+  activeTab: 'activity' | 'saved' | 'history' | 'preferences';
 }
 
 export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
@@ -99,11 +99,9 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
   };
 
   const tabs = [
-    { id: 'feed', icon: HomeIcon, label: 'My Feed', path: '/user-dashboard' },
+    { id: 'activity', icon: MessageSquareIcon, label: 'Dashboard', path: '/dashboard' },
     { id: 'saved', icon: BookmarkIcon, label: 'Saved', path: '/saved' },
     { id: 'history', icon: ClockIcon, label: 'History', path: '/history' },
-    { id: 'activity', icon: MessageSquareIcon, label: 'Activity', path: '/dashboard' },
-    { id: 'notifications', icon: BellIcon, label: 'Notifications', path: '/notifications' },
     { id: 'preferences', icon: SettingsIcon, label: 'Preferences', path: '/preferences' }
   ];
 
