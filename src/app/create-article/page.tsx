@@ -2,10 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
+import { DashboardLayout } from '@/components/homepage';
 import TiptapEditor from '@/components/TiptapEditor';
 
 interface Category {
@@ -152,11 +149,8 @@ export default function CreateArticlePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f7fafc]">
-      <Header categories={categories} />
-      
-      <main>
-        <div className="max-w-4xl mx-auto px-4 py-8">
+    <DashboardLayout activeTab="articles">
+      <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="bg-white rounded-[12px] border border-[rgba(203,213,225,0.35)] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-[rgba(203,213,225,0.35)]">
@@ -371,10 +365,7 @@ export default function CreateArticlePage() {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </DashboardLayout>
   );
 }
 

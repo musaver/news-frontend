@@ -2,10 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
+import { DashboardLayout } from '@/components/homepage';
 
 // SVG Icons
 const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -48,20 +45,19 @@ export default function PreviewArticlePage() {
 
   if (!articleData) {
     return (
-      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-[#657285] text-[16px]">Loading preview...</p>
+      <DashboardLayout activeTab="articles">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <p className="text-[#657285] text-[16px]">Loading preview...</p>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
-      
-      <main>
-        <div className="max-w-4xl mx-auto px-4 py-8">
+    <DashboardLayout activeTab="articles">
+      <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Preview Header */}
           <div className="bg-white rounded-[12px] border border-[rgba(203,213,225,0.35)] p-4 mb-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -214,10 +210,7 @@ export default function PreviewArticlePage() {
             </button>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </DashboardLayout>
   );
 }
 
