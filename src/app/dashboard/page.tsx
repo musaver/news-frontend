@@ -464,7 +464,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-[28px] leading-[36px] font-bold mb-2">
-                  Welcome back, {userData.name.split(' ')[0]}! 👋
+                  Welcome back, {defaultUserData.name.split(' ')[0]}! 👋
                 </h1>
                 <p className="text-white/90 text-[15px] leading-[24px]">
                   Track your engagement and see your recent activity
@@ -472,7 +472,7 @@ export default function DashboardPage() {
               </div>
               <div className="hidden md:block bg-white/20 backdrop-blur-sm rounded-lg p-4">
                 <p className="text-white/80 text-[12px] mb-1">Reading Streak</p>
-                <p className="text-[32px] leading-[40px] font-bold">{userData.readingStreak} 🔥</p>
+                <p className="text-[32px] leading-[40px] font-bold">{defaultUserData.readingStreak} 🔥</p>
                 <p className="text-white/80 text-[11px]">days in a row</p>
               </div>
             </div>
