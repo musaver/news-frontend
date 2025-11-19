@@ -77,6 +77,15 @@ const BarChart3Icon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
+const LayoutDashboardIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="14" y="3" width="7" height="7" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="14" y="14" width="7" height="7" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="3" y="14" width="7" height="7" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
   activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications' | 'analytics' | 'comments';
@@ -113,7 +122,7 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
   const isAuthor = userType === 'author';
 
   const baseTabs = [
-    { id: 'activity', icon: MessageSquareIcon, label: 'Dashboard', path: '/dashboard' },
+    { id: 'activity', icon: LayoutDashboardIcon, label: 'Dashboard', path: '/dashboard' },
     { id: 'saved', icon: BookmarkIcon, label: 'Saved', path: '/saved' },
     { id: 'history', icon: ClockIcon, label: 'History', path: '/history' },
     { id: 'preferences', icon: SettingsIcon, label: 'Preferences', path: '/preferences' }
