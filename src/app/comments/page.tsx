@@ -14,6 +14,7 @@ interface Comment {
   userName: string;
   userImage: string | null;
   userId: string;
+  parentId: string | null;
 }
 
 export default function AuthorCommentsPage() {
@@ -131,6 +132,13 @@ export default function AuthorCommentsPage() {
                       </p>
                     </div>
                   </div>
+                  {comment.parentId && (
+                    <div className="mb-2">
+                      <span className="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 text-[11px] rounded">
+                        Reply
+                      </span>
+                    </div>
+                  )}
                   <p className="text-[#020a1c] text-[14px] leading-[22px] mb-2">
                     {comment.content}
                   </p>

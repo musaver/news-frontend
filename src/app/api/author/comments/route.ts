@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { articles, comments, user } from '@/lib/schema';
-import { eq, desc, and, isNull } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 
 export async function GET() {
   try {
@@ -26,7 +26,7 @@ export async function GET() {
 
     const authorId = session.user.id;
 
-    // Get all comments on author's articles (only top-level comments, not replies)
+    // Get all comments on author's articles (including replies)
     const authorComments = await db
       .select({
         id: comments.id,
@@ -37,16 +37,12 @@ export async function GET() {
         userName: user.name,
         userImage: user.image,
         userId: user.id,
+        parentId: comments.parentId,
       })
       .from(comments)
-      .innerJoin(articles, eq(comments.articleId, articles.id))
-      .innerJoin(user, eq(comments.userId, user.id))
-      .where(
-        and(
-          eq(articles.authorId, authorId),
-          isNull(comments.parentId) // Only get top-level comments
-        )
-      )
+      .leftJoin(articles, eq(comments.articleId, articles.id))
+      .leftJoin(user, eq(comments.userId, user.id))
+      .where(eq(articles.authorId, authorId))
       .orderBy(desc(comments.createdAt));
 
     return NextResponse.json(
