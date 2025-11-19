@@ -2,10 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
+import { DashboardLayout } from '@/components/homepage';
 import TiptapEditor from '@/components/TiptapEditor';
 
 // SVG Icons
@@ -171,39 +168,40 @@ export default function EditArticlePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000] mx-auto mb-4"></div>
-          <p className="text-[#657285]">Loading article...</p>
+      <DashboardLayout activeTab="articles">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000] mx-auto mb-4"></div>
+            <p className="text-[#657285]">Loading article...</p>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
-        <div className="text-center">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
-            <p className="text-red-600 mb-4">{error}</p>
-            <button
-              onClick={() => router.push('/articles')}
-              className="px-4 py-2 bg-[#cc0000] text-white rounded-lg hover:bg-[#b30000] transition-colors"
-            >
-              Back to Articles
-            </button>
+      <DashboardLayout activeTab="articles">
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md">
+              <p className="text-red-600 mb-4">{error}</p>
+              <button
+                onClick={() => router.push('/articles')}
+                className="px-4 py-2 bg-[#cc0000] text-white rounded-lg hover:bg-[#b30000] transition-colors"
+              >
+                Back to Articles
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
-
-      <main>
-        <div className="max-w-4xl mx-auto px-4 py-8">
+    <DashboardLayout activeTab="articles">
+      <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="bg-white rounded-[12px] border border-[rgba(203,213,225,0.35)] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-[rgba(203,213,225,0.35)]">
@@ -429,9 +427,6 @@ export default function EditArticlePage() {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </DashboardLayout>
   );
 }
