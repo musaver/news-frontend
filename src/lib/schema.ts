@@ -7,6 +7,7 @@ import {
   json,
   timestamp,
   int,
+  boolean,
 } from 'drizzle-orm/mysql-core';
 
 // ✅ User table (required)
@@ -17,6 +18,14 @@ export const user = mysqlTable('user', {
   emailVerified: datetime('emailVerified'),
   image: text('image'),
   userType: varchar('user_type', { length: 50 }).notNull().default('user'), // 'user' or 'author'
+  bio: text('bio'),
+  // Notification preferences
+  emailNotifications: boolean('email_notifications').notNull().default(true),
+  authorNotifications: boolean('author_notifications').notNull().default(true),
+  weeklyNewsletter: boolean('weekly_newsletter').notNull().default(false),
+  commentReplies: boolean('comment_replies').notNull().default(true),
+  // Display settings
+  darkMode: boolean('dark_mode').notNull().default(false),
 });
 
 // ✅ Accounts table (OAuth support: Google, Facebook)

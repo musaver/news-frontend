@@ -15,14 +15,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if user is an author
-    if (session.user.userType !== 'author') {
-      return NextResponse.json(
-        { error: 'Forbidden. Only authors can upload images.' },
-        { status: 403 }
-      );
-    }
-
     const formData = await req.formData();
     const file = formData.get('file') as File;
 
