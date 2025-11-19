@@ -24,7 +24,9 @@ export async function GET() {
         name: user.name,
         email: user.email,
         image: user.image,
+        userType: user.userType,
         bio: user.bio,
+        authorDesignation: user.authorDesignation,
         emailNotifications: user.emailNotifications,
         authorNotifications: user.authorNotifications,
         weeklyNewsletter: user.weeklyNewsletter,
@@ -75,6 +77,7 @@ export async function PUT(req: Request) {
       name,
       image,
       bio,
+      authorDesignation,
       emailNotifications,
       authorNotifications,
       weeklyNewsletter,
@@ -87,6 +90,7 @@ export async function PUT(req: Request) {
     if (name !== undefined) updateData.name = name;
     if (image !== undefined) updateData.image = image;
     if (bio !== undefined) updateData.bio = bio;
+    if (authorDesignation !== undefined) updateData.authorDesignation = authorDesignation;
     if (emailNotifications !== undefined) updateData.emailNotifications = emailNotifications;
     if (authorNotifications !== undefined) updateData.authorNotifications = authorNotifications;
     if (weeklyNewsletter !== undefined) updateData.weeklyNewsletter = weeklyNewsletter;
@@ -106,7 +110,9 @@ export async function PUT(req: Request) {
         name: user.name,
         email: user.email,
         image: user.image,
+        userType: user.userType,
         bio: user.bio,
+        authorDesignation: user.authorDesignation,
         emailNotifications: user.emailNotifications,
         authorNotifications: user.authorNotifications,
         weeklyNewsletter: user.weeklyNewsletter,

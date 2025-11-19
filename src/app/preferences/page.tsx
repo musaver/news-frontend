@@ -24,7 +24,9 @@ interface UserPreferences {
   name: string | null;
   email: string;
   image: string | null;
+  userType: string;
   bio: string | null;
+  authorDesignation: string | null;
   emailNotifications: boolean;
   authorNotifications: boolean;
   weeklyNewsletter: boolean;
@@ -40,10 +42,12 @@ export default function PreferencesPage() {
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLDivElement>(null);
 
   // Form state
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
+  const [authorDesignation, setAuthorDesignation] = useState('');
   const [image, setImage] = useState<string | null>(null);
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [authorNotifications, setAuthorNotifications] = useState(true);
@@ -73,6 +77,7 @@ export default function PreferencesPage() {
         setUserData(data.user);
         setName(data.user.name || '');
         setBio(data.user.bio || '');
+        setAuthorDesignation(data.user.authorDesignation || '');
         setImage(data.user.image);
         setEmailNotifications(data.user.emailNotifications);
         setAuthorNotifications(data.user.authorNotifications);
@@ -136,6 +141,10 @@ export default function PreferencesPage() {
 
         if (updateResponse.ok) {
           setMessage({ type: 'success', text: 'Profile picture updated successfully!' });
+          // Scroll to success message
+          setTimeout(() => {
+            messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
         }
       }
     } catch (error) {
@@ -157,6 +166,7 @@ export default function PreferencesPage() {
         body: JSON.stringify({
           name,
           bio,
+          authorDesignation,
           emailNotifications,
           authorNotifications,
           weeklyNewsletter,
@@ -174,6 +184,11 @@ export default function PreferencesPage() {
       if (data.success) {
         setMessage({ type: 'success', text: 'Preferences saved successfully!' });
         setUserData(data.user);
+
+        // Scroll to success message
+        setTimeout(() => {
+          messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
 
         // Clear success message after 3 seconds
         setTimeout(() => setMessage(null), 3000);
@@ -216,7 +231,7 @@ export default function PreferencesPage() {
 
         {/* Message Alert */}
         {message && (
-          <div className={`p-4 rounded-lg ${message.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+          <div ref={messageRef} className={`p-4 rounded-lg ${message.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
             {message.text}
           </div>
         )}
@@ -310,6 +325,23 @@ export default function PreferencesPage() {
                 placeholder="Tell us about yourself..."
               />
             </div>
+
+            {/* Author Designation - Only show for authors */}
+            {userData?.userType === 'author' && (
+              <div>
+                <label className="text-[#020a1c] text-[14px] font-medium mb-2 block">
+                  Author Designation
+                </label>
+                <input
+                  type="text"
+                  value={authorDesignation}
+                  onChange={(e) => setAuthorDesignation(e.target.value)}
+                  className="w-full px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] focus:ring-1 focus:ring-[#cc0000] transition-colors"
+                  placeholder="e.g., Senior Editor, Tech Writer, Journalist"
+                />
+                <p className="text-[#657285] text-[12px] mt-1">Your professional title or role</p>
+              </div>
+            )}
 
             <button
               onClick={handleSavePreferences}
