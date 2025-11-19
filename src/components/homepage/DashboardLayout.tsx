@@ -70,7 +70,7 @@ const ChevronDownIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  activeTab: 'activity' | 'saved' | 'history' | 'preferences';
+  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications';
 }
 
 export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
