@@ -91,8 +91,34 @@ interface Comment {
   createdAt: string;
 }
 
+interface Article {
+  id: string;
+  title: string;
+  excerpt: string | null;
+  coverImage: string | null;
+  status: string;
+  publishedAt: Date | null;
+  createdAt: Date;
+  categoryName: string;
+}
+
+interface DashboardStats {
+  totalArticles: number;
+  totalViews: number;
+  totalComments: number;
+}
+
+interface UserData {
+  id: string;
+  name: string | null;
+  email: string;
+  image: string | null;
+  bio: string | null;
+  authorDesignation: string | null;
+}
+
 // Helper function to format the time since comment was created
-function getTimeAgo(dateString: string): string {
+function getTimeAgo(dateString: string | Date): string {
   const date = new Date(dateString);
   const now = new Date();
   const diffInMs = now.getTime() - date.getTime();
@@ -112,6 +138,17 @@ function getTimeAgo(dateString: string): string {
   }
 }
 
+// Helper function to format date
+function formatDate(dateString: string | Date | null): string {
+  if (!dateString) return 'Not published';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+}
+
 export default function DashboardPage() {
   const [savedCount, setSavedCount] = useState<number>(0);
   const [historyCount, setHistoryCount] = useState<number>(0);
@@ -120,47 +157,79 @@ export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { data: session } = useSession();
 
+  // Author-specific state
+  const [authorStats, setAuthorStats] = useState<DashboardStats>({
+    totalArticles: 0,
+    totalViews: 0,
+    totalComments: 0,
+  });
+  const [recentArticles, setRecentArticles] = useState<Article[]>([]);
+  const [userData, setUserData] = useState<UserData | null>(null);
+
   // Get user type from session
   const userType = (session?.user as any)?.userType || 'user';
   const isAuthor = userType === 'author';
 
-  const userData = {
+  const defaultUserData = {
     name: 'Sarah Johnson',
     email: 'sarah.johnson@email.com',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400',
     readingStreak: 15
   };
 
-  // Author-specific data
-  const authorData = {
-    name: 'Emily Davis',
-    role: 'Senior Political Correspondent',
-    bio: 'Award-winning journalist with 10+ years of experience covering politics and social issues.',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400',
-    email: 'emily.davis@newsflash.com',
-    joinDate: 'January 2020'
-  };
+  // Fetch user data for authors
+  useEffect(() => {
+    async function fetchUserData() {
+      if (!isAuthor) return;
 
-  const stats = {
-    totalViews: 2456789,
-    totalLikes: 45230,
-    totalComments: 12890,
-    totalShares: 8765,
-    earnings: 8750.50
-  };
+      try {
+        const response = await fetch('/api/users/preferences');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            setUserData(data.user);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
 
-  const notifications = [
-    { id: 1, type: 'approval', message: 'Your article "Unity Gains Momentum" was approved', time: '2 hours ago' },
-    { id: 2, type: 'comment', message: 'New comment on "Landmark Act" article', time: '5 hours ago' },
-    { id: 3, type: 'milestone', message: 'You reached 2M+ total views!', time: '1 day ago' },
-    { id: 4, type: 'earnings', message: 'Monthly earnings report is ready', time: '2 days ago' }
-  ];
+    fetchUserData();
+  }, [isAuthor]);
 
-  // Fetch saved articles, history counts, and user comments
+  // Fetch author dashboard stats
+  useEffect(() => {
+    async function fetchAuthorStats() {
+      if (!isAuthor) return;
+
+      try {
+        const response = await fetch('/api/author/dashboard-stats');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            setAuthorStats(data.stats);
+            setRecentArticles(data.recentArticles);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching author stats:', error);
+      }
+    }
+
+    fetchAuthorStats();
+  }, [isAuthor]);
+
+  // Fetch saved articles, history counts, and user comments (for regular users)
   useEffect(() => {
     async function fetchCounts() {
       try {
         setIsLoading(true);
+
+        if (isAuthor) {
+          setIsLoading(false);
+          return;
+        }
 
         // Fetch saved articles count
         const savedResponse = await fetch('/api/saved-articles');
@@ -192,7 +261,7 @@ export default function DashboardPage() {
     }
 
     fetchCounts();
-  }, []);
+  }, [isAuthor]);
 
   return (
     <DashboardLayout activeTab="activity">
@@ -203,57 +272,41 @@ export default function DashboardPage() {
           <div className="bg-white rounded-[12px] p-6 border border-[rgba(203,213,225,0.35)]">
             <div className="flex items-start gap-6">
               <img
-                src={authorData.avatar}
-                alt={authorData.name}
+                src={userData?.image || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400'}
+                alt={userData?.name || 'Author'}
                 className="w-20 h-20 rounded-full object-cover"
               />
               <div className="flex-1">
                 <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-bold mb-1">
-                  Welcome back, {authorData.name.split(' ')[0]}! 👋
+                  Welcome back, {userData?.name?.split(' ')[0] || 'Author'}! 👋
                 </h1>
                 <p className="text-[#657285] text-[15px] leading-[24px] mb-3">
-                  {authorData.role}
+                  {userData?.authorDesignation || 'Author'}
                 </p>
                 <p className="text-[#657285] text-[14px] leading-[22px] max-w-2xl">
-                  {authorData.bio}
+                  {userData?.bio || 'No bio available'}
                 </p>
               </div>
-              <button className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
+              <Link href="/create-article" className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
                 <PlusCircleIcon className="w-4 h-4" />
                 Create New Article
-              </button>
+              </Link>
             </div>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-[#cc0000]/10 rounded-lg flex items-center justify-center">
-                  <EyeIcon className="w-6 h-6 text-[#cc0000]" />
+                  <FileTextIcon className="w-6 h-6 text-[#cc0000]" />
                 </div>
                 <div>
                   <p className="text-[#657285] text-[13px] leading-[18px]">
-                    Total Views
+                    Total Articles
                   </p>
                   <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                    {stats.totalViews.toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-                  <HeartIcon className="w-6 h-6 text-pink-600" />
-                </div>
-                <div>
-                  <p className="text-[#657285] text-[13px] leading-[18px]">
-                    Total Likes
-                  </p>
-                  <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                    {stats.totalLikes.toLocaleString()}
+                    {authorStats.totalArticles.toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -262,14 +315,14 @@ export default function DashboardPage() {
             <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <MessageSquareIcon className="w-6 h-6 text-blue-600" />
+                  <EyeIcon className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
                   <p className="text-[#657285] text-[13px] leading-[18px]">
-                    Total Comments
+                    Total Page Views
                   </p>
                   <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                    {stats.totalComments.toLocaleString()}
+                    {authorStats.totalViews.toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -278,14 +331,14 @@ export default function DashboardPage() {
             <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <Share2Icon className="w-6 h-6 text-green-600" />
+                  <MessageSquareIcon className="w-6 h-6 text-green-600" />
                 </div>
                 <div>
                   <p className="text-[#657285] text-[13px] leading-[18px]">
-                    Total Shares
+                    Total Comments
                   </p>
                   <p className="text-[#020a1c] text-[24px] leading-[30px] font-bold">
-                    {stats.totalShares.toLocaleString()}
+                    {authorStats.totalComments.toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -296,24 +349,51 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px]">
               <h3 className="text-[#020a1c] text-[18px] leading-[24px] font-bold mb-4">
-                Recent Notifications
+                5 Recent Articles
               </h3>
               <div className="space-y-4">
-                {notifications.map(notif => (
-                  <div key={notif.id} className="flex gap-3 p-3 hover:bg-[#f7fafc] rounded-lg transition-colors cursor-pointer">
-                    <div className="w-8 h-8 bg-[#cc0000]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <BellIcon className="w-4 h-4 text-[#cc0000]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[#020a1c] text-[14px] leading-[20px] font-medium">
-                        {notif.message}
-                      </p>
-                      <p className="text-[#657285] text-[12px] leading-[18px]">
-                        {notif.time}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                {recentArticles.length === 0 ? (
+                  <p className="text-[#657285] text-[14px]">No articles yet. Start creating content!</p>
+                ) : (
+                  recentArticles.map(article => (
+                    <Link
+                      href={`/articles/${article.id}`}
+                      key={article.id}
+                      className="flex gap-3 p-3 hover:bg-[#f7fafc] rounded-lg transition-colors cursor-pointer"
+                    >
+                      {article.coverImage && (
+                        <img
+                          src={article.coverImage}
+                          alt={article.title}
+                          className="w-16 h-16 rounded object-cover flex-shrink-0"
+                        />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[#020a1c] text-[14px] leading-[20px] font-medium line-clamp-2">
+                          {article.title}
+                        </p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-[#657285] text-[12px]">
+                            {article.categoryName}
+                          </span>
+                          <span className="text-[#657285] text-[12px]">•</span>
+                          <span className="text-[#657285] text-[12px]">
+                            {formatDate(article.publishedAt || article.createdAt)}
+                          </span>
+                        </div>
+                        <span className={`inline-block mt-1 px-2 py-0.5 rounded text-[11px] font-medium ${
+                          article.status === 'published'
+                            ? 'bg-green-100 text-green-700'
+                            : article.status === 'under_review'
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-gray-100 text-gray-700'
+                        }`}>
+                          {article.status === 'published' ? 'Published' : article.status === 'under_review' ? 'Under Review' : 'Draft'}
+                        </span>
+                      </div>
+                    </Link>
+                  ))
+                )}
               </div>
             </div>
 
