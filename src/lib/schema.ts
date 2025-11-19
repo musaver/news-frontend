@@ -19,6 +19,7 @@ export const user = mysqlTable('user', {
   image: text('image'),
   userType: varchar('user_type', { length: 50 }).notNull().default('user'), // 'user' or 'author'
   bio: text('bio'),
+  authorDesignation: varchar('author_designation', { length: 255 }),
   // Notification preferences
   emailNotifications: boolean('email_notifications').notNull().default(true),
   authorNotifications: boolean('author_notifications').notNull().default(true),
