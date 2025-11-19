@@ -3,16 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
-
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { DashboardLayout } from '@/components/homepage';
 
 // SVG Icons
 const EyeIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -147,7 +138,6 @@ export default function ArticlesPage() {
   const router = useRouter();
   const [articleFilter, setArticleFilter] = useState('published');
   const [articles, setArticles] = useState<Article[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -158,20 +148,7 @@ export default function ArticlesPage() {
 
   useEffect(() => {
     fetchArticles();
-    fetchCategoriesData();
   }, []);
-
-  const fetchCategoriesData = async () => {
-    try {
-      const response = await fetch('/api/categories');
-      const data = await response.json();
-      if (data.success) {
-        setCategories(data.categories);
-      }
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  };
 
   const fetchArticles = async () => {
     try {
@@ -232,179 +209,134 @@ export default function ArticlesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7fafc]">
-      <Header categories={categories} />
-
-      {/* Tab Navigation */}
-      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
-        <div className="max-w-[1320px] mx-auto">
-          <div className="flex items-center justify-center gap-2 px-4 py-4 overflow-x-auto">
-            <Link href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
-              <LayoutDashboardIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Overview</span>
-            </Link>
-            <Link href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
-              <FileTextIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Articles</span>
-            </Link>
-            <Link href="/author-dashboard/analytics" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
-              <BarChart3Icon className="w-4 h-4" />
-              <span className="hidden sm:inline">Analytics</span>
-            </Link>
-            <Link href="/author-dashboard/comments" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
-              <MessageSquareIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Comments</span>
-            </Link>
-            <Link href="/author-dashboard/earnings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
-              <DollarSignIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Earnings</span>
-            </Link>
-            <Link href="/author-dashboard/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
-              <SettingsIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
-            </Link>
-            <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
-            <button className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium">
-              <LogOutIcon className="w-4 h-4" />
-              <span className="hidden xl:inline">Logout</span>
-            </button>
-          </div>
+    <DashboardLayout activeTab="articles">
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-bold">
+            My Articles
+          </h1>
+          <Link href="/create-article" className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
+            <PlusCircleIcon className="w-4 h-4" />
+            Create New Article
+          </Link>
         </div>
-      </div>
 
-      <main className="">
-        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-bold">
-                My Articles
-              </h1>
-              <Link href="/create-article" className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
-                <PlusCircleIcon className="w-4 h-4" />
-                Create New Article
-              </Link>
-            </div>
+        {/* Filter Tabs */}
+        <div className="bg-white border border-[rgba(203,213,225,0.35)] rounded-lg p-1 inline-flex gap-1">
+          <button
+            onClick={() => setArticleFilter('published')}
+            className={`px-4 py-2 rounded text-[14px] font-medium transition-colors ${
+              articleFilter === 'published' ? 'bg-[#cc0000] text-white' : 'text-[#657285] hover:bg-[#f7fafc]'
+            }`}
+          >
+            Published ({articles.filter(a => a.status === 'published').length})
+          </button>
+          <button
+            onClick={() => setArticleFilter('drafts')}
+            className={`px-4 py-2 rounded text-[14px] font-medium transition-colors ${
+              articleFilter === 'drafts' ? 'bg-[#cc0000] text-white' : 'text-[#657285] hover:bg-[#f7fafc]'
+            }`}
+          >
+            Drafts ({articles.filter(a => a.status === 'draft').length})
+          </button>
+          <button
+            onClick={() => setArticleFilter('under_review')}
+            className={`px-4 py-2 rounded text-[14px] font-medium transition-colors ${
+              articleFilter === 'under_review' ? 'bg-[#cc0000] text-white' : 'text-[#657285] hover:bg-[#f7fafc]'
+            }`}
+          >
+            Under Review ({articles.filter(a => a.status === 'under_review').length})
+          </button>
+        </div>
 
-            {/* Filter Tabs */}
-            <div className="bg-white border border-[rgba(203,213,225,0.35)] rounded-lg p-1 inline-flex gap-1">
-              <button
-                onClick={() => setArticleFilter('published')}
-                className={`px-4 py-2 rounded text-[14px] font-medium transition-colors ${
-                  articleFilter === 'published' ? 'bg-[#cc0000] text-white' : 'text-[#657285] hover:bg-[#f7fafc]'
-                }`}
-              >
-                Published ({articles.filter(a => a.status === 'published').length})
-              </button>
-              <button
-                onClick={() => setArticleFilter('drafts')}
-                className={`px-4 py-2 rounded text-[14px] font-medium transition-colors ${
-                  articleFilter === 'drafts' ? 'bg-[#cc0000] text-white' : 'text-[#657285] hover:bg-[#f7fafc]'
-                }`}
-              >
-                Drafts ({articles.filter(a => a.status === 'draft').length})
-              </button>
-              <button
-                onClick={() => setArticleFilter('under_review')}
-                className={`px-4 py-2 rounded text-[14px] font-medium transition-colors ${
-                  articleFilter === 'under_review' ? 'bg-[#cc0000] text-white' : 'text-[#657285] hover:bg-[#f7fafc]'
-                }`}
-              >
-                Under Review ({articles.filter(a => a.status === 'under_review').length})
-              </button>
-            </div>
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000] mx-auto mb-4"></div>
+            <p className="text-[#657285]">Loading articles...</p>
+          </div>
+        )}
 
-            {/* Loading State */}
-            {loading && (
-              <div className="text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000] mx-auto mb-4"></div>
-                <p className="text-[#657285]">Loading articles...</p>
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-600">{error}</p>
+          </div>
+        )}
+
+        {/* Articles List */}
+        {!loading && !error && (
+          <div className="space-y-4">
+            {filteredArticles.length === 0 ? (
+              <div className="bg-white p-12 border border-[rgba(203,213,225,0.35)] rounded-[12px] text-center">
+                <p className="text-[#657285] text-[16px]">
+                  No {articleFilter === 'published' ? 'published' : articleFilter === 'drafts' ? 'draft' : 'under review'} articles found.
+                </p>
+                <Link href="/create-article" className="inline-block mt-4 px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors">
+                  Create your first article
+                </Link>
               </div>
-            )}
-
-            {/* Error State */}
-            {error && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                <p className="text-red-600">{error}</p>
-              </div>
-            )}
-
-            {/* Articles List */}
-            {!loading && !error && (
-              <div className="space-y-4">
-                {filteredArticles.length === 0 ? (
-                  <div className="bg-white p-12 border border-[rgba(203,213,225,0.35)] rounded-[12px] text-center">
-                    <p className="text-[#657285] text-[16px]">
-                      No {articleFilter === 'published' ? 'published' : articleFilter === 'drafts' ? 'draft' : 'under review'} articles found.
-                    </p>
-                    <Link href="/create-article" className="inline-block mt-4 px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors">
-                      Create your first article
-                    </Link>
-                  </div>
-                ) : (
-                  filteredArticles.map(article => (
-                    <div key={article.id} className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px] hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="inline-block px-3 py-1 text-xs font-medium border border-[rgba(203,213,225,0.5)] rounded">
-                              {article.category}
-                            </span>
-                            <span className="text-[#657285] text-[12px]">
-                              {formatDate(article.publishedAt || article.createdAt)}
-                            </span>
-                          </div>
-                          <h3 className="text-[#020a1c] text-[18px] leading-[24px] font-bold mb-3">
-                            {article.title}
-                          </h3>
-
-                          {article.status === 'published' && (
-                            <div className="flex items-center gap-6">
-                              <div className="flex items-center gap-2 text-[#657285] text-[13px]">
-                                <EyeIcon className="w-4 h-4" />
-                                {(article.views || 0).toLocaleString()}
-                              </div>
-                              <div className="flex items-center gap-2 text-[#657285] text-[13px]">
-                                <HeartIcon className="w-4 h-4" />
-                                {(article.likes || 0).toLocaleString()}
-                              </div>
-                              <div className="flex items-center gap-2 text-[#657285] text-[13px]">
-                                <MessageSquareIcon className="w-4 h-4" />
-                                {(article.comments || 0).toLocaleString()}
-                              </div>
-                              <div className="flex items-center gap-2 text-[#657285] text-[13px]">
-                                <Share2Icon className="w-4 h-4" />
-                                {(article.shares || 0).toLocaleString()}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => router.push(`/articles/${article.id}/edit`)}
-                            className="px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2"
-                          >
-                            <EditIcon className="w-4 h-4" />
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDeleteArticle(article.id)}
-                            className="p-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-red-600 hover:bg-red-50 transition-colors"
-                          >
-                            <Trash2Icon className="w-4 h-4" />
-                          </button>
-                        </div>
+            ) : (
+              filteredArticles.map(article => (
+                <div key={article.id} className="bg-white p-6 border border-[rgba(203,213,225,0.35)] rounded-[12px] hover:shadow-md transition-shadow">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="inline-block px-3 py-1 text-xs font-medium border border-[rgba(203,213,225,0.5)] rounded">
+                          {article.category}
+                        </span>
+                        <span className="text-[#657285] text-[12px]">
+                          {formatDate(article.publishedAt || article.createdAt)}
+                        </span>
                       </div>
+                      <h3 className="text-[#020a1c] text-[18px] leading-[24px] font-bold mb-3">
+                        {article.title}
+                      </h3>
+
+                      {article.status === 'published' && (
+                        <div className="flex items-center gap-6">
+                          <div className="flex items-center gap-2 text-[#657285] text-[13px]">
+                            <EyeIcon className="w-4 h-4" />
+                            {(article.views || 0).toLocaleString()}
+                          </div>
+                          <div className="flex items-center gap-2 text-[#657285] text-[13px]">
+                            <HeartIcon className="w-4 h-4" />
+                            {(article.likes || 0).toLocaleString()}
+                          </div>
+                          <div className="flex items-center gap-2 text-[#657285] text-[13px]">
+                            <MessageSquareIcon className="w-4 h-4" />
+                            {(article.comments || 0).toLocaleString()}
+                          </div>
+                          <div className="flex items-center gap-2 text-[#657285] text-[13px]">
+                            <Share2Icon className="w-4 h-4" />
+                            {(article.shares || 0).toLocaleString()}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  ))
-                )}
-              </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => router.push(`/articles/${article.id}/edit`)}
+                        className="px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2"
+                      >
+                        <EditIcon className="w-4 h-4" />
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteArticle(article.id)}
+                        className="p-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        <Trash2Icon className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
             )}
           </div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        )}
+      </div>
+    </DashboardLayout>
   );
 }

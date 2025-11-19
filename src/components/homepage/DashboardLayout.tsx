@@ -77,9 +77,15 @@ const BarChart3Icon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
+const FileTextIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+  </svg>
+);
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications' | 'analytics' | 'comments';
+  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications' | 'analytics' | 'comments' | 'articles';
 }
 
 export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
@@ -119,8 +125,9 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
     { id: 'preferences', icon: SettingsIcon, label: 'Preferences', path: '/preferences' }
   ];
 
-  // Add analytics and comments tabs for authors
+  // Add articles, analytics and comments tabs for authors
   const authorTabs = [
+    { id: 'articles', icon: FileTextIcon, label: 'Articles', path: '/articles' },
     { id: 'analytics', icon: BarChart3Icon, label: 'Analytics', path: '/analytics' },
     { id: 'comments', icon: MessageSquareIcon, label: 'Comments', path: '/comments' }
   ];
