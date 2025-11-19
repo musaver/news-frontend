@@ -98,7 +98,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <DashboardLayout activeTab="dashboard">
+    <DashboardLayout activeTab="activity">
       <div className="space-y-6">
         {/* Header */}
         <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-bold">
