@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header, Footer } from '@/components/homepage';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 interface Category {
   id: number;
@@ -148,9 +148,12 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
               </button>
             ))}
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
-            <button className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium">
+            <button
+              onClick={() => signOut({ callbackUrl: '/' })}
+              className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium"
+            >
               <LogOutIcon className="w-4 h-4" />
-              <span className="hidden xl:inline">Logout</span>
+              <span>Logout</span>
             </button>
           </div>
         </div>
