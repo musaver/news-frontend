@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header, Footer } from '@/components/homepage';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 interface Category {
   id: number;
@@ -68,13 +69,22 @@ const ChevronDownIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
+const BarChart3Icon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <line x1="18" y1="20" x2="18" y2="10" strokeWidth={2} strokeLinecap="round"/>
+    <line x1="12" y1="20" x2="12" y2="4" strokeWidth={2} strokeLinecap="round"/>
+    <line x1="6" y1="20" x2="6" y2="14" strokeWidth={2} strokeLinecap="round"/>
+  </svg>
+);
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications';
+  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications' | 'analytics' | 'comments';
 }
 
 export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
   const router = useRouter();
+  const { data: session } = useSession();
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -98,12 +108,24 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400'
   };
 
-  const tabs = [
+  // Get user type from session
+  const userType = (session?.user as any)?.userType || 'user';
+  const isAuthor = userType === 'author';
+
+  const baseTabs = [
     { id: 'activity', icon: MessageSquareIcon, label: 'Dashboard', path: '/dashboard' },
     { id: 'saved', icon: BookmarkIcon, label: 'Saved', path: '/saved' },
     { id: 'history', icon: ClockIcon, label: 'History', path: '/history' },
     { id: 'preferences', icon: SettingsIcon, label: 'Preferences', path: '/preferences' }
   ];
+
+  // Add analytics and comments tabs for authors
+  const authorTabs = [
+    { id: 'analytics', icon: BarChart3Icon, label: 'Analytics', path: '/analytics' },
+    { id: 'comments', icon: MessageSquareIcon, label: 'Comments', path: '/comments' }
+  ];
+
+  const tabs = isAuthor ? [...baseTabs, ...authorTabs] : baseTabs;
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
