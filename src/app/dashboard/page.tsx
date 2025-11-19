@@ -59,6 +59,13 @@ export default function DashboardPage() {
   const [recentComments, setRecentComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const userData = {
+    name: 'Sarah Johnson',
+    email: 'sarah.johnson@email.com',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400',
+    readingStreak: 15
+  };
+
   // Fetch saved articles, history counts, and user comments
   useEffect(() => {
     async function fetchCounts() {
@@ -100,6 +107,25 @@ export default function DashboardPage() {
   return (
     <DashboardLayout activeTab="activity">
       <div className="space-y-6">
+        {/* Welcome Banner */}
+        <div className="bg-gradient-to-r from-[#cc0000] to-[#990000] rounded-[12px] p-6 text-white">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-[28px] leading-[36px] font-bold mb-2">
+                Welcome back, {userData.name.split(' ')[0]}! 👋
+              </h1>
+              <p className="text-white/90 text-[15px] leading-[24px]">
+                Track your engagement and see your recent activity
+              </p>
+            </div>
+            <div className="hidden md:block bg-white/20 backdrop-blur-sm rounded-lg p-4">
+              <p className="text-white/80 text-[12px] mb-1">Reading Streak</p>
+              <p className="text-[32px] leading-[40px] font-bold">{userData.readingStreak} 🔥</p>
+              <p className="text-white/80 text-[11px]">days in a row</p>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-bold">
           My Activity
