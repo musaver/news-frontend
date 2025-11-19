@@ -2,10 +2,16 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { Search, Menu, X, User } from 'lucide-react';
+import { Search, Menu, X, User, FileText, LayoutDashboard } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import svgPaths from '@/imports/svg-ykc7st1had';
 import NewsFlashLogo from './NewsFlashLogo';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
 
 interface Category {
   id: number;
@@ -131,12 +137,38 @@ const Header = ({ categories = [] }: HeaderProps) => {
               ))}
             </nav>
             <div className="flex items-center gap-2">
-              <Link
-                href={session ? '/dashboard' : '/register'}
-                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
-              >
-                <User className="w-4 h-4 text-white/80" />
-              </Link>
+              {session ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40 hover:bg-white/30 transition-colors">
+                      <User className="w-4 h-4 text-white/80" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer">
+                        <LayoutDashboard className="w-4 h-4" />
+                        <span>Dashboard</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    {(session?.user as any)?.userType === 'author' && (
+                      <DropdownMenuItem asChild>
+                        <Link href="/articles" className="flex items-center gap-2 cursor-pointer">
+                          <FileText className="w-4 h-4" />
+                          <span>Articles</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link
+                  href="/register"
+                  className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+                >
+                  <User className="w-4 h-4 text-white/80" />
+                </Link>
+              )}
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
@@ -165,12 +197,38 @@ const Header = ({ categories = [] }: HeaderProps) => {
         </Link>
         
         <div className="flex items-center gap-2">
-          <Link
-            href={session ? '/dashboard' : '/register'}
-            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
-          >
-            <User className="w-[18px] h-[18px] text-white/80" />
-          </Link>
+          {session ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40 hover:bg-white/30 transition-colors">
+                  <User className="w-[18px] h-[18px] text-white/80" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer">
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>Dashboard</span>
+                  </Link>
+                </DropdownMenuItem>
+                {(session?.user as any)?.userType === 'author' && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/articles" className="flex items-center gap-2 cursor-pointer">
+                      <FileText className="w-4 h-4" />
+                      <span>Articles</span>
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link
+              href="/register"
+              className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+            >
+              <User className="w-[18px] h-[18px] text-white/80" />
+            </Link>
+          )}
           <button
             onClick={() => setIsSearchOpen(true)}
             className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
