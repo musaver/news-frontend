@@ -102,7 +102,7 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
     { id: 'feed', icon: HomeIcon, label: 'My Feed', path: '/user-dashboard' },
     { id: 'saved', icon: BookmarkIcon, label: 'Saved', path: '/saved' },
     { id: 'history', icon: ClockIcon, label: 'History', path: '/history' },
-    { id: 'activity', icon: MessageSquareIcon, label: 'Activity', path: '/activity' },
+    { id: 'activity', icon: MessageSquareIcon, label: 'Activity', path: '/dashboard' },
     { id: 'notifications', icon: BellIcon, label: 'Notifications', path: '/notifications' },
     { id: 'preferences', icon: SettingsIcon, label: 'Preferences', path: '/preferences' }
   ];
