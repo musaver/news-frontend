@@ -58,6 +58,7 @@ export default function EditArticlePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isUploadingCoverImage, setIsUploadingCoverImage] = useState(false);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -114,6 +115,40 @@ export default function EditArticlePage() {
       ...prev,
       tags: prev.tags.filter(tag => tag !== tagToRemove)
     }));
+  };
+
+  const handleCoverImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingCoverImage(true);
+
+    try {
+      const formDataToUpload = new FormData();
+      formDataToUpload.append('file', file);
+
+      const response = await fetch('/api/upload/image', {
+        method: 'POST',
+        body: formDataToUpload,
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to upload image');
+      }
+
+      const data = await response.json();
+
+      // Set the cover image URL
+      handleInputChange('coverImage', data.url);
+    } catch (error) {
+      console.error('Error uploading cover image:', error);
+      alert(error instanceof Error ? error.message : 'Failed to upload image');
+    } finally {
+      setIsUploadingCoverImage(false);
+      // Reset file input
+      event.target.value = '';
+    }
   };
 
   const handleSave = async (status?: 'draft' | 'under_review' | 'published') => {
@@ -292,9 +327,32 @@ export default function EditArticlePage() {
                     placeholder="https://example.com/image.jpg"
                     className="flex-1 px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
                   />
-                  <button className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4" />
-                    Upload
+                  <input
+                    type="file"
+                    id="cover-image-upload-edit"
+                    accept="image/*"
+                    onChange={handleCoverImageUpload}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('cover-image-upload-edit')?.click()}
+                    disabled={isUploadingCoverImage}
+                    className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isUploadingCoverImage ? (
+                      <>
+                        <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <ImageIcon className="w-4 h-4" />
+                        Upload
+                      </>
+                    )}
                   </button>
                 </div>
                 {formData.coverImage && (
