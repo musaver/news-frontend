@@ -76,6 +76,7 @@ export default function RegisterPage() {
         <div className="max-w-md mx-auto px-4 py-8">
           <h1 className="text-2xl font-semibold mb-6">Register</h1>
           {error && <p className="text-red-600 mb-4">{error}</p>}
+          {step === 2 && <p className="text-green-600 mb-4">Email sent! Please check your email for the OTP.</p>}
 
           <div className="space-y-4 mb-6">
             {/* Step 1: Email field */}
