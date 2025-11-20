@@ -216,19 +216,6 @@ export default function RegisterPage() {
                 )}
               </div>
             </div>
-
-            {/* Footer */}
-            <div className="mt-6 text-center">
-              <p className="text-sm text-[#657285]">
-                Already have an account?{' '}
-                <a
-                  href="/login"
-                  className="text-[#cc0000] hover:underline font-semibold"
-                >
-                  Sign in
-                </a>
-              </p>
-            </div>
           </div>
         </div>
       </main>
