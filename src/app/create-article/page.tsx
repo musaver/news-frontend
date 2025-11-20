@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { DashboardLayout } from '@/components/homepage';
 import TiptapEditor from '@/components/TiptapEditor';
@@ -48,6 +48,7 @@ const EyeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 export default function CreateArticlePage() {
   const router = useRouter();
   const [categories, setCategories] = useState<Category[]>([]);
+  const coverImageInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchCategoriesData = async () => {
@@ -277,15 +278,15 @@ export default function CreateArticlePage() {
                     className="flex-1 px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
                   />
                   <input
+                    ref={coverImageInputRef}
                     type="file"
-                    id="cover-image-upload"
                     accept="image/*"
                     onChange={handleCoverImageUpload}
                     className="hidden"
                   />
                   <button
                     type="button"
-                    onClick={() => document.getElementById('cover-image-upload')?.click()}
+                    onClick={() => coverImageInputRef.current?.click()}
                     disabled={isUploadingCoverImage}
                     className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
@@ -305,11 +306,11 @@ export default function CreateArticlePage() {
                   </button>
                 </div>
                 {formData.coverImage && (
-                  <div className="mt-3 rounded-lg overflow-hidden border border-[rgba(203,213,225,0.35)]">
+                  <div className="mt-3 rounded-lg overflow-hidden border border-[rgba(203,213,225,0.35)] bg-gray-50">
                     <img
                       src={formData.coverImage}
                       alt="Cover preview"
-                      className="w-full h-48 object-cover"
+                      className="w-full h-64 object-contain"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800';
                       }}
