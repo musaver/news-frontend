@@ -149,6 +149,18 @@ function formatDate(dateString: string | Date | null): string {
   });
 }
 
+// Helper function to get display name from session
+function getDisplayName(session: any): string {
+  if (session?.user?.name) {
+    return session.user.name;
+  }
+  if (session?.user?.email) {
+    // Extract part before @ from email
+    return session.user.email.split('@')[0];
+  }
+  return 'User';
+}
+
 export default function DashboardPage() {
   const [savedCount, setSavedCount] = useState<number>(0);
   const [historyCount, setHistoryCount] = useState<number>(0);
@@ -464,7 +476,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-[28px] leading-[36px] font-bold mb-2">
-                  Welcome back, {defaultUserData.name.split(' ')[0]}! 👋
+                  Welcome back, {getDisplayName(session).split(' ')[0]}! 👋
                 </h1>
                 <p className="text-white/90 text-[15px] leading-[24px]">
                   Track your engagement and see your recent activity
