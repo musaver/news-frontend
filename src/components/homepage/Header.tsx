@@ -36,13 +36,32 @@ interface HeaderProps {
   categories?: Category[];
 }
 
-const Header = ({ categories = [] }: HeaderProps) => {
+const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
   const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResults>({ categories: [], articles: [] });
   const [isSearching, setIsSearching] = useState(false);
+  const [categories, setCategories] = useState<Category[]>(categoriesProp);
+
+  // Fetch categories if not provided
+  useEffect(() => {
+    if (categoriesProp.length === 0) {
+      fetch('/api/categories')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.categories) {
+            setCategories(data.categories);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching categories:', error);
+        });
+    } else {
+      setCategories(categoriesProp);
+    }
+  }, [categoriesProp]);
 
   // Fetch initial data when search modal opens
   useEffect(() => {
