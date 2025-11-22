@@ -59,7 +59,7 @@ const FeaturedSection = ({ mockImages, articles }: FeaturedSectionProps) => {
             <ArticleDate>{formatDate(featuredArticle.publishedAt)}</ArticleDate>
           </div>
           <Link href={`/news-details/${featuredArticle.id}`}>
-            <h1 className="text-4xl leading-tight font-semibold hover:text-[#cc0000] transition-colors">
+            <h1 className="text-3xl leading-tight font-normal hover:text-[#cc0000] transition-colors">
               {featuredArticle.title}
             </h1>
           </Link>
