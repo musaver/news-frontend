@@ -170,7 +170,7 @@ export default async function Home() {
     fetchArticlesByCategory('Entertainment', 3),
     fetchArticlesByCategory('Sports', 3),
     fetchArticlesByCategory('Tech', 4),
-    fetchLatestArticles(10)
+    fetchLatestArticles(3)
   ]);
 
   return (
