@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { Header, Footer } from '@/components/homepage';
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -19,7 +18,6 @@ export default function LogoutPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <main>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -29,7 +27,6 @@ export default function LogoutPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

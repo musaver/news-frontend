@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { Header, Footer } from '@/components/homepage';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -101,7 +100,6 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
       <main className="flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           {/* Card Container */}
@@ -219,7 +217,6 @@ export default function RegisterPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

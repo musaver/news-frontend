@@ -1,8 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import {
-  Header,
-  Footer,
   FeaturedSection,
   LatestNewsSection,
   FinanceSidebar,
@@ -40,24 +38,6 @@ const mockImages = {
 
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
-
-// Fetch all categories for navigation
-async function fetchCategories() {
-  try {
-    const result = await db
-      .select({
-        id: categories.id,
-        name: categories.name,
-        slug: categories.slug,
-      })
-      .from(categories)
-      .orderBy(categories.name);
-    return result;
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    return [];
-  }
-}
 
 // Fetch category by slug or ID
 async function fetchCategory(categoryId: string) {
@@ -187,16 +167,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  // Fetch articles and categories in parallel
-  const [allCategories, categoryArticles, sidebarArticles] = await Promise.all([
-    fetchCategories(),
+  // Fetch articles in parallel
+  const [categoryArticles, sidebarArticles] = await Promise.all([
     fetchArticlesByCategory(category.id, 100),
     fetchLatestArticles(8)
   ]);
 
   return (
     <div className="min-h-screen bg-white">
-      <Header categories={allCategories} />
 
       <main>
         {/* Category Header Banner */}
@@ -268,8 +246,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           <PodcastSection mockImages={mockImages} articles={categoryArticles.slice(0, 3)} />
         )}
       </main>
-
-      <Footer />
     </div>
   );
 }

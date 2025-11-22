@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import '@/styles/globals.css'
 import NavigationLoadingProvider from '@/components/NavigationLoadingProvider';
 import Providers from '@/components/Providers';
+import AppLayout from '@/components/AppLayout';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +21,9 @@ export default function RootLayout({
       >
         <Providers>
           <NavigationLoadingProvider>
-            {children}
+            <AppLayout>
+              {children}
+            </AppLayout>
           </NavigationLoadingProvider>
         </Providers>
       </body>

@@ -2,10 +2,6 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
 
 // SVG Icons (same as create page)
 const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -135,7 +131,6 @@ function EditArticleContent() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header />
       
       <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -366,7 +361,6 @@ function EditArticleContent() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }
