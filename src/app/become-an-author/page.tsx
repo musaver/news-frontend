@@ -222,34 +222,37 @@ export default function BecomeAnAuthorPage() {
                       )}
 
                       <form onSubmit={handleSubmit} className="space-y-4 w-full">
-                        <div>
-                          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
-                            Full Name <span className="text-red-600">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
-                            required
-                          />
-                        </div>
+                        {/* Full Name and Email Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+                              Full Name <span className="text-red-600">*</span>
+                            </label>
+                            <input
+                              type="text"
+                              id="fullName"
+                              name="fullName"
+                              value={formData.fullName}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
+                              required
+                            />
+                          </div>
 
-                        <div>
-                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                            Email <span className="text-red-600">*</span>
-                          </label>
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
-                            required
-                          />
+                          <div>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                              Email <span className="text-red-600">*</span>
+                            </label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
+                              required
+                            />
+                          </div>
                         </div>
 
                         <div>
@@ -267,34 +270,37 @@ export default function BecomeAnAuthorPage() {
                           />
                         </div>
 
-                        <div>
-                          <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
-                            Bio <span className="text-red-600">*</span>
-                          </label>
-                          <textarea
-                            id="bio"
-                            name="bio"
-                            value={formData.bio}
-                            onChange={handleChange}
-                            rows={4}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
-                            required
-                          />
-                        </div>
+                        {/* Bio and Address Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
+                              Bio <span className="text-red-600">*</span>
+                            </label>
+                            <textarea
+                              id="bio"
+                              name="bio"
+                              value={formData.bio}
+                              onChange={handleChange}
+                              rows={4}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
+                              required
+                            />
+                          </div>
 
-                        <div>
-                          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-                            Address <span className="text-red-600">*</span>
-                          </label>
-                          <textarea
-                            id="address"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            rows={3}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
-                            required
-                          />
+                          <div>
+                            <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
+                              Address <span className="text-red-600">*</span>
+                            </label>
+                            <textarea
+                              id="address"
+                              name="address"
+                              value={formData.address}
+                              onChange={handleChange}
+                              rows={4}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
+                              required
+                            />
+                          </div>
                         </div>
 
                         <div className="pt-2">
@@ -465,34 +471,37 @@ export default function BecomeAnAuthorPage() {
                         )}
 
                         <form onSubmit={handleSubmit} className="space-y-4 w-full">
-                          <div>
-                            <label htmlFor="fullName-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                              Full Name <span className="text-red-600">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              id="fullName-mobile"
-                              name="fullName"
-                              value={formData.fullName}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
-                              required
-                            />
-                          </div>
+                          {/* Full Name and Email Row */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label htmlFor="fullName-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                                Full Name <span className="text-red-600">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                id="fullName-mobile"
+                                name="fullName"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
+                                required
+                              />
+                            </div>
 
-                          <div>
-                            <label htmlFor="email-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                              Email <span className="text-red-600">*</span>
-                            </label>
-                            <input
-                              type="email"
-                              id="email-mobile"
-                              name="email"
-                              value={formData.email}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
-                              required
-                            />
+                            <div>
+                              <label htmlFor="email-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                                Email <span className="text-red-600">*</span>
+                              </label>
+                              <input
+                                type="email"
+                                id="email-mobile"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
+                                required
+                              />
+                            </div>
                           </div>
 
                           <div>
@@ -510,34 +519,37 @@ export default function BecomeAnAuthorPage() {
                             />
                           </div>
 
-                          <div>
-                            <label htmlFor="bio-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                              Bio <span className="text-red-600">*</span>
-                            </label>
-                            <textarea
-                              id="bio-mobile"
-                              name="bio"
-                              value={formData.bio}
-                              onChange={handleChange}
-                              rows={4}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
-                              required
-                            />
-                          </div>
+                          {/* Bio and Address Row */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <label htmlFor="bio-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                                Bio <span className="text-red-600">*</span>
+                              </label>
+                              <textarea
+                                id="bio-mobile"
+                                name="bio"
+                                value={formData.bio}
+                                onChange={handleChange}
+                                rows={4}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
+                                required
+                              />
+                            </div>
 
-                          <div>
-                            <label htmlFor="address-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                              Address <span className="text-red-600">*</span>
-                            </label>
-                            <textarea
-                              id="address-mobile"
-                              name="address"
-                              value={formData.address}
-                              onChange={handleChange}
-                              rows={3}
-                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
-                              required
-                            />
+                            <div>
+                              <label htmlFor="address-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                                Address <span className="text-red-600">*</span>
+                              </label>
+                              <textarea
+                                id="address-mobile"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                                rows={4}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
+                                required
+                              />
+                            </div>
                           </div>
 
                           <div className="pt-2">
