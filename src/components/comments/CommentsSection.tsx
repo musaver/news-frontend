@@ -22,14 +22,15 @@ interface Comment {
 interface CommentsSectionProps {
   articleId: string;
   initialComments?: Comment[];
+  initialCommentsCount?: number;
 }
 
-export default function CommentsSection({ articleId, initialComments = [] }: CommentsSectionProps) {
+export default function CommentsSection({ articleId, initialComments = [], initialCommentsCount = 0 }: CommentsSectionProps) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [comments, setComments] = useState<Comment[]>(initialComments);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalComments, setTotalComments] = useState(0);
+  const [totalComments, setTotalComments] = useState(initialCommentsCount);
 
   const fetchComments = async () => {
     setIsLoading(true);
@@ -49,7 +50,10 @@ export default function CommentsSection({ articleId, initialComments = [] }: Com
   };
 
   useEffect(() => {
-    fetchComments();
+    // Only fetch if we don't have initial data or if there might be comments
+    if (initialComments.length === 0 && initialCommentsCount > 0) {
+      fetchComments();
+    }
   }, [articleId]);
 
   const handleCommentAdded = () => {
