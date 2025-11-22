@@ -187,8 +187,8 @@ export default function CategoryPageClient({
         {/* Desktop Layout */}
         <div className="hidden md:block">
           <div className="max-w-[1320px] mx-auto px-6 py-12">
-            <div className="flex grid-cols-1 lg:grid-cols-4 gap-2">
-              <div className="lg:col-span-3 space-y-12">
+            <div className="flex gap-2">
+              <div className="flex-1 space-y-12">
                 {loadingFeatured ? (
                   <CategoryFeaturedSkeleton />
                 ) : featuredArticle ? (
@@ -213,7 +213,7 @@ export default function CategoryPageClient({
               {/* Vertical Divider */}
               <div className="hidden lg:block w-px bg-slate-200 mx-3"></div>
 
-              <div className="lg:col-span-1">
+              <div>
                 {loadingSidebar ? (
                   <CategorySidebarSkeleton />
                 ) : sidebarArticles.length > 0 ? (
