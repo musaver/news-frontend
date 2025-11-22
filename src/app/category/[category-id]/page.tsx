@@ -230,7 +230,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           {categoryArticles.length > 0 ? (
             <>
               <FeaturedSection mockImages={mockImages} articles={categoryArticles} />
-              <LatestNewsSection mockImages={mockImages} articles={categoryArticles} title={`All articles of ${category.name}`} />
+              <LatestNewsSection mockImages={mockImages} articles={categoryArticles.slice(1)} title={`All articles of ${category.name}`} />
             </>
           ) : (
             <div className="text-center py-12">
@@ -247,7 +247,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <div className="flex grid-cols-1 lg:grid-cols-4 gap-2">
                 <div className="lg:col-span-3 space-y-12">
                   <FeaturedSection mockImages={mockImages} articles={categoryArticles} />
-                  <LatestNewsSection mockImages={mockImages} articles={categoryArticles} title={`All articles of ${category.name}`} />
+                  <LatestNewsSection mockImages={mockImages} articles={categoryArticles.slice(1)} title={`All articles of ${category.name}`} />
                 </div>
                 {/* Vertical Divider */}
                 <div className="hidden lg:block w-px bg-slate-200 mx-3"></div>
