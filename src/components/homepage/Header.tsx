@@ -226,6 +226,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
             <div className="space-y-8">
               <Link
                 href="/"
+                onClick={() => setIsMenuOpen(false)}
                 className={`block text-slate-800 ${pathname === '/' ? 'font-bold text-[#cc0000]' : ''}`}
               >
                 Top Stories
@@ -236,6 +237,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                   <Link
                     key={category.id}
                     href={`/category/${category.id}`}
+                    onClick={() => setIsMenuOpen(false)}
                     className={`block text-slate-800 ${isActive ? 'font-bold text-[#cc0000]' : ''}`}
                   >
                     {category.name}
@@ -245,11 +247,11 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
             </div>
             <div className="h-px bg-slate-300/35"></div>
             <div className="space-y-6">
-              <Link href="/about-us" className="block text-slate-800">About</Link>
-              <Link href="#" className="block text-slate-800">Careers</Link>
-              <Link href="/authors" className="block text-slate-800">Authors</Link>
-              <Link href="#" className="block text-slate-800">Advertise</Link>
-              <Link href="#" className="block text-slate-800">Contact</Link>
+              <Link href="/about-us" onClick={() => setIsMenuOpen(false)} className="block text-slate-800">About</Link>
+              <Link href="#" onClick={() => setIsMenuOpen(false)} className="block text-slate-800">Careers</Link>
+              <Link href="/authors" onClick={() => setIsMenuOpen(false)} className="block text-slate-800">Authors</Link>
+              <Link href="#" onClick={() => setIsMenuOpen(false)} className="block text-slate-800">Advertise</Link>
+              <Link href="#" onClick={() => setIsMenuOpen(false)} className="block text-slate-800">Contact</Link>
             </div>
           </div>
         </div>
