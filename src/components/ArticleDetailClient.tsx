@@ -352,7 +352,7 @@ export default function ArticleDetailClient({
                 </div>
 
                 {/* Article Content */}
-                <div className="prose max-w-none flex-1">
+                <div className="max-w-none flex-1">
                   {headerData?.excerpt && (
                     <p className="text-[18px] leading-[28px] text-[#020a1c] mb-6 font-medium">
                       {headerData.excerpt}
@@ -360,7 +360,7 @@ export default function ArticleDetailClient({
                   )}
 
                   <div
-                    className="text-[18px] leading-[28px] text-[#020a1c]"
+                    className="article-content"
                     dangerouslySetInnerHTML={{ __html: contentData.content }}
                   />
                 </div>
