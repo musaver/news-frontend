@@ -136,7 +136,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
         {/* Sub Navigation Bar */}
         <div className="bg-[#cc0000] border-b border-slate-200">
           <div className="max-w-[1320px] mx-auto px-6 h-10 flex items-center justify-between">
-            <nav className="flex items-center gap-6 text-white text-sm font-medium">
+            <nav className="flex items-center gap-6 text-white text-md font-medium">
               <Link href="/" className="hover:opacity-80">Latest News</Link>
               <div className="w-px h-4 bg-white/30"></div>
               {categories.map((category) => (
