@@ -12,10 +12,16 @@ export async function GET(
 
     const result = await db
       .select({
-        id: articles.id,
-        title: articles.title,
+        excerpt: articles.excerpt,
+        coverImage: articles.coverImage,
+        publishedAt: articles.publishedAt,
+        category: {
+          id: categories.id,
+          name: categories.name,
+        },
       })
       .from(articles)
+      .innerJoin(categories, eq(articles.categoryId, categories.id))
       .where(and(eq(articles.id, id), eq(articles.status, 'published')))
       .limit(1);
 
@@ -28,7 +34,7 @@ export async function GET(
 
     return NextResponse.json(result[0]);
   } catch (error) {
-    console.error('Error fetching basic article data:', error);
+    console.error('Error fetching article header data:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
