@@ -31,23 +31,15 @@ async function fetchCategories() {
   }
 }
 
-// Fetch basic article data for initial render
-async function fetchBasicArticleData(articleId: string) {
+// Fetch minimal article data for initial render (just title)
+async function fetchMinimalArticleData(articleId: string) {
   try {
     const result = await db
       .select({
         id: articles.id,
         title: articles.title,
-        excerpt: articles.excerpt,
-        coverImage: articles.coverImage,
-        publishedAt: articles.publishedAt,
-        category: {
-          id: categories.id,
-          name: categories.name,
-        },
       })
       .from(articles)
-      .innerJoin(categories, eq(articles.categoryId, categories.id))
       .where(and(eq(articles.id, articleId), eq(articles.status, 'published')))
       .limit(1);
 
@@ -55,7 +47,7 @@ async function fetchBasicArticleData(articleId: string) {
 
     return result[0];
   } catch (error) {
-    console.error('Error fetching basic article data:', error);
+    console.error('Error fetching minimal article data:', error);
     return null;
   }
 }
@@ -71,22 +63,22 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
   const resolvedParams = await params;
   const articleId = resolvedParams.id;
 
-  // Fetch basic article data and categories in parallel
-  const [basicArticleData, allCategories] = await Promise.all([
-    fetchBasicArticleData(articleId),
+  // Fetch minimal article data (just title) and categories in parallel
+  const [minimalArticleData, allCategories] = await Promise.all([
+    fetchMinimalArticleData(articleId),
     fetchCategories(),
   ]);
 
   // If article not found, show 404
-  if (!basicArticleData) {
+  if (!minimalArticleData) {
     notFound();
   }
 
   return (
     <>
       <Header categories={allCategories} />
-      <VisitTracker articleId={basicArticleData.id} />
-      <ArticleDetailClient articleId={articleId} initialData={basicArticleData} />
+      <VisitTracker articleId={minimalArticleData.id} />
+      <ArticleDetailClient articleId={articleId} initialData={minimalArticleData} />
       <Footer />
     </>
   );
