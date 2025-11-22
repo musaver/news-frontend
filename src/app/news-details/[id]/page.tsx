@@ -13,9 +13,13 @@ import { formatDate } from '@/types/article';
 import CommentsSection from '@/components/comments/CommentsSection';
 import SaveButton from '@/components/SaveButton';
 import VisitTracker from '@/components/VisitTracker';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { savedArticles, comments } from '@/lib/schema';
+import { count } from 'drizzle-orm';
 
-// Force dynamic rendering for database queries
-export const dynamic = 'force-dynamic';
+// Use ISR with 60-second revalidation for better performance
+export const revalidate = 60;
 
 // Fetch all categories for navigation
 async function fetchCategories() {
@@ -161,6 +165,44 @@ async function fetchMostRecentArticles(limit: number = 5) {
   }
 }
 
+// Check if article is saved by current user
+async function checkIfArticleSaved(articleId: string, userId?: string): Promise<boolean> {
+  if (!userId) return false;
+
+  try {
+    const result = await db
+      .select({ id: savedArticles.id })
+      .from(savedArticles)
+      .where(
+        and(
+          eq(savedArticles.userId, userId),
+          eq(savedArticles.articleId, articleId)
+        )
+      )
+      .limit(1);
+
+    return result.length > 0;
+  } catch (error) {
+    console.error('Error checking if article is saved:', error);
+    return false;
+  }
+}
+
+// Fetch comments count for an article
+async function fetchCommentsCount(articleId: string): Promise<number> {
+  try {
+    const result = await db
+      .select({ count: count() })
+      .from(comments)
+      .where(eq(comments.articleId, articleId));
+
+    return result[0]?.count || 0;
+  } catch (error) {
+    console.error('Error fetching comments count:', error);
+    return 0;
+  }
+}
+
 interface NewsDetailsPageProps {
   params: Promise<{
     id: string;
@@ -180,11 +222,16 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
     notFound();
   }
 
-  // Fetch related articles, recent articles, and categories in parallel
-  const [allCategories, relatedArticles, mostRecentArticles] = await Promise.all([
+  // Get session to check if article is saved
+  const session = await getServerSession(authOptions);
+
+  // Fetch related articles, recent articles, categories, saved status, and comments count in parallel
+  const [allCategories, relatedArticles, mostRecentArticles, isSaved, commentsCount] = await Promise.all([
     fetchCategories(),
     fetchRelatedArticles(article.categoryId, article.id, 6),
-    fetchMostRecentArticles(5)
+    fetchMostRecentArticles(5),
+    checkIfArticleSaved(article.id, session?.user?.id),
+    fetchCommentsCount(article.id)
   ]);
 
   // Calculate reading time
@@ -281,6 +328,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                     alt={article.title}
                     width={1200}
                     height={500}
+                    priority
                     className="w-full h-[400px] md:h-[500px] object-cover"
                   />
                 </div>
@@ -292,7 +340,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                 <div className="hidden lg:block">
                   <div className="sticky top-32 flex flex-col gap-4">
                     {/* Save Button */}
-                    <SaveButton articleId={article.id} />
+                    <SaveButton articleId={article.id} initialIsSaved={isSaved} />
 
                     {/* Facebook */}
                     <button className="w-10 h-10 rounded-full border border-[rgba(203,213,225,0.35)] flex items-center justify-center hover:bg-[#f7fafc] transition-colors">
@@ -380,6 +428,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                               alt={relArticle.title}
                               width={400}
                               height={200}
+                              loading="lazy"
                               className="w-full h-full object-cover"
                             />
                           </div>
@@ -401,7 +450,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
               )}
 
               {/* Comments Section */}
-              <CommentsSection articleId={article.id} />
+              <CommentsSection articleId={article.id} initialCommentsCount={commentsCount} />
             </div>
 
             {/* Sidebar */}
@@ -426,6 +475,7 @@ export default async function NewsDetailsPage({ params }: NewsDetailsPageProps) 
                                   alt={recentArticle.title}
                                   width={125}
                                   height={100}
+                                  loading="lazy"
                                   className="w-full h-full object-cover"
                                 />
                               </div>

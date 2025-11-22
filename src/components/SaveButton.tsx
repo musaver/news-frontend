@@ -7,27 +7,31 @@ import { useRouter } from 'next/navigation';
 interface SaveButtonProps {
   articleId: string;
   className?: string;
+  initialIsSaved?: boolean;
 }
 
-export default function SaveButton({ articleId, className = '' }: SaveButtonProps) {
+export default function SaveButton({ articleId, className = '', initialIsSaved = false }: SaveButtonProps) {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(initialIsSaved);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheckingSaved, setIsCheckingSaved] = useState(true);
+  const [isCheckingSaved, setIsCheckingSaved] = useState(!initialIsSaved && status === 'loading');
 
-  // Check if article is already saved
+  // Check if article is already saved (only if not provided initially)
   useEffect(() => {
     const checkIfSaved = async () => {
+      // Skip API call if we already have the initial value and user is authenticated
+      if (initialIsSaved && status === 'authenticated') {
+        setIsCheckingSaved(false);
+        return;
+      }
+
       if (status === 'authenticated' && session?.user) {
         try {
-          const response = await fetch('/api/saved-articles');
+          const response = await fetch(`/api/saved-articles/check?articleId=${articleId}`);
           if (response.ok) {
             const data = await response.json();
-            const saved = data.savedArticles.some(
-              (item: any) => item.articleId === articleId
-            );
-            setIsSaved(saved);
+            setIsSaved(data.isSaved || false);
           }
         } catch (error) {
           console.error('Error checking saved status:', error);
@@ -40,7 +44,7 @@ export default function SaveButton({ articleId, className = '' }: SaveButtonProp
     };
 
     checkIfSaved();
-  }, [articleId, session, status]);
+  }, [articleId, session, status, initialIsSaved]);
 
   const handleSaveToggle = async () => {
     // Check if user is logged in
