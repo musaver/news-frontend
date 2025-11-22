@@ -42,18 +42,30 @@ export default function BecomeAnAuthorPage() {
     }
 
     try {
-      // TODO: Replace with actual API endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-
-      setSubmitStatus({ type: 'success', message: 'Application submitted successfully! We will review your application and get back to you soon.' });
-      setFormData({
-        fullName: '',
-        email: '',
-        designation: '',
-        bio: '',
-        address: ''
+      const response = await fetch('/api/author-applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({ type: 'success', message: data.message });
+        setFormData({
+          fullName: '',
+          email: '',
+          designation: '',
+          bio: '',
+          address: ''
+        });
+      } else {
+        setSubmitStatus({ type: 'error', message: data.error || 'Failed to submit application. Please try again.' });
+      }
     } catch (error) {
+      console.error('Error submitting application:', error);
       setSubmitStatus({ type: 'error', message: 'Failed to submit application. Please try again.' });
     } finally {
       setIsSubmitting(false);
