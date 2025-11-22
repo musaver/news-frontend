@@ -96,20 +96,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if article exists
-    const articleExists = await db
-      .select()
-      .from(articles)
-      .where(eq(articles.id, articleId))
-      .limit(1);
-
-    if (articleExists.length === 0) {
-      return NextResponse.json(
-        { error: 'Article not found.' },
-        { status: 404 }
-      );
-    }
-
     // Get IP address from headers
     const forwarded = req.headers.get('x-forwarded-for');
     const ipAddress = forwarded ? forwarded.split(',')[0] : req.headers.get('x-real-ip') || 'unknown';
