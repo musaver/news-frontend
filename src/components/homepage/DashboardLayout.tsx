@@ -1,15 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import { Header, Footer } from '@/components/homepage';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
-
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-}
 
 // SVG Icons
 const HomeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -100,22 +93,6 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
   const router = useRouter();
   const { data: session } = useSession();
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const fetchCategoriesData = async () => {
-      try {
-        const response = await fetch('/api/categories');
-        const data = await response.json();
-        if (data.success) {
-          setCategories(data.categories);
-        }
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-    fetchCategoriesData();
-  }, []);
 
   const userData = {
     name: 'Sarah Johnson',
@@ -145,8 +122,6 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      <Header categories={categories} />
-
       {/* Tab Navigation */}
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
@@ -181,8 +156,6 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
           {children}
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 }
