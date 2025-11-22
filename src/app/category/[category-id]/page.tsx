@@ -190,7 +190,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   // Fetch articles and categories in parallel
   const [allCategories, categoryArticles, sidebarArticles] = await Promise.all([
     fetchCategories(),
-    fetchArticlesByCategory(category.id, 20),
+    fetchArticlesByCategory(category.id, 100),
     fetchLatestArticles(8)
   ]);
 

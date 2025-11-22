@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import ArticleDate from './ArticleDate';
 import { Article, formatDate } from '@/types/article';
@@ -15,6 +17,9 @@ interface LatestNewsSectionProps {
 }
 
 const LatestNewsSection = ({ mockImages, articles, title = "Latest News" }: LatestNewsSectionProps) => {
+  // State to track how many articles to show
+  const [visibleCount, setVisibleCount] = useState(12);
+
   // Get fallback images based on category
   const getFallbackImage = (category: string) => {
     const categoryMap: { [key: string]: string } = {
@@ -26,9 +31,17 @@ const LatestNewsSection = ({ mockImages, articles, title = "Latest News" }: Late
     return categoryMap[category] || mockImages.healthNews;
   };
 
-  // For mobile: show 4 articles, for desktop: show 3 articles
-  const mobileArticles = articles.slice(0, 4);
-  const desktopArticles = articles.slice(0, 3);
+  // For mobile: show 12 articles initially, for desktop: show 10 articles initially
+  const mobileArticles = articles.slice(0, Math.min(visibleCount, articles.length));
+  const desktopArticles = articles.slice(0, Math.min(visibleCount, articles.length));
+
+  // Function to load more articles
+  const loadMore = () => {
+    setVisibleCount(prev => prev + 10);
+  };
+
+  // Check if there are more articles to load
+  const hasMore = visibleCount < articles.length;
 
   return (
     <section className="max-w-[917px] md:max-w-none">
@@ -91,6 +104,18 @@ const LatestNewsSection = ({ mockImages, articles, title = "Latest News" }: Late
           </article>
         ))}
       </div>
+
+      {/* View More Button */}
+      {hasMore && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={loadMore}
+            className="px-6 py-3 bg-[#cc0000] text-white rounded-lg hover:bg-[#aa0000] transition-colors font-medium"
+          >
+            View More
+          </button>
+        </div>
+      )}
     </section>
   );
 };
