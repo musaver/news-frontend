@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Search, Menu, X, User } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import svgPaths from '@/imports/svg-ykc7st1had';
@@ -38,6 +39,7 @@ interface HeaderProps {
 
 const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -137,17 +139,25 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
         <div className="bg-[#cc0000] border-b border-slate-200">
           <div className="max-w-[1320px] mx-auto px-6 h-10 flex items-center justify-between">
             <nav className="flex items-center gap-6 text-white text-md font-medium">
-              <Link href="/" className="hover:opacity-80">Latest News</Link>
+              <Link
+                href="/"
+                className={`hover:opacity-80 ${pathname === '/' ? 'border-b-2 border-white' : ''}`}
+              >
+                Latest News
+              </Link>
               <div className="w-px h-4 bg-white/30"></div>
-              {categories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/category/${category.id}`}
-                  className="hover:opacity-80"
-                >
-                  {category.name}
-                </Link>
-              ))}
+              {categories.map((category) => {
+                const isActive = pathname === `/category/${category.id}`;
+                return (
+                  <Link
+                    key={category.id}
+                    href={`/category/${category.id}`}
+                    className={`hover:opacity-80 ${isActive ? 'border-b-2 border-white' : ''}`}
+                  >
+                    {category.name}
+                  </Link>
+                );
+              })}
             </nav>
             <div className="flex items-center gap-2">
               <Link
@@ -214,16 +224,24 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
         <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-slate-200 z-40">
           <div className="px-6 py-8 space-y-8">
             <div className="space-y-8">
-              <Link href="/" className="block text-slate-800">Top Stories</Link>
-              {categories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/category/${category.id}`}
-                  className="block text-slate-800"
-                >
-                  {category.name}
-                </Link>
-              ))}
+              <Link
+                href="/"
+                className={`block text-slate-800 ${pathname === '/' ? 'font-bold text-[#cc0000]' : ''}`}
+              >
+                Top Stories
+              </Link>
+              {categories.map((category) => {
+                const isActive = pathname === `/category/${category.id}`;
+                return (
+                  <Link
+                    key={category.id}
+                    href={`/category/${category.id}`}
+                    className={`block text-slate-800 ${isActive ? 'font-bold text-[#cc0000]' : ''}`}
+                  >
+                    {category.name}
+                  </Link>
+                );
+              })}
             </div>
             <div className="h-px bg-slate-300/35"></div>
             <div className="space-y-6">
