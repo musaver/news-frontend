@@ -46,6 +46,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
   const [linkUrl, setLinkUrl] = useState('');
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [, setEditorState] = useState(0);
 
   const editor = useEditor({
     extensions: [
@@ -73,6 +74,10 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       onChange(html);
+    },
+    onSelectionUpdate: () => {
+      // Force component re-render when selection changes
+      setEditorState(prev => prev + 1);
     },
     editorProps: {
       attributes: {
