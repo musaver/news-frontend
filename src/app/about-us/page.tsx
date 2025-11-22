@@ -1,19 +1,11 @@
 import React from 'react';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
 import Image from 'next/image';
 import imgAboutUs from '@/assets/6d00fa3c2d7790e1cd6b7cdb3f89652742305c58.png';
 import { imgContainer as imgAboutUsWatermark } from "@/imports/svg-a7b80";
-import { fetchCategories } from '@/lib/fetchCategories';
 
 export default async function AboutUsPage() {
-  const allCategories = await fetchCategories();
-
   return (
     <div className="min-h-screen bg-white">
-      <Header categories={allCategories} />
       
       <main>
         
@@ -320,7 +312,6 @@ export default async function AboutUsPage() {
         </div>
       </main>
       
-      <Footer />
     </div>
   );
 }

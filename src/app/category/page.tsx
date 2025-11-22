@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Header,
-  Footer,
   FeaturedSection,
   LatestNewsSection,
   FinanceSidebar,
@@ -118,7 +116,6 @@ export default async function CategoryPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
 
       
       
@@ -173,7 +170,6 @@ export default async function CategoryPage() {
         <PodcastSection mockImages={mockImages} articles={podcastArticles} />
       </main>
       
-      <Footer />
     </div>
   );
 }

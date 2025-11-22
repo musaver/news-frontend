@@ -1,10 +1,6 @@
 'use client'
 
 import React from 'react';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
 import Image from 'next/image';
 import { imgContainer } from "@/imports/svg-4a9ab";
 
@@ -80,7 +76,6 @@ export default function AuthorDetailsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       
       <main>
         
@@ -498,7 +493,6 @@ export default function AuthorDetailsPage() {
         </div>
       </main>
       
-      <Footer />
     </div>
   );
 }

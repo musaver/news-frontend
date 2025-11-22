@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  Header,
-  Footer,
   FeaturedSection,
   LatestNewsSection,
   FinanceSidebar,
@@ -139,8 +137,6 @@ export default function CategoryPageClient({
 
   return (
     <div className="min-h-screen bg-white">
-      <Header categories={initialCategories} />
-
       <main>
         {/* Category Header Banner */}
         <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
@@ -235,8 +231,6 @@ export default function CategoryPageClient({
           <PodcastSection mockImages={mockImages} articles={podcastArticles} />
         ) : null}
       </main>
-
-      <Footer />
     </div>
   );
 }
