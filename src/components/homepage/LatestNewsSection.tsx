@@ -11,9 +11,10 @@ interface LatestNewsSectionProps {
     travel: string;
   };
   articles: Article[];
+  title?: string;
 }
 
-const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => {
+const LatestNewsSection = ({ mockImages, articles, title = "Latest News" }: LatestNewsSectionProps) => {
   // Get fallback images based on category
   const getFallbackImage = (category: string) => {
     const categoryMap: { [key: string]: string } = {
@@ -33,7 +34,7 @@ const LatestNewsSection = ({ mockImages, articles }: LatestNewsSectionProps) => 
     <section className="max-w-[917px] md:max-w-none">
       <div className="flex items-center gap-5 mb-6 px-1 md:px-0">
         <div className="w-1 h-4 bg-[#cc0000]"></div>
-        <h2 className="text-[12.5px] leading-[19px] md:text-lg font-normal">Latest News</h2>
+        <h2 className="text-[12.5px] leading-[19px] md:text-lg font-normal">{title}</h2>
         <div className="flex-1 h-px bg-slate-300/35"></div>
         <Link href="/articles" className="flex items-center gap-1 text-[12.8px] leading-[19px] md:text-sm text-slate-700 font-normal hover:text-[#cc0000] transition-colors cursor-pointer">
           <span>View all</span>
