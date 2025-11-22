@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Header,
-  Footer,
   FeaturedSection,
   LatestNewsSection,
   TopStoriesSection,
@@ -18,24 +16,6 @@ import { eq, desc, and } from 'drizzle-orm';
 
 // Force dynamic rendering for database queries
 export const dynamic = 'force-dynamic';
-
-// Fetch all categories
-async function fetchCategories() {
-  try {
-    const result = await db
-      .select({
-        id: categories.id,
-        name: categories.name,
-        slug: categories.slug,
-      })
-      .from(categories)
-      .orderBy(categories.name);
-    return result;
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-    return [];
-  }
-}
 
 // Mock images - fallback for articles without cover images
 const mockImages = {
@@ -144,9 +124,8 @@ async function fetchLatestArticles(limit: number = 10) {
 
 // Main App Component
 export default async function Home() {
-  // Fetch categories and articles in parallel
+  // Fetch articles in parallel
   const [
-    allCategories,
     businessArticles,
     financeArticles,
     politicsArticles,
@@ -159,7 +138,6 @@ export default async function Home() {
     techArticles,
     latestArticles
   ] = await Promise.all([
-    fetchCategories(),
     fetchArticlesByCategory('Business', 5),
     fetchArticlesByCategory('Finance', 8),
     fetchArticlesByCategory('Politics', 5),
@@ -175,7 +153,6 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header categories={allCategories} />
 
       <main>
         {/* Mobile Layout */}
@@ -250,8 +227,6 @@ export default async function Home() {
           articles={[...techArticles, ...entertainmentArticles].slice(0, 3)}
         />
       </main>
-
-      <Footer />
     </div>
   );
 }

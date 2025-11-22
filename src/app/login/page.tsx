@@ -2,7 +2,6 @@
 
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import { Header, Footer } from '@/components/homepage';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -17,7 +16,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <main>
         <div className="max-w-md mx-auto px-4 py-8">
           <h1 className="text-2xl font-semibold mb-6">Login</h1>
@@ -53,7 +51,6 @@ export default function LoginPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

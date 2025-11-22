@@ -1,39 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import {
-  Header,
-  Footer,
-} from '@/components/homepage';
+import React from 'react';
 import { imgContainer as imgCareersWatermark } from "@/imports/svg-a7b80";
 
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-}
-
 export default function CareersPage() {
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const fetchCategoriesData = async () => {
-      try {
-        const response = await fetch('/api/categories');
-        const data = await response.json();
-        if (data.success) {
-          setCategories(data.categories);
-        }
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-    fetchCategoriesData();
-  }, []);
-
   return (
     <div className="min-h-screen bg-white">
-      <Header categories={categories} />
 
       <main>
 
@@ -169,7 +141,6 @@ export default function CareersPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

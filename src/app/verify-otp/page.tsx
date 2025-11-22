@@ -3,7 +3,6 @@
 import { useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { Header, Footer } from '@/components/homepage';
 
 function VerifyOTPContent() {
   const searchParams = useSearchParams();
@@ -48,7 +47,6 @@ function VerifyOTPContent() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
       <main>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
@@ -58,7 +56,6 @@ function VerifyOTPContent() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
@@ -67,7 +64,6 @@ export default function VerifyOTP() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-white">
-        <Header />
         <main>
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="text-center">
@@ -76,7 +72,6 @@ export default function VerifyOTP() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     }>
       <VerifyOTPContent />
