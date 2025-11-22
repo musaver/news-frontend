@@ -48,6 +48,19 @@ function NavigationLoadingContent({ children }: { children: React.ReactNode }) {
       const anchor = target.closest('a');
 
       if (anchor && anchor.href) {
+        // Check if the link will open in a new tab
+        const isNewTab =
+          e.ctrlKey || // Ctrl+click (Windows/Linux)
+          e.metaKey || // Cmd+click (Mac)
+          e.shiftKey || // Shift+click (new window)
+          e.button === 1 || // Middle click
+          anchor.target === '_blank'; // Target blank attribute
+
+        // Don't show loading if opening in new tab
+        if (isNewTab) {
+          return;
+        }
+
         const url = new URL(anchor.href);
         const currentUrl = new URL(window.location.href);
 
