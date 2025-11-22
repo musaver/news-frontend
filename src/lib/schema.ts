@@ -123,3 +123,19 @@ export const articleVisits = mysqlTable('article_visits', {
   ipAddress: varchar('ip_address', { length: 45 }), // IPv4 or IPv6 address
   userAgent: text('user_agent'), // Browser and device information
 });
+
+// ✅ Pending Authors table (for author applications)
+export const pendingAuthors = mysqlTable('pending_authors', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  fullName: varchar('full_name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  designation: varchar('designation', { length: 255 }).notNull(),
+  bio: text('bio').notNull(),
+  address: text('address').notNull(),
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // 'pending', 'approved', 'rejected'
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow().onUpdateNow(),
+  reviewedAt: timestamp('reviewed_at'),
+  reviewedBy: varchar('reviewed_by', { length: 255 }), // Admin/reviewer user ID
+  rejectionReason: text('rejection_reason'), // Optional reason if rejected
+});
