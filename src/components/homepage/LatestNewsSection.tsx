@@ -98,7 +98,7 @@ const LatestNewsSection = ({ mockImages, articles, title = "Latest News" }: Late
                 <ArticleDate>{formatDate(article.publishedAt)}</ArticleDate>
               </div>
               <Link href={`/news-details/${article.id}`}>
-                <h3 className="text-sm leading-tight font-medium hover:text-[#cc0000] transition-colors">{article.title}</h3>
+                <h3 className="text-lg leading-tight font-medium hover:text-[#cc0000] transition-colors">{article.title}</h3>
               </Link>
             </div>
           </article>
