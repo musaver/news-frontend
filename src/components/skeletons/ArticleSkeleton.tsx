@@ -1,5 +1,22 @@
 import React from 'react';
 
+export const HeaderSkeleton = () => (
+  <div className="space-y-4 animate-pulse">
+    {/* Category and Date Skeleton */}
+    <div className="flex items-center gap-3">
+      <div className="h-6 bg-gray-200 rounded w-24"></div>
+      <div className="h-4 bg-gray-200 rounded w-20"></div>
+    </div>
+    {/* Title is already visible, so no need to show skeleton for it */}
+  </div>
+);
+
+export const CoverImageSkeleton = () => (
+  <div className="rounded-lg overflow-hidden animate-pulse">
+    <div className="w-full h-[400px] md:h-[500px] bg-gray-200"></div>
+  </div>
+);
+
 export const AuthorSkeleton = () => (
   <div className="bg-white box-border content-stretch flex gap-[12px] items-center overflow-clip pl-[4px] pr-0 py-0 relative shrink-0 w-full md:w-[476px] mt-2 animate-pulse">
     {/* Author Avatar Skeleton */}

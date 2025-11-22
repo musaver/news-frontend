@@ -7,6 +7,8 @@ import { formatDate } from '@/types/article';
 import CommentsSection from '@/components/comments/CommentsSection';
 import SaveButton from '@/components/SaveButton';
 import {
+  HeaderSkeleton,
+  CoverImageSkeleton,
   AuthorSkeleton,
   ContentSkeleton,
   RelatedArticlesSkeleton,
@@ -37,9 +39,12 @@ function formatFullDate(date: Date | null | undefined): string {
   });
 }
 
-interface BasicArticleData {
+interface MinimalArticleData {
   id: string;
   title: string;
+}
+
+interface HeaderData {
   excerpt: string | null;
   coverImage: string | null;
   publishedAt: Date | null;
@@ -85,23 +90,46 @@ interface RelatedData {
 
 interface ArticleDetailClientProps {
   articleId: string;
-  initialData: BasicArticleData;
+  initialData: MinimalArticleData;
 }
 
 export default function ArticleDetailClient({
   articleId,
   initialData,
 }: ArticleDetailClientProps) {
+  const [headerData, setHeaderData] = useState<HeaderData | null>(null);
   const [authorData, setAuthorData] = useState<AuthorData | null>(null);
   const [contentData, setContentData] = useState<ContentData | null>(null);
   const [relatedData, setRelatedData] = useState<RelatedData | null>(null);
 
+  const [loadingHeader, setLoadingHeader] = useState(true);
   const [loadingAuthor, setLoadingAuthor] = useState(true);
   const [loadingContent, setLoadingContent] = useState(true);
   const [loadingRelated, setLoadingRelated] = useState(true);
 
-  // Fetch author data
+  // Fetch header data (description, image, category, date)
   useEffect(() => {
+    async function fetchHeader() {
+      try {
+        const response = await fetch(`/api/articles/${articleId}/header`);
+        if (response.ok) {
+          const data = await response.json();
+          setHeaderData(data);
+        }
+      } catch (error) {
+        console.error('Error fetching header data:', error);
+      } finally {
+        setLoadingHeader(false);
+      }
+    }
+
+    fetchHeader();
+  }, [articleId]);
+
+  // Fetch author data after header data
+  useEffect(() => {
+    if (!headerData) return;
+
     async function fetchAuthor() {
       try {
         const response = await fetch(`/api/articles/${articleId}/author`);
@@ -117,7 +145,7 @@ export default function ArticleDetailClient({
     }
 
     fetchAuthor();
-  }, [articleId]);
+  }, [articleId, headerData]);
 
   // Fetch content data after author data
   useEffect(() => {
@@ -167,17 +195,32 @@ export default function ArticleDetailClient({
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_354px] gap-8">
           {/* Main Content */}
           <div className="space-y-8">
-            {/* Article Header - Always visible */}
+            {/* Article Header - Title always visible, rest progressive */}
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Link href={`/category/${initialData.category.id}`}>
-                  <CategoryBadge>{initialData.category.name}</CategoryBadge>
-                </Link>
-                <ArticleDate>{formatDate(initialData.publishedAt)}</ArticleDate>
-              </div>
-              <h1 className="text-[32px] md:text-[40px] leading-[1.2] font-normal text-[#020a1c]">
-                {initialData.title}
-              </h1>
+              {loadingHeader ? (
+                <>
+                  <HeaderSkeleton />
+                  <h1 className="text-[32px] md:text-[40px] leading-[1.2] font-normal text-[#020a1c]">
+                    {initialData.title}
+                  </h1>
+                </>
+              ) : headerData ? (
+                <>
+                  <div className="flex items-center gap-3">
+                    <Link href={`/category/${headerData.category.id}`}>
+                      <CategoryBadge>{headerData.category.name}</CategoryBadge>
+                    </Link>
+                    <ArticleDate>{formatDate(headerData.publishedAt)}</ArticleDate>
+                  </div>
+                  <h1 className="text-[32px] md:text-[40px] leading-[1.2] font-normal text-[#020a1c]">
+                    {initialData.title}
+                  </h1>
+                </>
+              ) : (
+                <h1 className="text-[32px] md:text-[40px] leading-[1.2] font-normal text-[#020a1c]">
+                  {initialData.title}
+                </h1>
+              )}
             </div>
 
             {/* Divider Line */}
@@ -244,11 +287,13 @@ export default function ArticleDetailClient({
               </div>
             ) : null}
 
-            {/* Featured Image - Always visible */}
-            {initialData.coverImage && (
+            {/* Featured Image - Progressive loading */}
+            {loadingHeader ? (
+              <CoverImageSkeleton />
+            ) : headerData?.coverImage ? (
               <div className="rounded-lg overflow-hidden">
                 <Image
-                  src={initialData.coverImage}
+                  src={headerData.coverImage}
                   alt={initialData.title}
                   width={1200}
                   height={500}
@@ -256,7 +301,7 @@ export default function ArticleDetailClient({
                   className="w-full h-[400px] md:h-[500px] object-cover"
                 />
               </div>
-            )}
+            ) : null}
 
             {/* Article Content with Social Share - Progressive loading */}
             {loadingContent ? (
@@ -308,9 +353,9 @@ export default function ArticleDetailClient({
 
                 {/* Article Content */}
                 <div className="prose max-w-none flex-1">
-                  {initialData.excerpt && (
+                  {headerData?.excerpt && (
                     <p className="text-[18px] leading-[28px] text-[#020a1c] mb-6 font-medium">
-                      {initialData.excerpt}
+                      {headerData.excerpt}
                     </p>
                   )}
 

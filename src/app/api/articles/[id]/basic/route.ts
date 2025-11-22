@@ -14,16 +14,8 @@ export async function GET(
       .select({
         id: articles.id,
         title: articles.title,
-        excerpt: articles.excerpt,
-        coverImage: articles.coverImage,
-        publishedAt: articles.publishedAt,
-        category: {
-          id: categories.id,
-          name: categories.name,
-        },
       })
       .from(articles)
-      .innerJoin(categories, eq(articles.categoryId, categories.id))
       .where(and(eq(articles.id, id), eq(articles.status, 'published')))
       .limit(1);
 
