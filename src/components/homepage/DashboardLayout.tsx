@@ -1,0 +1,161 @@
+'use client'
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import { useSession, signOut } from 'next-auth/react';
+
+// SVG Icons
+const HomeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+  </svg>
+);
+
+const BookmarkIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+  </svg>
+);
+
+const ClockIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12,6 12,12 16,14" />
+  </svg>
+);
+
+const MessageSquareIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+  </svg>
+);
+
+const BellIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+  </svg>
+);
+
+const SettingsIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+  </svg>
+);
+
+const LogOutIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+  </svg>
+);
+
+const SearchIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="8" />
+    <path d="M21 21l-4.35-4.35" />
+  </svg>
+);
+
+const ChevronDownIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <polyline points="6,9 12,15 18,9" />
+  </svg>
+);
+
+const BarChart3Icon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <line x1="18" y1="20" x2="18" y2="10" strokeWidth={2} strokeLinecap="round" />
+    <line x1="12" y1="20" x2="12" y2="4" strokeWidth={2} strokeLinecap="round" />
+    <line x1="6" y1="20" x2="6" y2="14" strokeWidth={2} strokeLinecap="round" />
+  </svg>
+);
+
+const LayoutDashboardIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="9" />
+    <rect x="14" y="3" width="7" height="5" />
+    <rect x="14" y="12" width="7" height="9" />
+    <rect x="3" y="16" width="7" height="5" />
+  </svg>
+);
+
+const FileTextIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
+
+interface DashboardLayoutProps {
+  children: React.ReactNode;
+  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications' | 'analytics' | 'comments' | 'articles';
+}
+
+export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  const userData = {
+    name: 'Sarah Johnson',
+    email: 'sarah.johnson@email.com',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400'
+  };
+
+  // Get user type from session
+  const userType = (session?.user as any)?.userType || 'user';
+  const isAuthor = userType === 'author';
+
+  const baseTabs = [
+    { id: 'activity', icon: LayoutDashboardIcon, label: 'Dashboard', path: '/dashboard' },
+    { id: 'saved', icon: BookmarkIcon, label: 'Saved', path: '/saved' },
+    { id: 'history', icon: ClockIcon, label: 'History', path: '/history' },
+    { id: 'preferences', icon: SettingsIcon, label: 'Preferences', path: '/preferences' }
+  ];
+
+  // Add articles, analytics and comments tabs for authors
+  const authorTabs = [
+    { id: 'articles', icon: FileTextIcon, label: 'Articles', path: '/articles' },
+    { id: 'analytics', icon: BarChart3Icon, label: 'Analytics', path: '/analytics' },
+    { id: 'comments', icon: MessageSquareIcon, label: 'Comments', path: '/comments' }
+  ];
+
+  const tabs = isAuthor ? [...baseTabs, ...authorTabs] : baseTabs;
+
+  return (
+    <div className="min-h-screen bg-[#f7fafc]">
+      {/* Tab Navigation */}
+      <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
+        <div className="max-w-[1320px] mx-auto">
+          <div className="flex items-center justify-center gap-2 px-4 py-2 overflow-x-auto">
+            {tabs.map(({ id, icon: Icon, label, path }) => (
+              <button
+                key={id}
+                onClick={() => router.push(path)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-md font-medium ${id === activeTab ? 'bg-[#cc0000] text-white' : 'hover:bg-[#f7fafc]'
+                  }`}
+              >
+                <Icon className="w-4 h-4" />
+                <span className="hidden sm:inline">{label}</span>
+              </button>
+            ))}
+            <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
+            <button
+              onClick={() => signOut({ callbackUrl: '/register' })}
+              className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium"
+            >
+              <LogOutIcon className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <main className="">
+        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
+
