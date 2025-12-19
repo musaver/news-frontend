@@ -92,32 +92,32 @@ export default function AuthorSettingsPage() {
           <div className="flex items-center justify-center gap-2 px-4 py-4 overflow-x-auto">
             <Link href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <LayoutDashboardIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Overview</span>
+              <span className="">Overview</span>
             </Link>
             <Link href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <FileTextIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Articles</span>
+              <span className="">Articles</span>
             </Link>
             <Link href="/author-dashboard/analytics" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <BarChart3Icon className="w-4 h-4" />
-              <span className="hidden sm:inline">Analytics</span>
+              <span className="">Analytics</span>
             </Link>
             <Link href="/author-dashboard/comments" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <MessageSquareIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Comments</span>
+              <span className="">Comments</span>
             </Link>
             <Link href="/author-dashboard/earnings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
               <DollarSignIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Earnings</span>
+              <span className="">Earnings</span>
             </Link>
             <Link href="/author-dashboard/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
               <SettingsIcon className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
+              <span className="">Settings</span>
             </Link>
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
             <button className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium">
               <LogOutIcon className="w-4 h-4" />
-              <span className="hidden xl:inline">Logout</span>
+              <span className="">Logout</span>
             </button>
           </div>
         </div>

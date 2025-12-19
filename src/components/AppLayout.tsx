@@ -1,6 +1,4 @@
-'use client'
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Header, Footer } from '@/components/homepage';
 
 interface Category {
@@ -9,23 +7,12 @@ interface Category {
   slug: string;
 }
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const [categories, setCategories] = useState<Category[]>([]);
+interface AppLayoutProps {
+  children: React.ReactNode;
+  categories: Category[];
+}
 
-  // Fetch categories once when the layout mounts
-  useEffect(() => {
-    fetch('/api/categories')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.categories) {
-          setCategories(data.categories);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching categories:', error);
-      });
-  }, []);
-
+export default function AppLayout({ children, categories }: AppLayoutProps) {
   return (
     <>
       <Header categories={categories} />

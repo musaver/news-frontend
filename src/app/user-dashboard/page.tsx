@@ -218,7 +218,7 @@ export default function UserDashboardPage() {
                   }`}
               >
                 <Icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{label}</span>
+                <span className="">{label}</span>
               </button>
             ))}
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>

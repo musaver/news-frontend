@@ -125,7 +125,7 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
       {/* Tab Navigation */}
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
-          <div className="flex items-center justify-center gap-2 px-4 py-2 overflow-x-auto">
+          <div className="flex items-center justify-start md:justify-center gap-2 px-4 py-2 overflow-x-auto no-scrollbar">
             {tabs.map(({ id, icon: Icon, label, path }) => (
               <button
                 key={id}
@@ -134,13 +134,13 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
                   }`}
               >
                 <Icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{label}</span>
+                <span className="">{label}</span>
               </button>
             ))}
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
             <button
               onClick={() => signOut({ callbackUrl: '/register' })}
-              className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium"
             >
               <LogOutIcon className="w-4 h-4" />
               <span>Logout</span>

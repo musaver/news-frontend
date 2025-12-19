@@ -137,9 +137,9 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
         </div>
 
         {/* Sub Navigation Bar */}
-        <div className="bg-[#cc0000] border-b border-slate-200">
+        <div className="border-b border-slate-200">
           <div className="max-w-[1320px] mx-auto px-6 h-10 flex items-center justify-between">
-            <nav className="flex items-center gap-6 text-white text-md font-medium">
+            <nav className="flex items-center gap-6 text-md font-medium">
               <Link
                 href="/"
                 className={`hover:opacity-80 ${pathname === '/' ? 'border-b-2 border-white' : ''}`}
@@ -163,15 +163,15 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
             <div className="flex items-center gap-2">
               <Link
                 href={session ? '/dashboard' : '/register'}
-                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border"
               >
-                <User className="w-4 h-4 text-white/80" />
+                <User className="w-4 h-4" />
               </Link>
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+                className="w-8 h-8  rounded-full flex items-center justify-center border"
               >
-                <Search className="w-4 h-4 text-white/80" />
+                <Search className="w-4 h-4 " />
               </button>
             </div>
           </div>
@@ -179,13 +179,13 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
       </div>
 
       {/* Mobile Header */}
-      <div className="md:hidden bg-[#cc0000] h-16 flex items-center justify-between px-4">
+      <div className="md:hidden h-16 flex items-center justify-between px-4">
         <Link href="/" className="block">
           <Image
             src={logo}
             alt="NewsFlash Logo"
-            width={150}
-            height={35}
+            width={100}
+            height={25}
             className="object-contain"
             priority
           />
@@ -194,24 +194,24 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
         <div className="flex items-center gap-2">
           <Link
             href={session ? '/dashboard' : '/register'}
-            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+            className="w-10 h-10 rounded-full flex items-center justify-center border"
           >
-            <User className="w-[18px] h-[18px] text-white/80" />
+            <User className="w-[18px] h-[18px] " />
           </Link>
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/40"
+            className="w-10 h-10 rounded-full flex items-center justify-center border"
           >
-            <Search className="w-[18px] h-[18px] text-white/80" />
+            <Search className="w-[18px] h-[18px]" />
           </button>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-10 h-10 bg-white rounded-full flex items-center justify-center"
+            className="w-10 h-10 rounded-full flex items-center justify-center border"
           >
             {isMenuOpen ? (
-              <X className="w-5 h-5 text-[#cc0000]" />
+              <X className="w-5 h-5" />
             ) : (
-              <Menu className="w-5 h-5 text-[#cc0000]" />
+              <Menu className="w-5 h-5" />
             )}
           </button>
         </div>
@@ -268,7 +268,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                   autoFocus
                   value={searchQuery}
                   onChange={handleSearchInputChange}
-                  className="flex-1 text-base outline-none placeholder-slate-400"
+                  className="flex-1 text-base outline-none placeholder-slate-400 font-sans bg-transparent"
                 />
                 <button
                   onClick={() => {
@@ -282,7 +282,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
               </div>
               <div className="p-4 max-h-[60vh] overflow-y-auto">
                 {isSearching ? (
-                  <div className="text-center py-8 text-slate-500">
+                  <div className="text-center py-8 text-slate-500 font-sans">
                     <p className="text-sm">Searching...</p>
                   </div>
                 ) : (
@@ -290,7 +290,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                     {/* Categories */}
                     {searchResults.categories.length > 0 && (
                       <div>
-                        <h3 className="text-xs font-medium text-slate-500 mb-2">
+                        <h3 className="text-xs font-medium text-slate-500 mb-2 font-lora">
                           {searchQuery ? 'Matching Categories' : 'Categories'}
                         </h3>
                         <div className="flex flex-wrap gap-1.5">
@@ -299,7 +299,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                               key={category.id}
                               href={`/category/${category.id}`}
                               onClick={() => handleCategoryClick(category.slug)}
-                              className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs text-slate-700 transition-colors"
+                              className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded-full text-xs text-slate-700 transition-colors font-sans"
                             >
                               {category.name}
                             </Link>
@@ -311,7 +311,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                     {/* Articles */}
                     {searchResults.articles.length > 0 && (
                       <div>
-                        <h3 className="text-xs font-medium text-slate-500 mb-2">
+                        <h3 className="text-xs font-medium text-slate-500 mb-2 font-lora">
                           {searchQuery ? 'Matching Articles' : 'Recent Articles'}
                         </h3>
                         <div className="space-y-2">
@@ -330,10 +330,10 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                                 />
                               )}
                               <div className="flex-1 min-w-0">
-                                <h4 className="text-xs font-medium text-slate-900 line-clamp-2 mb-1">
+                                <h4 className="text-xs font-medium text-slate-900 line-clamp-2 mb-1 font-lora">
                                   {article.title}
                                 </h4>
-                                <p className="text-xs text-slate-500">{article.category}</p>
+                                <p className="text-xs text-slate-500 font-sans">{article.category}</p>
                               </div>
                             </Link>
                           ))}
@@ -343,7 +343,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
 
                     {/* No results */}
                     {searchQuery && searchResults.categories.length === 0 && searchResults.articles.length === 0 && (
-                      <div className="text-center py-8 text-slate-500">
+                      <div className="text-center py-8 text-slate-500 font-sans">
                         <p className="text-sm">No results found for &quot;{searchQuery}&quot;</p>
                         <p className="text-xs mt-1">Try a different search term</p>
                       </div>
