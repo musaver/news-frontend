@@ -60,7 +60,7 @@ export async function GET(
       })
       .from(articles)
       .innerJoin(categories, eq(articles.categoryId, categories.id))
-      .where(eq(articles.status, 'published'))
+      .where(and(eq(articles.status, 'published'), ne(articles.id, id)))
       .orderBy(desc(articles.publishedAt))
       .limit(5);
 

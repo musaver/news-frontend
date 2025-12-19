@@ -13,6 +13,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/login',
+        destination: '/register',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

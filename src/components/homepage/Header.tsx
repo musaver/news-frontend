@@ -142,18 +142,18 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
             <nav className="flex items-center gap-6 text-md font-medium">
               <Link
                 href="/"
-                className={`hover:opacity-80 ${pathname === '/' ? 'border-b-2 border-white' : ''}`}
+                className={`hover:opacity-80 ${pathname === '/' ? 'border-b-2 border-slate-500' : ''}`}
               >
                 Latest News
               </Link>
-              <div className="w-px h-4 bg-white/30"></div>
+              <div className="w-px h-4 bg-slate-600"></div>
               {categories.map((category) => {
                 const isActive = pathname === `/category/${category.id}`;
                 return (
                   <Link
                     key={category.id}
                     href={`/category/${category.id}`}
-                    className={`hover:opacity-80 ${isActive ? 'border-b-2 border-white' : ''}`}
+                    className={`hover:opacity-80 ${isActive ? 'border-b-2 border-slate-500' : ''}`}
                   >
                     {category.name}
                   </Link>
