@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Fonts */
+/* Custom Fonts s*/
 .font-lora {
   font-family: "Lora", serif;
   font-optical-sizing: auto;
