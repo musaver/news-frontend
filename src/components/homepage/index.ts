@@ -15,3 +15,4 @@ export { default as HealthNewsSection } from './HealthNewsSection';
 export { default as BusinessSection } from './BusinessSection';
 export { default as FourColumnSection } from './FourColumnSection';
 export { default as PodcastSection } from './PodcastSection';
+export { default as GoldLiveRatesWidget } from './GoldLiveRatesWidget';

@@ -191,7 +191,7 @@ export default function CreateArticlePage() {
         <div className="bg-white rounded-[12px] border border-[rgba(203,213,225,0.35)] overflow-hidden">
           <div className="flex items-center justify-between p-6 border-b border-[rgba(203,213,225,0.35)]">
             <div>
-              <h2 className="text-[#020a1c] text-[24px] leading-[32px] font-bold">
+              <h2 className="text-[#020a1c] text-[24px] leading-[32px] font-normal">
                 Create New Article
               </h2>
               <p className="text-[#657285] text-[14px] leading-[20px] mt-1">

@@ -8,7 +8,8 @@ import {
   HealthNewsSection,
   BusinessSection,
   FourColumnSection,
-  PodcastSection
+  PodcastSection,
+  GoldLiveRatesWidget
 } from '@/components/homepage';
 import { db } from '@/lib/db';
 import { articles, user, categories } from '@/lib/schema';
@@ -161,6 +162,7 @@ export default async function Home() {
             mockImages={mockImages}
             articles={businessArticles}
           />
+          <GoldLiveRatesWidget />
           <LatestNewsSection
             mockImages={mockImages}
             articles={latestArticles}
