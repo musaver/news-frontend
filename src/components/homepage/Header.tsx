@@ -163,15 +163,15 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
             <div className="flex items-center gap-2">
               <Link
                 href={session ? '/dashboard' : '/register'}
-                className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border"
+                className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center border-2 border-slate-500"
               >
-                <User className="w-4 h-4" />
+                <User className="w-5 h-5" />
               </Link>
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="w-8 h-8  rounded-full flex items-center justify-center border"
+                className="w-9 h-9  rounded-full flex items-center justify-center border-2 border-slate-500"
               >
-                <Search className="w-4 h-4 " />
+                <Search className="w-5 h-5 " />
               </button>
             </div>
           </div>
@@ -194,24 +194,24 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
         <div className="flex items-center gap-2">
           <Link
             href={session ? '/dashboard' : '/register'}
-            className="w-10 h-10 rounded-full flex items-center justify-center border"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-slate-500"
           >
-            <User className="w-[18px] h-[18px] " />
+            <User className="w-[22px] h-[22px] " />
           </Link>
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="w-10 h-10 rounded-full flex items-center justify-center border"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-slate-500"
           >
-            <Search className="w-[18px] h-[18px]" />
+            <Search className="w-[22px] h-[22px]" />
           </button>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-10 h-10 rounded-full flex items-center justify-center border"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-slate-500"
           >
             {isMenuOpen ? (
-              <X className="w-5 h-5" />
+              <X className="w-6 h-6" />
             ) : (
-              <Menu className="w-5 h-5" />
+              <Menu className="w-6 h-6" />
             )}
           </button>
         </div>
@@ -277,7 +277,7 @@ const Header = ({ categories: categoriesProp = [] }: HeaderProps) => {
                   }}
                   className="ml-3 p-1.5 hover:bg-slate-100 rounded-full transition-colors"
                 >
-                  <X className="w-4 h-4 text-slate-500" />
+                  <X className="w-5 h-5 text-slate-500" />
                 </button>
               </div>
               <div className="p-4 max-h-[60vh] overflow-y-auto">

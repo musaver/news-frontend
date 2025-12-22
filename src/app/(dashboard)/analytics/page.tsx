@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { DashboardLayout } from '@/components/homepage';
+
 
 interface AnalyticsStats {
   totalArticles: number;
@@ -63,7 +63,7 @@ export default function AuthorAnalyticsPage() {
   };
 
   return (
-    <DashboardLayout activeTab="analytics">
+    <>
       <div className="space-y-6">
         <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal">
           Performance Analytics
@@ -125,7 +125,7 @@ export default function AuthorAnalyticsPage() {
                 <div className="space-y-3">
                   {topArticles.map(article => (
                     <Link
-                      href={`/articles/${article.id}`}
+                      href={`/news-details/${article.id}`}
                       key={article.id}
                       className="flex items-center justify-between p-3 bg-[#f7fafc] hover:bg-[#eef2f6] rounded-lg transition-colors"
                     >
@@ -159,6 +159,6 @@ export default function AuthorAnalyticsPage() {
           </>
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 }

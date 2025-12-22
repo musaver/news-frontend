@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 // SVG Icons
 const HomeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -87,11 +88,12 @@ const FileTextIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  activeTab: 'activity' | 'saved' | 'history' | 'preferences' | 'notifications' | 'analytics' | 'comments' | 'articles';
+  activeTab?: string;
 }
 
-export default function DashboardLayout({ children, activeTab }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = useSession();
 
   const userData = {
@@ -126,17 +128,22 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
           <div className="flex items-center justify-start md:justify-center gap-2 px-4 py-2 overflow-x-auto no-scrollbar">
-            {tabs.map(({ id, icon: Icon, label, path }) => (
-              <button
-                key={id}
-                onClick={() => router.push(path)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-md font-medium ${id === activeTab ? 'bg-[#cc0000] text-white' : 'hover:bg-[#f7fafc]'
-                  }`}
-              >
-                <Icon className="w-4 h-4" />
-                <span className="">{label}</span>
-              </button>
-            ))}
+            {tabs.map(({ id, icon: Icon, label, path }) => {
+              const isActive = pathname === path ||
+                (path !== '/dashboard' && pathname?.startsWith(path)) ||
+                (id === 'articles' && pathname === '/create-article');
+              return (
+                <Link
+                  key={id}
+                  href={path}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-sm font-medium ${isActive ? 'bg-[#cc0000] text-white' : 'hover:bg-[#f7fafc]'
+                    }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="">{label}</span>
+                </Link>
+              )
+            })}
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
             <button
               onClick={() => signOut({ callbackUrl: '/register' })}
@@ -158,4 +165,3 @@ export default function DashboardLayout({ children, activeTab }: DashboardLayout
     </div>
   );
 }
-

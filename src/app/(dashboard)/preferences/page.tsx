@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react';
-import { DashboardLayout } from '@/components/homepage';
+
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -204,26 +204,22 @@ export default function PreferencesPage() {
 
   if (status === 'loading' || loading) {
     return (
-      <DashboardLayout activeTab="preferences">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000]"></div>
-        </div>
-      </DashboardLayout>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#cc0000]"></div>
+      </div>
     );
   }
 
   if (status === 'unauthenticated') {
     return (
-      <DashboardLayout activeTab="preferences">
-        <div className="text-center py-12">
-          <p className="text-[#657285] text-[16px]">Please log in to access preferences.</p>
-        </div>
-      </DashboardLayout>
+      <div className="text-center py-12">
+        <p className="text-[#657285] text-[16px]">Please log in to access preferences.</p>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout activeTab="preferences">
+    <>
       <div className="space-y-6">
         {/* Header */}
         <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal">
@@ -493,6 +489,6 @@ export default function PreferencesPage() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

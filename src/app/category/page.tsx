@@ -117,31 +117,31 @@ export default async function CategoryPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      
-      
+
+
       <main>
 
-      <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
-        <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
-          {/* Left Text with Bullet */}
-          <div className="absolute h-[22px] left-[24px] overflow-clip top-1/2 translate-y-[-50%] w-[98.06px]" data-name="Left Text">
-            <div className="absolute bg-[#cc0000] h-[15px] left-[calc(50%-47.03px)] top-1/2 translate-x-[-50%] translate-y-[-50%] w-[4px]" data-name="bullet" />
-            <div className="absolute flex flex-col font-normal h-[22px] justify-center leading-[0] left-[14px] not-italic text-[#020a1c] text-[14.25px] top-[11px] translate-y-[-50%] w-[84.26px]">
-              <p className="leading-[22px]">Latest News</p>
+        <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
+          <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
+            {/* Left Text with Bullet */}
+            <div className="absolute h-[22px] left-[24px] overflow-clip top-1/2 translate-y-[-50%] w-[98.06px]" data-name="Left Text">
+              <div className="absolute bg-[#cc0000] h-[15px] left-[calc(50%-47.03px)] top-1/2 translate-x-[-50%] translate-y-[-50%] w-[4px]" data-name="bullet" />
+              <div className="absolute flex flex-col font-normal h-[22px] justify-center leading-[0] left-[14px] not-italic text-[#020a1c] text-[14.25px] top-[11px] translate-y-[-50%] w-[84.26px]">
+                <p className="leading-[22px]">Latest News</p>
+              </div>
             </div>
-          </div>
-          
-          {/* Right Watermark Text with Gradient Mask - Desktop Only */}
-          <div className="hidden md:block absolute bottom-[-5px] h-[84px] right-[24px] w-[405.59px]" data-name="Mask Group">
-            <div 
-              className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[84px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[405.59px_84px] not-italic text-[65.898px] top-[42px] translate-y-[-50%] w-[405.79px]" 
-              style={{ maskImage: `url('${imgLatestNews}')` }}
-            >
-              <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>Latest News</p>
+
+            {/* Right Watermark Text with Gradient Mask - Desktop Only */}
+            <div className="hidden md:block absolute bottom-[-5px] h-[84px] right-[24px] w-[405.59px]" data-name="Mask Group">
+              <div
+                className="absolute flex flex-col font-['Inter:Black',_sans-serif] font-black h-[84px] justify-center leading-[0] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[405.59px_84px] not-italic text-[65.898px] top-[42px] translate-y-[-50%] w-[405.79px]"
+                style={{ maskImage: `url('${imgLatestNews}')` }}
+              >
+                <p className="leading-[84px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>Latest News</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
         {/* Mobile Layout */}
         <div className="md:hidden px-4 py-6 space-y-12 max-w-[480px] mx-auto">
@@ -152,7 +152,7 @@ export default async function CategoryPage() {
         {/* Desktop Layout */}
         <div className="hidden md:block">
           {/* Main Content Grid */}
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="flex grid-cols-1 lg:grid-cols-4 gap-2">
               <div className="lg:col-span-3 space-y-12">
                 <FeaturedSection mockImages={mockImages} articles={latestArticles} />
@@ -169,7 +169,7 @@ export default async function CategoryPage() {
 
         <PodcastSection mockImages={mockImages} articles={podcastArticles} />
       </main>
-      
+
     </div>
   );
 }

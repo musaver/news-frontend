@@ -33,9 +33,8 @@ const ToolbarButton = ({
     onClick={onClick}
     disabled={disabled}
     title={title}
-    className={`p-2 rounded hover:bg-[#f7fafc] transition-colors ${
-      active ? 'bg-[#f7fafc] text-[#cc0000]' : 'text-[#657285]'
-    } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+    className={`p-2 rounded hover:bg-[#f7fafc] transition-colors ${active ? 'bg-[#f7fafc] text-[#cc0000]' : 'text-[#657285]'
+      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
   >
     {children}
   </button>
@@ -49,6 +48,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
   const [, setEditorState] = useState(0);
 
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         heading: {
@@ -169,7 +169,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Bold (Ctrl+B)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
           </svg>
         </ToolbarButton>
 
@@ -179,7 +179,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Italic (Ctrl+I)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 4h8 M8 20h8 M15 4L9 20"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 4h8 M8 20h8 M15 4L9 20" />
           </svg>
         </ToolbarButton>
 
@@ -189,7 +189,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Strikethrough"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12h18 M8 5h8a4 4 0 0 1 0 8H8 M8 17h8"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12h18 M8 5h8a4 4 0 0 1 0 8H8 M8 17h8" />
           </svg>
         </ToolbarButton>
 
@@ -229,7 +229,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Align Left"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M3 12h12M3 18h18"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M3 12h12M3 18h18" />
           </svg>
         </ToolbarButton>
 
@@ -239,7 +239,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Align Center"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M7 12h10M3 18h18"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M7 12h10M3 18h18" />
           </svg>
         </ToolbarButton>
 
@@ -249,7 +249,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Align Right"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M9 12h12M3 18h18"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M9 12h12M3 18h18" />
           </svg>
         </ToolbarButton>
 
@@ -259,7 +259,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Justify"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M3 12h18M3 18h18"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6h18M3 12h18M3 18h18" />
           </svg>
         </ToolbarButton>
 
@@ -272,7 +272,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Bullet List"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01" />
           </svg>
         </ToolbarButton>
 
@@ -282,7 +282,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Ordered List"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 6h11 M9 12h11 M9 18h11 M3 6v3 M3 12v3 M3 18v3 M6 7H3 M6 13H3 M6 19H3"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 6h11 M9 12h11 M9 18h11 M3 6v3 M3 12v3 M3 18v3 M6 7H3 M6 13H3 M6 19H3" />
           </svg>
         </ToolbarButton>
 
@@ -292,7 +292,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Blockquote"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 8h2.5A2.5 2.5 0 0 1 11 10.5V11a2.5 2.5 0 0 1-2.5 2.5H6 M6 15h2.5A2.5 2.5 0 0 1 11 17.5V18a2.5 2.5 0 0 1-2.5 2.5H6 M13 8h2.5A2.5 2.5 0 0 1 18 10.5V11a2.5 2.5 0 0 1-2.5 2.5H13 M13 15h2.5A2.5 2.5 0 0 1 18 17.5V18a2.5 2.5 0 0 1-2.5 2.5H13"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 8h2.5A2.5 2.5 0 0 1 11 10.5V11a2.5 2.5 0 0 1-2.5 2.5H6 M6 15h2.5A2.5 2.5 0 0 1 11 17.5V18a2.5 2.5 0 0 1-2.5 2.5H6 M13 8h2.5A2.5 2.5 0 0 1 18 10.5V11a2.5 2.5 0 0 1-2.5 2.5H13 M13 15h2.5A2.5 2.5 0 0 1 18 17.5V18a2.5 2.5 0 0 1-2.5 2.5H13" />
           </svg>
         </ToolbarButton>
 
@@ -302,7 +302,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Code Block"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
           </svg>
         </ToolbarButton>
 
@@ -322,7 +322,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
             title={editor.isActive('link') ? 'Remove Link' : 'Add Link'}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
             </svg>
           </ToolbarButton>
 
@@ -358,7 +358,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
             title="Add Emoji"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </ToolbarButton>
 
@@ -385,11 +385,11 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           >
             {isUploading ? (
               <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             ) : (
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             )}
           </ToolbarButton>
@@ -403,7 +403,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Horizontal Rule"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 12h16"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 12h16" />
           </svg>
         </ToolbarButton>
 
@@ -416,7 +416,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Undo (Ctrl+Z)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 0 1 8 8v2M3 10l6 6m-6-6l6-6"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 0 1 8 8v2M3 10l6 6m-6-6l6-6" />
           </svg>
         </ToolbarButton>
 
@@ -426,7 +426,7 @@ export default function TiptapEditor({ value, onChange, placeholder }: TiptapEdi
           title="Redo (Ctrl+Y)"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 10H11a8 8 0 0 0-8 8v2m18-10l-6 6m6-6l-6-6"/>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 10H11a8 8 0 0 0-8 8v2m18-10l-6 6m6-6l-6-6" />
           </svg>
         </ToolbarButton>
       </div>

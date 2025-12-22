@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { DashboardLayout } from '@/components/homepage';
+
 
 // SVG Icons
 const BookmarkIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -104,17 +104,15 @@ export default function SavedPage() {
 
   if (isLoading || status === 'loading') {
     return (
-      <DashboardLayout activeTab="saved">
-        <div className="text-center py-12">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#cc0000] border-r-transparent"></div>
-          <p className="mt-4 text-[#657285]">Loading saved articles...</p>
-        </div>
-      </DashboardLayout>
+      <div className="text-center py-12">
+        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#cc0000] border-r-transparent"></div>
+        <p className="mt-4 text-[#657285]">Loading saved articles...</p>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout activeTab="saved">
+    <>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -175,6 +173,6 @@ export default function SavedPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 }

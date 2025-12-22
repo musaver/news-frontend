@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { DashboardLayout } from '@/components/homepage';
+
 
 interface ArticleVisit {
   id: string;
@@ -79,11 +79,11 @@ export default function HistoryPage() {
   };
 
   const handleViewArticle = (articleId: string) => {
-    router.push(`/news/${articleId}`);
+    router.push(`/news-details/${articleId}`);
   };
 
   return (
-    <DashboardLayout activeTab="history">
+    <>
       <div className="space-y-6">
         {/* Header */}
         <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal">
@@ -147,6 +147,6 @@ export default function HistoryPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 }

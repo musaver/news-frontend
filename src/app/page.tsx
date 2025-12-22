@@ -174,7 +174,7 @@ export default async function Home() {
         {/* Desktop Layout */}
         <div className="hidden md:block">
           {/* Main Content Grid */}
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="flex grid-cols-1 lg:grid-cols-4 gap-2">
               <div className="lg:col-span-3 space-y-12">
                 <FeaturedSection

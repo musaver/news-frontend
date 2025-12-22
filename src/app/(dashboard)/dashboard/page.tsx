@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { DashboardLayout } from '@/components/homepage';
+
 import { useSession } from 'next-auth/react';
 
 // SVG Icons
@@ -276,36 +276,34 @@ export default function DashboardPage() {
 
   if (status === 'loading') {
     return (
-      <DashboardLayout activeTab="activity">
-        <div className="space-y-6 animate-pulse">
-          {/* Welcome Banner Skeleton */}
-          <div className="bg-gray-200 rounded-[12px] h-32 w-full"></div>
+      <div className="space-y-6 animate-pulse">
+        {/* Welcome Banner Skeleton */}
+        <div className="bg-gray-200 rounded-[12px] h-32 w-full"></div>
 
-          {/* Header Skeleton */}
-          <div className="h-9 w-48 bg-gray-200 rounded"></div>
+        {/* Header Skeleton */}
+        <div className="h-9 w-48 bg-gray-200 rounded"></div>
 
-          {/* Stats Grid Skeleton */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-32"></div>
-            <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-32"></div>
-            <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-32"></div>
-          </div>
-
-          {/* Recent Comments Skeleton */}
-          <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-64"></div>
+        {/* Stats Grid Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-32"></div>
+          <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-32"></div>
+          <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-32"></div>
         </div>
-      </DashboardLayout>
+
+        {/* Recent Comments Skeleton */}
+        <div className="bg-white p-6 border border-gray-200 rounded-[12px] h-64"></div>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout activeTab="activity">
+    <>
       {isAuthor ? (
         // Author Dashboard Content
         <div className="space-y-6">
           {/* Welcome Header */}
           <div className="bg-white rounded-[12px] p-6 border border-[rgba(203,213,225,0.35)]">
-            <div className="flex items-start gap-6">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               {userData?.image ? (
                 <img
                   src={userData.image}
@@ -317,18 +315,18 @@ export default function DashboardPage() {
                   {userData?.name?.charAt(0) || 'A'}
                 </div>
               )}
-              <div className="flex-1">
+              <div className="flex-1 text-center md:text-left w-full md:w-auto">
                 <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal mb-1">
                   Welcome back, {userData?.name?.split(' ')[0] || ''}! 👋
                 </h1>
-                <p className="text-[#657285] text-[20px] leading-[22px] mb-2">
+                <p className="text-[#657285] text-[18px] leading-[22px]">
                   {userData?.authorDesignation || ''}
                 </p>
-                <p className="text-[#657285] text-[18px] leading-[20px] max-w-2xl">
+                <p className="text-[#657285] text-[16px] leading-[20px] max-w-2xl mx-auto md:mx-0">
                   {userData?.bio || ''}
                 </p>
               </div>
-              <Link href="/create-article" className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
+              <Link href="/create-article" className="w-full md:w-auto justify-center px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2 whitespace-nowrap">
                 <PlusCircleIcon className="w-4 h-4" />
                 Create New Article
               </Link>
@@ -398,7 +396,7 @@ export default function DashboardPage() {
                 ) : (
                   recentArticles.map(article => (
                     <Link
-                      href={`/articles/${article.id}`}
+                      href={`/news-details/${article.id}`}
                       key={article.id}
                       className="flex gap-3 p-3 hover:bg-[#f7fafc] rounded-lg transition-colors cursor-pointer"
                     >
@@ -610,6 +608,6 @@ export default function DashboardPage() {
           )}
         </div>
       )}
-    </DashboardLayout>
+    </>
   );
 }

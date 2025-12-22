@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { DashboardLayout } from '@/components/homepage';
+
 
 // SVG Icon
 const BellIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
@@ -21,7 +21,7 @@ export default function NotificationsPage() {
   ];
 
   return (
-    <DashboardLayout activeTab="notifications">
+    <>
       <div className="space-y-6">
         {/* Header */}
         <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal">
@@ -57,6 +57,6 @@ export default function NotificationsPage() {
           ))}
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

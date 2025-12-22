@@ -84,7 +84,7 @@ export default function BecomeAnAuthorPage() {
 
             <div className="flex items-center gap-3 mt-6 px-1 md:px-0">
               <div className="w-1 h-4 bg-[#cc0000]"></div>
-              <h2 className="text-[12.5px] leading-[19px] md:text-lg font-normal">
+              <h2 className="text-lg leading-[19px] md:text-lg font-normal">
                 Become an Author
               </h2>
             </div>
@@ -104,7 +104,7 @@ export default function BecomeAnAuthorPage() {
 
         {/* Desktop Version */}
         <div className="hidden md:block">
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="grid grid-cols-[341.73px_1px_1fr] gap-x-[24px] w-full">
               {/* Mission + Vision (Left Column - Sticky) */}
               <div className="content-stretch flex flex-col gap-[32px] items-start sticky top-24 self-start">
@@ -337,247 +337,247 @@ export default function BecomeAnAuthorPage() {
         <div className="md:hidden">
           <div className="max-w-[480px] mx-auto px-4 py-6">
             <div className="flex flex-col gap-[24px] w-full">
-                {/* Mission + Vision */}
-                <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full z-[2]">
-                  {/* Mission */}
-                  <div className="box-border content-stretch flex flex-col items-start overflow-clip pb-[0.81px] pt-0 px-0 relative shrink-0 w-full">
-                    <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] relative shrink-0 w-full">
-                      <div className="flex flex-col font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
-                        <p className="leading-[22px]">Our Mission</p>
-                      </div>
-                    </div>
-                    <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] relative shrink-0">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[18.2px] not-italic relative shrink-0 text-[#020a1c] text-[13px] text-nowrap whitespace-pre">
-                          <p className="mb-0">{`To deliver unbiased, timely, and comprehensive news that `}</p>
-                          <p className="mb-0">{`empowers readers to make informed decisions and fosters `}</p>
-                          <p>a deeper understanding of global events.</p>
-                        </div>
-                      </div>
+              {/* Mission + Vision */}
+              <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full z-[2]">
+                {/* Mission */}
+                <div className="box-border content-stretch flex flex-col items-start overflow-clip pb-[0.81px] pt-0 px-0 relative shrink-0 w-full">
+                  <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] relative shrink-0 w-full">
+                    <div className="flex flex-col font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
+                      <p className="leading-[22px]">Our Mission</p>
                     </div>
                   </div>
-
-                  {/* Vision */}
-                  <div className="box-border content-stretch flex flex-col items-start overflow-clip pb-[0.81px] pt-0 px-0 relative shrink-0 w-full">
-                    <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] relative shrink-0 w-full">
-                      <div className="flex flex-col font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
-                        <p className="leading-[22px]">Our Vision</p>
-                      </div>
-                    </div>
-                    <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] min-w-[358px] relative shrink-0">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[18.2px] not-italic relative shrink-0 text-[#020a1c] text-[13.1px] text-nowrap whitespace-pre">
-                          <p className="mb-0">{`To be the most trusted and influential source of news, `}</p>
-                          <p className="mb-0">{`shaping global conversations and connecting the world `}</p>
-                          <p>through responsible journalism.</p>
-                        </div>
+                  <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] relative shrink-0">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[18.2px] not-italic relative shrink-0 text-[#020a1c] text-[13px] text-nowrap whitespace-pre">
+                        <p className="mb-0">{`To deliver unbiased, timely, and comprehensive news that `}</p>
+                        <p className="mb-0">{`empowers readers to make informed decisions and fosters `}</p>
+                        <p>a deeper understanding of global events.</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Image and Content */}
-                <div className="content-stretch flex flex-col gap-[24px] items-center justify-center overflow-clip relative shrink-0 w-full z-[1]">
-                  {/* Featured Image */}
-                  <div className="h-[300px] overflow-clip relative rounded-[8px] shrink-0 w-full max-w-[358px] mx-auto">
-                    <div className="absolute inset-0 rounded-[8px]">
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
-                        <Image
-                          alt="About NewsFlash"
-                          className="absolute h-full left-0 top-0 w-full object-cover"
-                          src={imgAboutUs}
-                        />
+                {/* Vision */}
+                <div className="box-border content-stretch flex flex-col items-start overflow-clip pb-[0.81px] pt-0 px-0 relative shrink-0 w-full">
+                  <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] relative shrink-0 w-full">
+                    <div className="flex flex-col font-bold justify-center leading-[0] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
+                      <p className="leading-[22px]">Our Vision</p>
+                    </div>
+                  </div>
+                  <div className="box-border content-stretch flex flex-col items-start mb-[-0.81px] min-w-[358px] relative shrink-0">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[18.2px] not-italic relative shrink-0 text-[#020a1c] text-[13.1px] text-nowrap whitespace-pre">
+                        <p className="mb-0">{`To be the most trusted and influential source of news, `}</p>
+                        <p className="mb-0">{`shaping global conversations and connecting the world `}</p>
+                        <p>through responsible journalism.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Image and Content */}
+              <div className="content-stretch flex flex-col gap-[24px] items-center justify-center overflow-clip relative shrink-0 w-full z-[1]">
+                {/* Featured Image */}
+                <div className="h-[300px] overflow-clip relative rounded-[8px] shrink-0 w-full max-w-[358px] mx-auto">
+                  <div className="absolute inset-0 rounded-[8px]">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+                      <Image
+                        alt="About NewsFlash"
+                        className="absolute h-full left-0 top-0 w-full object-cover"
+                        src={imgAboutUs}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Text */}
+                <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                    <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15px] w-full">
+                      <p className="mb-0">{`NewsFlash is the country's leading online news `}</p>
+                      <p className="mb-0">{`agency, connecting millions of readers with timely, `}</p>
+                      <p className="mb-0">{`accurate, and impactful news from across the `}</p>
+                      <p className="mb-0">{`globe. Our mission is to provide reliable coverage `}</p>
+                      <p className="mb-0">{`on everything the world needs to know about the `}</p>
+                      <p className="mb-0">{`US and everything the US needs to know about the `}</p>
+                      <p className="mb-0">{`world. From breaking news to in-depth analysis on `}</p>
+                      <p className="mb-0">{`politics, business, culture, and international affairs, `}</p>
+                      <p className="mb-0">{`we are committed to delivering the information you `}</p>
+                      <p>need to stay informed.</p>
+                    </div>
+                  </div>
+
+                  <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[20px] px-0 relative shrink-0 w-full">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
+                        <p className="mb-0">{`At NewsFlash, we believe news should go beyond `}</p>
+                        <p className="mb-0">{`just reporting the facts; it should provide context, `}</p>
+                        <p className="mb-0">{`insight, and understanding. Our dedicated team of `}</p>
+                        <p className="mb-0">{`journalists works around the clock to ensure you `}</p>
+                        <p className="mb-0">{`get not only the headlines but also the deeper `}</p>
+                        <p className="mb-0">{`stories that shape our society. Whether it's the `}</p>
+                        <p className="mb-0">{`latest political developments or economic trends, `}</p>
+                        <p className="mb-0">{`we bring a balanced and critical perspective, `}</p>
+                        <p className="mb-0">{`empowering our readers with the knowledge to `}</p>
+                        <p>make informed decisions.</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Content Text */}
-                  <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                  <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[19.29px] px-0 relative shrink-0 w-full">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
+                        <p className="mb-0">{`We are proud of our commitment to journalistic `}</p>
+                        <p className="mb-0">{`integrity, delivering unbiased, fair, and transparent `}</p>
+                        <p className="mb-0">{`news. Our editorial team adheres to the highest `}</p>
+                        <p className="mb-0">{`standards, focusing on accuracy and depth to `}</p>
+                        <p className="mb-0">{`ensure that every story reflects the truth without `}</p>
+                        <p className="mb-0">{`sensationalism. In a world overwhelmed by `}</p>
+                        <p className="mb-0">{`information, NewsFlash stands out as a trusted `}</p>
+                        <p>source that prioritizes clarity and credibility.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[19.29px] px-0 relative shrink-0 w-full">
                     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
                       <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15px] w-full">
-                        <p className="mb-0">{`NewsFlash is the country's leading online news `}</p>
-                        <p className="mb-0">{`agency, connecting millions of readers with timely, `}</p>
-                        <p className="mb-0">{`accurate, and impactful news from across the `}</p>
-                        <p className="mb-0">{`globe. Our mission is to provide reliable coverage `}</p>
-                        <p className="mb-0">{`on everything the world needs to know about the `}</p>
-                        <p className="mb-0">{`US and everything the US needs to know about the `}</p>
-                        <p className="mb-0">{`world. From breaking news to in-depth analysis on `}</p>
-                        <p className="mb-0">{`politics, business, culture, and international affairs, `}</p>
-                        <p className="mb-0">{`we are committed to delivering the information you `}</p>
-                        <p>need to stay informed.</p>
+                        <p className="mb-0">{`In addition to our domestic coverage, NewsFlash `}</p>
+                        <p className="mb-0">{`has a strong international presence, with `}</p>
+                        <p className="mb-0">{`correspondents around the globe providing `}</p>
+                        <p className="mb-0">{`firsthand reporting on global events. We believe `}</p>
+                        <p className="mb-0">{`that understanding international developments is `}</p>
+                        <p className="mb-0">{`key to understanding national ones, and our global `}</p>
+                        <p className="mb-0">{`reach allows us to bring you a truly comprehensive `}</p>
+                        <p>perspective on world affairs.</p>
                       </div>
                     </div>
+                  </div>
 
-                    <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[20px] px-0 relative shrink-0 w-full">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
-                          <p className="mb-0">{`At NewsFlash, we believe news should go beyond `}</p>
-                          <p className="mb-0">{`just reporting the facts; it should provide context, `}</p>
-                          <p className="mb-0">{`insight, and understanding. Our dedicated team of `}</p>
-                          <p className="mb-0">{`journalists works around the clock to ensure you `}</p>
-                          <p className="mb-0">{`get not only the headlines but also the deeper `}</p>
-                          <p className="mb-0">{`stories that shape our society. Whether it's the `}</p>
-                          <p className="mb-0">{`latest political developments or economic trends, `}</p>
-                          <p className="mb-0">{`we bring a balanced and critical perspective, `}</p>
-                          <p className="mb-0">{`empowering our readers with the knowledge to `}</p>
-                          <p>make informed decisions.</p>
+                  <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[19.19px] px-0 relative shrink-0 w-full">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15px] w-full">
+                        <p className="mb-0">{`As a digital-first platform, NewsFlash is committed `}</p>
+                        <p className="mb-0">{`to innovation, utilizing cutting-edge technology to `}</p>
+                        <p className="mb-0">{`deliver news in accessible and engaging formats. `}</p>
+                        <p className="mb-0">{`Whether you're browsing on your phone, tablet, or `}</p>
+                        <p className="mb-0">{`desktop, we ensure you can stay informed `}</p>
+                        <p className="mb-0">{`wherever you are. Our goal is simple: to empower `}</p>
+                        <p className="mb-0">{`readers by delivering news that shapes opinions, `}</p>
+                        <p className="mb-0">{`sparks conversations, and connects you to the `}</p>
+                        <p>world.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Application Form - Mobile */}
+                  <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[32px] px-0 relative shrink-0 w-full">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+                      <h3 className="text-[18px] font-bold text-[#020a1c] mb-4">Apply to Become an Author</h3>
+
+                      {submitStatus && (
+                        <div className={`mb-4 p-3 rounded-lg text-sm ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                          {submitStatus.message}
                         </div>
-                      </div>
-                    </div>
+                      )}
 
-                    <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[19.29px] px-0 relative shrink-0 w-full">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15.1px] w-full">
-                          <p className="mb-0">{`We are proud of our commitment to journalistic `}</p>
-                          <p className="mb-0">{`integrity, delivering unbiased, fair, and transparent `}</p>
-                          <p className="mb-0">{`news. Our editorial team adheres to the highest `}</p>
-                          <p className="mb-0">{`standards, focusing on accuracy and depth to `}</p>
-                          <p className="mb-0">{`ensure that every story reflects the truth without `}</p>
-                          <p className="mb-0">{`sensationalism. In a world overwhelmed by `}</p>
-                          <p className="mb-0">{`information, NewsFlash stands out as a trusted `}</p>
-                          <p>source that prioritizes clarity and credibility.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[19.29px] px-0 relative shrink-0 w-full">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15px] w-full">
-                          <p className="mb-0">{`In addition to our domestic coverage, NewsFlash `}</p>
-                          <p className="mb-0">{`has a strong international presence, with `}</p>
-                          <p className="mb-0">{`correspondents around the globe providing `}</p>
-                          <p className="mb-0">{`firsthand reporting on global events. We believe `}</p>
-                          <p className="mb-0">{`that understanding international developments is `}</p>
-                          <p className="mb-0">{`key to understanding national ones, and our global `}</p>
-                          <p className="mb-0">{`reach allows us to bring you a truly comprehensive `}</p>
-                          <p>perspective on world affairs.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[19.19px] px-0 relative shrink-0 w-full">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <div className="flex flex-col font-normal justify-center leading-[20.8px] not-italic relative shrink-0 text-[#020a1c] text-[15px] w-full">
-                          <p className="mb-0">{`As a digital-first platform, NewsFlash is committed `}</p>
-                          <p className="mb-0">{`to innovation, utilizing cutting-edge technology to `}</p>
-                          <p className="mb-0">{`deliver news in accessible and engaging formats. `}</p>
-                          <p className="mb-0">{`Whether you're browsing on your phone, tablet, or `}</p>
-                          <p className="mb-0">{`desktop, we ensure you can stay informed `}</p>
-                          <p className="mb-0">{`wherever you are. Our goal is simple: to empower `}</p>
-                          <p className="mb-0">{`readers by delivering news that shapes opinions, `}</p>
-                          <p className="mb-0">{`sparks conversations, and connects you to the `}</p>
-                          <p>world.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Application Form - Mobile */}
-                    <div className="box-border content-stretch flex flex-col items-start pb-0 pt-[32px] px-0 relative shrink-0 w-full">
-                      <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
-                        <h3 className="text-[18px] font-bold text-[#020a1c] mb-4">Apply to Become an Author</h3>
-
-                        {submitStatus && (
-                          <div className={`mb-4 p-3 rounded-lg text-sm ${submitStatus.type === 'success' ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
-                            {submitStatus.message}
-                          </div>
-                        )}
-
-                        <form onSubmit={handleSubmit} className="space-y-4 w-full">
-                          {/* Full Name and Email Row */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                              <label htmlFor="fullName-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                                Full Name <span className="text-red-600">*</span>
-                              </label>
-                              <input
-                                type="text"
-                                id="fullName-mobile"
-                                name="fullName"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
-                                required
-                              />
-                            </div>
-
-                            <div>
-                              <label htmlFor="email-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                                Email <span className="text-red-600">*</span>
-                              </label>
-                              <input
-                                type="email"
-                                id="email-mobile"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
-                                required
-                              />
-                            </div>
-                          </div>
-
+                      <form onSubmit={handleSubmit} className="space-y-4 w-full">
+                        {/* Full Name and Email Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label htmlFor="designation-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                              Designation <span className="text-red-600">*</span>
+                            <label htmlFor="fullName-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                              Full Name <span className="text-red-600">*</span>
                             </label>
                             <input
                               type="text"
-                              id="designation-mobile"
-                              name="designation"
-                              value={formData.designation}
+                              id="fullName-mobile"
+                              name="fullName"
+                              value={formData.fullName}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
                               required
                             />
                           </div>
 
-                          {/* Bio and Address Row */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                              <label htmlFor="bio-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                                Bio <span className="text-red-600">*</span>
-                              </label>
-                              <textarea
-                                id="bio-mobile"
-                                name="bio"
-                                value={formData.bio}
-                                onChange={handleChange}
-                                rows={4}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
-                                required
-                              />
-                            </div>
+                          <div>
+                            <label htmlFor="email-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                              Email <span className="text-red-600">*</span>
+                            </label>
+                            <input
+                              type="email"
+                              id="email-mobile"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
+                              required
+                            />
+                          </div>
+                        </div>
 
-                            <div>
-                              <label htmlFor="address-mobile" className="block text-sm font-medium text-gray-700 mb-2">
-                                Address <span className="text-red-600">*</span>
-                              </label>
-                              <textarea
-                                id="address-mobile"
-                                name="address"
-                                value={formData.address}
-                                onChange={handleChange}
-                                rows={4}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
-                                required
-                              />
-                            </div>
+                        <div>
+                          <label htmlFor="designation-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                            Designation <span className="text-red-600">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="designation-mobile"
+                            name="designation"
+                            value={formData.designation}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent"
+                            required
+                          />
+                        </div>
+
+                        {/* Bio and Address Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label htmlFor="bio-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                              Bio <span className="text-red-600">*</span>
+                            </label>
+                            <textarea
+                              id="bio-mobile"
+                              name="bio"
+                              value={formData.bio}
+                              onChange={handleChange}
+                              rows={4}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
+                              required
+                            />
                           </div>
 
-                          <div className="pt-2">
-                            <button
-                              type="submit"
-                              disabled={isSubmitting}
-                              className="w-full px-6 py-3 bg-[#cc0000] text-white rounded-lg font-medium hover:bg-[#b30000] disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-                            >
-                              {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                            </button>
+                          <div>
+                            <label htmlFor="address-mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                              Address <span className="text-red-600">*</span>
+                            </label>
+                            <textarea
+                              id="address-mobile"
+                              name="address"
+                              value={formData.address}
+                              onChange={handleChange}
+                              rows={4}
+                              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#cc0000] focus:border-transparent resize-none"
+                              required
+                            />
                           </div>
-                        </form>
-                      </div>
+                        </div>
+
+                        <div className="pt-2">
+                          <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full px-6 py-3 bg-[#cc0000] text-white rounded-lg font-medium hover:bg-[#b30000] disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                          >
+                            {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>

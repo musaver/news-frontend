@@ -143,7 +143,7 @@ export default function CategoryPageClient({
           <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
             <div className="flex items-center gap-3 mt-6 px-1 md:px-0">
               <div className="w-1 h-4 bg-[#cc0000]"></div>
-              <h2 className="text-[12.5px] leading-[19px] md:text-lg font-normal">
+              <h2 className="text-lg leading-[19px] md:text-lg font-normal">
                 {initialCategory.name}
               </h2>
             </div>
@@ -186,7 +186,7 @@ export default function CategoryPageClient({
 
         {/* Desktop Layout */}
         <div className="hidden md:block">
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="flex gap-2">
               <div className="flex-1 space-y-12">
                 {loadingFeatured ? (

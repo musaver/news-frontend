@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import DashboardLayout from '@/components/homepage/DashboardLayout';
+
 
 // SVG Icons
 const EyeIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -142,7 +142,7 @@ export default function ArticlesPage() {
   };
 
   return (
-    <DashboardLayout activeTab="articles">
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal">
@@ -267,6 +267,6 @@ export default function ArticlesPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 }

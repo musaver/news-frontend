@@ -40,9 +40,9 @@ export default async function AuthorsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      
+
       <main>
-        
+
         <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
           <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
             {/* Left Text with Bullet */}
@@ -52,7 +52,7 @@ export default async function AuthorsPage() {
                 <p className="leading-[22px]">Meet Our Authors</p>
               </div>
             </div>
-            
+
             {/* Right Watermark Text with Gradient Mask - Desktop Only */}
             <div className="hidden md:block absolute bottom-[-10px] h-[94.8px] right-[24px] w-fit" data-name="Mask Group">
               <div
@@ -61,15 +61,15 @@ export default async function AuthorsPage() {
               >
                 <p className="leading-[94.8px]" style={{ color: 'rgba(0, 0, 0, 0)', WebkitTextStroke: '0.7px rgb(101 114 133)' }}>Meet Our Authors</p>
               </div>
-            
-            <p className="leading-[94.8px]" style={{ color: 'rgba(0, 0, 0, 0)', fontSize: '78.18px' }}>Meet Our Authors</p>
+
+              <p className="leading-[94.8px]" style={{ color: 'rgba(0, 0, 0, 0)', fontSize: '78.18px' }}>Meet Our Authors</p>
             </div>
           </div>
         </div>
-        
+
         {/* Desktop Version */}
         <div className="hidden md:block">
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="grid grid-cols-[340px_1fr] gap-12 lg:gap-16">
               {/* Left Column - About Section */}
               <div className="space-y-6">
@@ -127,7 +127,7 @@ export default async function AuthorsPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Mobile Version */}
         <div className="md:hidden">
           <div className="max-w-[480px] mx-auto px-4 py-6">

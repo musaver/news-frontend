@@ -6,34 +6,34 @@ import { useRouter, useSearchParams } from 'next/navigation';
 // SVG Icons (same as create page)
 const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
   </svg>
 );
 
 const ImageIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-    <circle cx="8.5" cy="8.5" r="1.5"/>
-    <polyline points="21,15 16,10 5,21"/>
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+    <circle cx="8.5" cy="8.5" r="1.5" />
+    <polyline points="21,15 16,10 5,21" />
   </svg>
 );
 
 const TagIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5l9 9-5 5-9-9V3z"/>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5l9 9-5 5-9-9V3z" />
   </svg>
 );
 
 const SaveIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5l9 9-5 5-9-9V3z"/>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5l9 9-5 5-9-9V3z" />
   </svg>
 );
 
 const EyeIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-    <circle cx="12" cy="12" r="3"/>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+    <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
@@ -68,7 +68,7 @@ function EditArticleContent() {
         coverImage: 'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=800',
         status: 'published'
       };
-      
+
       setFormData({
         title: mockArticle.title,
         category: mockArticle.category,
@@ -105,7 +105,7 @@ function EditArticleContent() {
   const handleSave = (status: 'draft' | 'under_review' | 'published') => {
     // In a real app, you would update in backend/database here
     console.log('Updating article:', { ...formData, status, id: articleId });
-    
+
     // Navigate back to articles page
     router.push('/articles');
   };
@@ -131,14 +131,14 @@ function EditArticleContent() {
 
   return (
     <div className="min-h-screen bg-[#f7fafc]">
-      
+
       <main>
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Header */}
           <div className="bg-white rounded-[12px] border border-[rgba(203,213,225,0.35)] overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-[rgba(203,213,225,0.35)]">
               <div>
-                <h2 className="text-[#020a1c] text-[24px] leading-[32px] font-bold">
+                <h2 className="text-[#020a1c] text-[24px] leading-[32px] font-normal">
                   Edit Article
                 </h2>
                 <p className="text-[#657285] text-[14px] leading-[20px] mt-1">
@@ -231,9 +231,9 @@ function EditArticleContent() {
                 </div>
                 {formData.coverImage && (
                   <div className="mt-3 rounded-lg overflow-hidden border border-[rgba(203,213,225,0.35)]">
-                    <img 
-                      src={formData.coverImage} 
-                      alt="Cover preview" 
+                    <img
+                      src={formData.coverImage}
+                      alt="Cover preview"
                       className="w-full h-48 object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800';
@@ -274,7 +274,7 @@ function EditArticleContent() {
                     placeholder="Add a tag..."
                     className="flex-1 px-3 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] outline-none focus:border-[#cc0000] transition-colors"
                   />
-                  <button 
+                  <button
                     onClick={handleAddTag}
                     className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors flex items-center gap-2"
                   >
@@ -285,8 +285,8 @@ function EditArticleContent() {
                 {formData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {formData.tags.map(tag => (
-                      <span 
-                        key={tag} 
+                      <span
+                        key={tag}
                         className="inline-flex items-center gap-2 px-3 py-1 border border-[rgba(203,213,225,0.5)] rounded text-[12px] font-medium"
                       >
                         {tag}
@@ -321,13 +321,13 @@ function EditArticleContent() {
 
             {/* Footer */}
             <div className="flex items-center justify-between p-6 border-t border-[rgba(203,213,225,0.35)]">
-              <button 
+              <button
                 onClick={() => router.back()}
                 className="px-4 py-2 border border-[rgba(203,213,225,0.35)] rounded-lg text-[14px] hover:bg-[#f7fafc] transition-colors"
               >
                 Cancel
               </button>
-              
+
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => handleSave('draft')}
@@ -336,7 +336,7 @@ function EditArticleContent() {
                 >
                   Save as Draft
                 </button>
-                
+
                 {formData.status !== 'published' && (
                   <button
                     onClick={() => handleSave('under_review')}
@@ -346,7 +346,7 @@ function EditArticleContent() {
                     Submit for Review
                   </button>
                 )}
-                
+
                 <button
                   onClick={() => handleSave(formData.status === 'published' ? 'published' : 'under_review')}
                   disabled={!formData.title || !formData.content}

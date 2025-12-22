@@ -76,9 +76,9 @@ export default function AuthorDetailsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      
+
       <main>
-        
+
         <div className="bg-[#f7fafc] relative w-full h-[75px]" data-name="Category - Desktop">
           <div className="absolute h-[75px] left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-full max-w-[1320px] px-6" data-name="CMS">
             {/* Left Text with Bullet */}
@@ -88,7 +88,7 @@ export default function AuthorDetailsPage() {
                 <p className="leading-[22px]">Author</p>
               </div>
             </div>
-            
+
             {/* Right Watermark Text with Gradient Mask - Desktop Only */}
             <div className="hidden md:block absolute bottom-[-10px] h-[94.8px] right-[24px] w-fit" data-name="Mask Group">
               <div
@@ -101,20 +101,20 @@ export default function AuthorDetailsPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Desktop Version */}
         <div className="hidden md:block">
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="grid grid-cols-[380px_1fr] gap-12">
               {/* Left Column - Author Info */}
               <div className="space-y-8">
                 {/* Author Photo & Name */}
                 <div className="flex flex-col gap-4 items-start">
                   <div className="overflow-clip relative rounded-full shrink-0 w-[150px] h-[150px]">
-                    <Image 
-                      alt="Emily Davis" 
-                      className="absolute h-full w-full left-0 top-0 object-cover" 
-                      src={imgAuthor} 
+                    <Image
+                      alt="Emily Davis"
+                      className="absolute h-full w-full left-0 top-0 object-cover"
+                      src={imgAuthor}
                     />
                   </div>
                   <div className="space-y-1">
@@ -209,7 +209,7 @@ export default function AuthorDetailsPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-4 items-center overflow-x-auto pb-2">
                     <div className="overflow-clip relative rounded-[99px] shrink-0 size-[50px] cursor-pointer hover:opacity-80 transition-opacity">
                       <div className="absolute inset-0 rounded-[99px] bg-slate-200">
@@ -252,16 +252,16 @@ export default function AuthorDetailsPage() {
                 {/* Articles Grid */}
                 <div className="grid grid-cols-3 gap-6">
                   {authorArticles.map((article, index) => (
-                    <div 
+                    <div
                       key={index}
                       className="flex flex-col gap-2 cursor-pointer hover:opacity-80 transition-opacity"
                     >
                       {/* Article Image */}
                       <div className="h-[150px] overflow-clip rounded-lg relative w-full">
-                        <Image 
-                          alt={article.title} 
-                          className="absolute h-full w-full object-cover" 
-                          src={article.image} 
+                        <Image
+                          alt={article.title}
+                          className="absolute h-full w-full object-cover"
+                          src={article.image}
                         />
                       </div>
                       {/* Article Meta */}
@@ -296,7 +296,7 @@ export default function AuthorDetailsPage() {
             </div>
           </div>
         </div>
-        
+
         {/* Mobile Version */}
         <div className="md:hidden">
           <div className="max-w-[768px] mx-auto px-4 py-8">
@@ -306,10 +306,10 @@ export default function AuthorDetailsPage() {
                 {/* Author Photo & Name */}
                 <div className="flex flex-col gap-4 items-start">
                   <div className="overflow-clip relative rounded-full shrink-0 w-[120px] h-[120px]">
-                    <Image 
-                      alt="Emily Davis" 
-                      className="absolute h-full w-full left-0 top-0 object-cover" 
-                      src={imgAuthor} 
+                    <Image
+                      alt="Emily Davis"
+                      className="absolute h-full w-full left-0 top-0 object-cover"
+                      src={imgAuthor}
                     />
                   </div>
                   <div className="space-y-1">
@@ -404,7 +404,7 @@ export default function AuthorDetailsPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-4 items-center overflow-x-auto pb-2">
                     <div className="overflow-clip relative rounded-[99px] shrink-0 size-[50px] cursor-pointer hover:opacity-80 transition-opacity">
                       <div className="absolute inset-0 rounded-[99px] bg-slate-200">
@@ -447,16 +447,16 @@ export default function AuthorDetailsPage() {
                 {/* Articles Grid */}
                 <div className="grid grid-cols-2 gap-4">
                   {authorArticles.map((article, index) => (
-                    <div 
+                    <div
                       key={index}
                       className="flex flex-col gap-2 cursor-pointer hover:opacity-80 transition-opacity"
                     >
                       {/* Article Image */}
                       <div className="h-[120px] overflow-clip rounded-lg relative w-full">
-                        <Image 
-                          alt={article.title} 
-                          className="absolute h-full w-full object-cover" 
-                          src={article.image} 
+                        <Image
+                          alt={article.title}
+                          className="absolute h-full w-full object-cover"
+                          src={article.image}
                         />
                       </div>
                       {/* Article Meta */}
@@ -492,7 +492,7 @@ export default function AuthorDetailsPage() {
           </div>
         </div>
       </main>
-      
+
     </div>
   );
 }

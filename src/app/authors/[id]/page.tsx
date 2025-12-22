@@ -166,7 +166,7 @@ export default async function AuthorDetailsPage({ params }: { params: Promise<{ 
 
         {/* Desktop Version */}
         <div className="hidden md:block">
-          <div className="max-w-[1320px] mx-auto px-6 py-12">
+          <div className="max-w-[1320px] mx-auto px-6 py-6">
             <div className="grid grid-cols-[380px_1fr] gap-12">
               {/* Left Column - Author Info */}
               <div className="space-y-8">

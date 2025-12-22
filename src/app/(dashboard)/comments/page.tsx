@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { DashboardLayout } from '@/components/homepage';
+
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
@@ -75,7 +75,7 @@ export default function AuthorCommentsPage() {
   };
 
   return (
-    <DashboardLayout activeTab="comments">
+    <>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal">
@@ -155,6 +155,6 @@ export default function AuthorCommentsPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </>
   );
 }

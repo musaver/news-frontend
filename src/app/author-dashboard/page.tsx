@@ -157,33 +157,33 @@ export default function AuthorDashboardPage() {
       {/* Tab Navigation */}
       <div className="left-0 right-0 bg-white border-b border-[rgba(203,213,225,0.35)] shadow-sm z-30">
         <div className="max-w-[1320px] mx-auto">
-          <div className="flex items-center justify-center gap-2 px-4 py-2 overflow-x-auto">
-            <Link href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white">
+          <div className="flex items-center justify-start md:justify-center gap-2 px-4 py-2 overflow-x-auto no-scrollbar">
+            <Link href="/author-dashboard" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium bg-[#cc0000] text-white flex-shrink-0">
               <LayoutDashboardIcon className="w-4 h-4" />
               <span className="">Overview</span>
             </Link>
-            <Link href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            <Link href="/articles" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc] flex-shrink-0">
               <FileTextIcon className="w-4 h-4" />
               <span className="">Articles</span>
             </Link>
-            <Link href="/author-dashboard/analytics" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            <Link href="/author-dashboard/analytics" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc] flex-shrink-0">
               <BarChart3Icon className="w-4 h-4" />
               <span className="">Analytics</span>
             </Link>
-            <Link href="/author-dashboard/comments" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            <Link href="/author-dashboard/comments" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc] flex-shrink-0">
               <MessageSquareIcon className="w-4 h-4" />
               <span className="">Comments</span>
             </Link>
-            <Link href="/author-dashboard/earnings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            <Link href="/author-dashboard/earnings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc] flex-shrink-0">
               <DollarSignIcon className="w-4 h-4" />
               <span className="">Earnings</span>
             </Link>
-            <Link href="/author-dashboard/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc]">
+            <Link href="/author-dashboard/settings" className="flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all text-[14px] font-medium text-[#657285] hover:bg-[#f7fafc] flex-shrink-0">
               <SettingsIcon className="w-4 h-4" />
               <span className="">Settings</span>
             </Link>
             <div className="hidden lg:block h-6 w-px bg-[rgba(203,213,225,0.35)] mx-2"></div>
-            <button className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium">
+            <button className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap text-[#657285] hover:bg-red-50 hover:text-red-600 transition-all text-[14px] font-medium flex-shrink-0">
               <LogOutIcon className="w-4 h-4" />
               <span className="">Logout</span>
             </button>
@@ -192,28 +192,28 @@ export default function AuthorDashboardPage() {
       </div>
 
       <main className="">
-        <div className="p-6 lg:p-8 max-w-7xl mx-auto">
+        <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
           <div className="space-y-6">
             {/* Welcome Header */}
-            <div className="bg-white rounded-[12px] p-6 border border-[rgba(203,213,225,0.35)]">
-              <div className="flex items-start gap-6">
+            <div className="bg-white rounded-[12px] p-4 md:p-6 border border-[rgba(203,213,225,0.35)]">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6">
                 <img
                   src={authorData.avatar}
                   alt={authorData.name}
-                  className="w-20 h-20 rounded-full object-cover"
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover"
                 />
-                <div className="flex-1">
-                  <h1 className="text-[#020a1c] text-[28px] leading-[36px] font-normal mb-1">
+                <div className="flex-1 text-center md:text-left w-full">
+                  <h1 className="text-[#020a1c] text-[24px] md:text-[28px] leading-tight md:leading-[36px] font-normal mb-1">
                     Welcome back, {authorData.name.split(' ')[0]}! 👋
                   </h1>
                   <p className="text-[#657285] text-[15px] leading-[24px] mb-3">
                     {authorData.role}
                   </p>
-                  <p className="text-[#657285] text-[14px] leading-[22px] max-w-2xl">
+                  <p className="text-[#657285] text-[14px] leading-[22px] max-w-2xl mx-auto md:mx-0">
                     {authorData.bio}
                   </p>
                 </div>
-                <button className="px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2">
+                <button className="w-full md:w-auto justify-center px-4 py-2 bg-[#cc0000] hover:bg-[#b30000] text-white rounded-lg text-[14px] font-semibold transition-colors flex items-center gap-2 mt-2 md:mt-0">
                   <PlusCircleIcon className="w-4 h-4" />
                   Create New Article
                 </button>
